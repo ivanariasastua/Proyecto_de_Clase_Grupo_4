@@ -67,7 +67,6 @@ public class UsuarioServiceImplementation implements IUsuarioService {
     @Override
     @Transactional
     public void delete(Long id) {
-
         usuarioRepository.deleteById(id);
     }
 

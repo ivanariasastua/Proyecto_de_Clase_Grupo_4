@@ -151,14 +151,30 @@ public class UsuarioController {
         }
     }
 
-//    @DeleteMapping("/{id}") 
-//    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
-////TODO: Implementar este método
-//    }
-//
-//    @DeleteMapping("/") 
-//    public ResponseEntity<?> deleteAll() {
-// 	//TODO: Implementar este método
-//    } 
+    @DeleteMapping("/{id}") 
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+        try{
+            usuarioService.delete(id);
+            if(findById(id).getStatusCode() == HttpStatus.NO_CONTENT){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/") 
+    public ResponseEntity<?> deleteAll() {
+        try{
+            usuarioService.deleteAll();
+            if(findAll().getStatusCode() == HttpStatus.NO_CONTENT){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    } 
 }
 
