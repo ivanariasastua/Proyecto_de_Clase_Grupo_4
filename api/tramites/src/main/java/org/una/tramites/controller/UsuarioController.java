@@ -5,6 +5,8 @@
  */
 package org.una.tramites.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +32,16 @@ import org.una.tramites.utils.MapperUtils;
  *
  * @author cordo
  */
- @RestController
+@RestController
 @RequestMapping("/usuarios") 
+@Api(tags = {"Usuarios"})
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
 
     @GetMapping() 
+    @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -71,6 +75,7 @@ public class UsuarioController {
 
     @PutMapping("/login")
     @ResponseBody 
+    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
     public ResponseEntity<?> login(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "password") String password) {
         try {
             Usuario usuario = new Usuario();
