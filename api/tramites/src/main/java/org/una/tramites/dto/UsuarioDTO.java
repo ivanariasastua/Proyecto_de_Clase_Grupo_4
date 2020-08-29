@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.una.tramites.entities.Departamento;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class UsuarioDTO {
     private boolean estado; 
     private Date fechaRegistro; 
     private Date fechaModificacion; 
-    private Long departamentoId; 
+    private Departamento departamentoId; 
     private boolean esJefe;
     
     

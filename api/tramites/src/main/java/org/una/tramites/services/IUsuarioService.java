@@ -32,4 +32,8 @@ public interface IUsuarioService {
     public void deleteAll();
 
     public Optional<Usuario> login(Usuario usuario); 
+    
+    public Optional<List<Usuario>> findUsersByDepartamentoId(Long id);
+    
+    public Optional<Usuario> findJefesDepartemento(Long id);
 }

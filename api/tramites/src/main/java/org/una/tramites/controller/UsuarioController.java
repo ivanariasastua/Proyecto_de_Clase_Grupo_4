@@ -42,7 +42,7 @@ public class UsuarioController {
 
     @GetMapping() 
     @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    public @ResponseBody
+    public @ResponseBody 
     ResponseEntity<?> findAll() {
         try {
             Optional<List<Usuario>> result = usuarioService.findAll();
@@ -58,6 +58,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}") 
+    @ApiOperation(value = "Obtiene un usuario a travez de su identificador unico", response = UsuarioDTO.class, tags = "Usuarios")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
 
@@ -181,5 +182,33 @@ public class UsuarioController {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     } 
+    
+    @GetMapping("/usuarios_en_departamento/{id}")
+    public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id")Long id){
+        try{
+            Optional<List<Usuario>> result = usuarioService.findUsersByDepartamentoId(id);
+            if(result.isPresent()){
+                List<UsuarioDTO> usuariosDTO = MapperUtils.DtoListFromEntityList(result.get(), UsuarioDTO.class);
+                return new ResponseEntity<>(usuariosDTO, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("/jefe/{id}")
+    public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id")Long id){
+        try{
+            Optional<Usuario> result = usuarioService.findJefesDepartemento(id);
+            if(result.isPresent()){
+                UsuarioDTO userDto = MapperUtils.DtoFromEntity(result.get(), UsuarioDTO.class);
+                return new ResponseEntity<>(userDto, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 

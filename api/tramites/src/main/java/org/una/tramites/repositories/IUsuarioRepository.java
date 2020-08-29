@@ -13,7 +13,7 @@ import org.una.tramites.entities.Usuario;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Ivan Josué Arias Astúa
  */
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
     
@@ -28,4 +28,10 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
 
     @Query("select u from Usuario u where u.cedula = :cedula")
     public Usuario findByCedula(@Param("cedula")String cedula);
+    
+    public List<Usuario> findByDepartamentoId(Long id);
+
+    @Query("SELECT u FROM Usuario u LEFT JOIN u.departamento d WHERE u.esJefe=1 AND d.id=:id")
+    public Usuario findJefeByDepartamento(Long id);
+
 }
