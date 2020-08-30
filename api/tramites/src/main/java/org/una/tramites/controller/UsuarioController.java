@@ -27,22 +27,21 @@ import org.una.tramites.entities.Usuario;
 import org.una.tramites.services.IUsuarioService;
 import org.una.tramites.utils.MapperUtils;
 
-
 /**
  *
  * @author cordo
  */
 @RestController
-@RequestMapping("/usuarios") 
+@RequestMapping("/usuarios")
 @Api(tags = {"Usuarios"})
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
 
-    @GetMapping() 
+    @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    public @ResponseBody 
+    public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
             Optional<List<Usuario>> result = usuarioService.findAll();
@@ -57,7 +56,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/{id}") 
+    @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un usuario a travez de su identificador unico", response = UsuarioDTO.class, tags = "Usuarios")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
@@ -75,7 +74,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/login")
-    @ResponseBody 
+    @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
     public ResponseEntity<?> login(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "password") String password) {
         try {
@@ -96,7 +95,7 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/cedula/{term}") 
+    @GetMapping("/cedula/{term}")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
             Optional<List<Usuario>> result = usuarioService.findByCedulaAproximate(term);
@@ -111,7 +110,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/nombre/{term}") 
+    @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
             Optional<List<Usuario>> result = usuarioService.findByNombreCompletoAproximateIgnoreCase(term);
@@ -127,7 +126,7 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/") 
+    @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody Usuario usuario) {
         try {
@@ -139,7 +138,7 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/{id}") 
+    @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Usuario usuarioModified) {
         try {
@@ -157,58 +156,57 @@ public class UsuarioController {
         }
     }
 
-    @DeleteMapping("/{id}") 
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
-        try{
+        try {
             usuarioService.delete(id);
-            if(findById(id).getStatusCode() == HttpStatus.NO_CONTENT){
+            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/") 
+    @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() {
-        try{
+        try {
             usuarioService.deleteAll();
-            if(findAll().getStatusCode() == HttpStatus.NO_CONTENT){
+            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } 
-    
+    }
+
     @GetMapping("/usuarios_en_departamento/{id}")
-    public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id")Long id){
-        try{
+    public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") Long id) {
+        try {
             Optional<List<Usuario>> result = usuarioService.findUsersByDepartamentoId(id);
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 List<UsuarioDTO> usuariosDTO = MapperUtils.DtoListFromEntityList(result.get(), UsuarioDTO.class);
                 return new ResponseEntity<>(usuariosDTO, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping("/jefe/{id}")
-    public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id")Long id){
-        try{
+    public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id") Long id) {
+        try {
             Optional<Usuario> result = usuarioService.findJefesDepartemento(id);
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 UsuarioDTO userDto = MapperUtils.DtoFromEntity(result.get(), UsuarioDTO.class);
                 return new ResponseEntity<>(userDto, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
-

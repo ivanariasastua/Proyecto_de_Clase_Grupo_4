@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.una.tramites.controller;
 
 import io.swagger.annotations.Api;
@@ -29,51 +28,51 @@ import org.una.tramites.services.IDepartamentoService;
 import org.una.tramites.utils.MapperUtils;
 
 /**
- * 
+ *
  * @author Ivan Josué Arias Astúa
  */
 @RestController
 @RequestMapping("/departamentos")
 @Api(tags = {"Departamentos"})
 public class DepartamentoController {
-    
+
     @Autowired
     private IDepartamentoService departamentoService;
-    
+
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
     public @ResponseBody
-    ResponseEntity<?> findAll(){
-        try{
+    ResponseEntity<?> findAll() {
+        try {
             Optional<List<Departamento>> result = departamentoService.findAll();
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 List<DepartamentoDTO> departamentosDTO = MapperUtils.DtoListFromEntityList(result.get(), DepartamentoDTO.class);
                 return new ResponseEntity<>(departamentosDTO, HttpStatus.OK);
-            }else{
+            } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } 
-        }catch(Exception ex){
+            }
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    @GetMapping("/{id}") 
+
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             Optional<Departamento> departamentoFound = departamentoService.findById(id);
-            if(departamentoFound.isPresent()){
+            if (departamentoFound.isPresent()) {
                 DepartamentoDTO depDto = MapperUtils.DtoFromEntity(departamentoFound.get(), DepartamentoDTO.class);
                 return new ResponseEntity<>(depDto, HttpStatus.OK);
-            }else{
+            } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } 
-        }catch(Exception ex){
+            }
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/") 
+    @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody Departamento dep) {
         try {
@@ -85,7 +84,7 @@ public class DepartamentoController {
         }
     }
 
-    @PutMapping("/{id}") 
+    @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Departamento depModified) {
         try {
@@ -101,28 +100,28 @@ public class DepartamentoController {
         }
     }
 
-    @DeleteMapping("/{id}") 
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
-        try{
+        try {
             departamentoService.delete(id);
-            if(findById(id).getStatusCode() == HttpStatus.NO_CONTENT){
+            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/") 
+    @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() {
-        try{
+        try {
             departamentoService.deleteAll();
-            if(findAll().getStatusCode() == HttpStatus.NO_CONTENT){
+            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
