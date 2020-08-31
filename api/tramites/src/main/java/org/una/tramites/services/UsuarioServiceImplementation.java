@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.una.tramites.services;
 
 import java.util.List;
@@ -13,10 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.una.tramites.entities.Usuario;
 import org.una.tramites.repositories.IUsuarioRepository;
 
-/**
- *
- * @author cordo
- */
 @Service
 public class UsuarioServiceImplementation implements IUsuarioService {
 
