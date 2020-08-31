@@ -58,4 +58,16 @@ public class PermisoServiceImplementation implements IPermisoService {
         permisoRepository.deleteAll();
     }
     
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Permiso> findByCodigo(String Codigo) {
+        return Optional.ofNullable(permisoRepository.findByCodigo(Codigo));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<Permiso>> findByCodigoAproximate(String codigo) {
+        return Optional.ofNullable(permisoRepository.findByCodigoContaining(codigo));
+    }
+    
 }

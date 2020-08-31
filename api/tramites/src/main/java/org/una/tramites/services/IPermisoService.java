@@ -13,6 +13,10 @@ public interface IPermisoService {
     
     public Optional<Permiso> findById(Long id);
     
+    public Optional<Permiso> findByCodigo(String Codigo);
+    
+    public Optional<List<Permiso>> findByCodigoAproximate(String codigo);
+    
     public Optional<List<Permiso>> findAll();
     
     public Permiso create(Permiso permiso);

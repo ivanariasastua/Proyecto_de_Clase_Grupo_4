@@ -28,5 +28,5 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
 
     @Query("SELECT u FROM Usuario u LEFT JOIN u.departamento d WHERE u.esJefe=1 AND d.id=:id")
     public Usuario findJefeByDepartamento(Long id);
-
+    
 }

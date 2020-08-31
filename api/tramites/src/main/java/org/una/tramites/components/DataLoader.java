@@ -1,14 +1,19 @@
 package org.una.tramites.components;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.una.tramites.entities.Permiso;
+import org.una.tramites.entities.PermisoOtorgado;
 import org.una.tramites.entities.Usuario;
 import org.una.tramites.services.IUsuarioService;
+import org.una.tramites.services.IPermisoService;
+import org.una.tramites.services.IPermisoOtorgadoService;
 
-/*
+
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -63,5 +68,5 @@ public class DataLoader implements ApplicationRunner {
         }
 
     }
-}*/
+}
 

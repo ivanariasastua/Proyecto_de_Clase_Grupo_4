@@ -36,4 +36,6 @@ public interface IUsuarioService {
     public Optional<List<Usuario>> findUsersByDepartamentoId(Long id);
     
     public Optional<Usuario> findJefesDepartemento(Long id);
+    
+    public Optional<Usuario> findByCedula(String cedula);
 }

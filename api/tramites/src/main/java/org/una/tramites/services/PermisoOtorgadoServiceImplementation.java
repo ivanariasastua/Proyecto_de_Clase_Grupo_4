@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.tramites.entities.PermisoOtorgado;
 import org.una.tramites.repositories.IPermisoOtorgadoRepository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Dios
  */
+@Service
 public class PermisoOtorgadoServiceImplementation implements IPermisoOtorgadoService{
     
     @Autowired
