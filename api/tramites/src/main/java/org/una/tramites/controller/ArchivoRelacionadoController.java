@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.ArchivoRelacionadoDTO;
-import org.una.tramites.dto.PermisoDTO;
 import org.una.tramites.entities.ArchivoRelacionado;
-import org.una.tramites.entities.Permiso;
 import org.una.tramites.services.IArchivoRelacionadoService;
 import org.una.tramites.utils.MapperUtils;
 
