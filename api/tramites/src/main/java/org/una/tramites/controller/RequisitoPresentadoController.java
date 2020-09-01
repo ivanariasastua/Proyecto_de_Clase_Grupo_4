@@ -67,7 +67,7 @@ public class RequisitoPresentadoController {
         }
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("requisito_presentado/{id}")
     @ApiOperation(value = "Obtiene los requisitos presentados del tramite registrado", response = RequisitoPresentadoDTO.class, responseContainer = "List", tags = "Requisitos_Presentados")
     public ResponseEntity<?> findByTramiteRegistrado(@PathVariable(value = "id")Long  id) {
         try{
