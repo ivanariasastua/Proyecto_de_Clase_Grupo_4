@@ -31,16 +31,19 @@ public class VariacionesServiceImplemantation implements IVariacionesService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Variaciones> findById(Long id) {
         return varRepository.findById(id);
     }
 
     @Override
+    @Transactional
     public Variaciones create(Variaciones variacion) {
         return varRepository.save(variacion);
     }
 
     @Override
+    @Transactional
     public Optional<Variaciones> update(Variaciones variacion, Long id) {
         if(varRepository.findById(id).isPresent())
             return Optional.ofNullable(varRepository.save(variacion));
@@ -48,21 +51,25 @@ public class VariacionesServiceImplemantation implements IVariacionesService{
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         varRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
         varRepository.deleteAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<Variaciones>> findByGrupo(String grupo) {
         return Optional.ofNullable(varRepository.findByGrupo(grupo));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<Variaciones>> findByDescripcion(String descripcion) {
         return Optional.ofNullable(varRepository.findByDescripcion(descripcion));
     }

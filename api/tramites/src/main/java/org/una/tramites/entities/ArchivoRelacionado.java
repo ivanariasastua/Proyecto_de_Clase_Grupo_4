@@ -31,10 +31,10 @@ public class ArchivoRelacionado implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    /*@ManyToOne 
+    @ManyToOne 
     @JoinColumn(name="tramites_registrados_id")
-    private TramiteRegistrado tramiteRegistrado;
-    */
+    private TramitesRegistrados tramiteRegistrado;
+    
     
     @Column(name = "nombre", length = 100)
     private String nombre;

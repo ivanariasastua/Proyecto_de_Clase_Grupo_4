@@ -70,7 +70,7 @@ public class ArchivoRelacionadoController {
         }
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("tramite_registrado/{id}")
     @ApiOperation(value = "Obtiene los archivos relacionados al tramite registrado", response = ArchivoRelacionadoDTO.class, responseContainer = "List", tags = "Archivos_Relacionados")
     public ResponseEntity<?> findByTramiteRegistrado(@PathVariable(value = "id")Long  id) {
         try{

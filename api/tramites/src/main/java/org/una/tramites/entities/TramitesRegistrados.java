@@ -45,8 +45,8 @@ public class TramitesRegistrados implements Serializable {
     @JoinColumn(name="tramites_tipos_id")
     private TramitesTipos tramitesTipos;
     
-    
-    //falta agregar las listas 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tramiteRegistrado") 
+    private List<ArchivoRelacionado> archivosRelacionados = new ArrayList<>();
     
     
     private static final long serialVersionUID = 1L;
