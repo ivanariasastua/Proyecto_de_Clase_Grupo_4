@@ -8,6 +8,7 @@ package org.una.tramites.services;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.tramites.entities.TramitesRegistrados;
 import org.una.tramites.repositories.ITramitesRegistradosRepository;
@@ -16,6 +17,7 @@ import org.una.tramites.repositories.ITramitesRegistradosRepository;
  *
  * @author cordo
  */
+@Service
 public class TramitesRegistradosServiceImplementation implements ITramitesRegistradosService{
     
     @Autowired
