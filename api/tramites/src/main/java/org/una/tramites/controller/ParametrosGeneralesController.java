@@ -41,7 +41,7 @@ public class ParametrosGeneralesController {
     
     @GetMapping("/{nombre}")
     @ApiOperation(value = "Obtiene los Paremetros Generales segun el nombre", response = ParametrosGeneralesDTO.class, responseContainer = "List", tags = "Parametros_Generales")
-    public ResponseEntity<?> findByNombre(@PathParam("nombre")String nombre) {
+    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre")String nombre) {
         try{
             Optional<List<ParametrosGenerales>> result = paramGenService.findByNombre(nombre);
             if(result.isPresent()){
@@ -56,7 +56,7 @@ public class ParametrosGeneralesController {
     
     @GetMapping("/{valor}")
     @ApiOperation(value = "Obtiene una lista de Parametros Generales segun el valor que guardan", response = ParametrosGeneralesDTO.class, responseContainer = "List", tags = "Parametros_Generales")
-    public ResponseEntity<?> findByValor(@PathParam("valor") String valor){
+    public ResponseEntity<?> findByValor(@PathVariable(value = "valor") String valor){
         try{
             Optional<List<ParametrosGenerales>> result = paramGenService.findByValor(valor);
             if(result.isPresent()){
@@ -70,7 +70,7 @@ public class ParametrosGeneralesController {
     }
     @GetMapping("/{descripcion}")
     @ApiOperation(value = "Obtiene una lista de Parametros Generales segun su descripcion", response = ParametrosGeneralesDTO.class, responseContainer = "List", tags = "Parametros_Generales")
-    public ResponseEntity<?> findByDescripcion(@PathParam("descripcion")String descripcion){
+    public ResponseEntity<?> findByDescripcion(@PathVariable(value = "descripcion")String descripcion){
         try{
             Optional<List<ParametrosGenerales>> result = paramGenService.findByDescripcion(descripcion);
             if(result.isPresent()){

@@ -62,6 +62,9 @@ public class Departamento {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento") 
     private List<Usuario> usuarios = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento") 
+    private List<TramitesTipos> tramites = new ArrayList<>();
 
     
     @PrePersist
