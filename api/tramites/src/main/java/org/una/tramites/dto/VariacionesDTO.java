@@ -7,6 +7,7 @@
 package org.una.tramites.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class VariacionesDTO {
     private boolean grupo;
     private String descripcion;
     private boolean estado;
+    private Date fechaRegistro;
     private TramitesTiposDTO tramites; 
     private List<RequisitosDTO> requisitos = new ArrayList<>();
 }

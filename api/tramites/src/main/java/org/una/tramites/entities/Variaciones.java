@@ -8,6 +8,7 @@ package org.una.tramites.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,9 +21,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -52,6 +57,11 @@ public class Variaciones implements Serializable {
     @Column
     private boolean estado;
     
+    @Column(name = "fecha_registro", updatable = false)
+    @Temporal(TemporalType.DATE)
+    @Setter(AccessLevel.NONE)
+    private Date fechaRegistro;
+    
     @ManyToOne 
     @JoinColumn(name="tramites_tipos_id")
     private TramitesTipos tramites;
@@ -62,5 +72,6 @@ public class Variaciones implements Serializable {
     @PrePersist
     public void prePersist() {
         estado=true;
+        fechaRegistro = new Date();
     }
 }
