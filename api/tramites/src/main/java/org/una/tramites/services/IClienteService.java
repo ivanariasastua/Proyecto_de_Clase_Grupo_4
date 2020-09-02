@@ -13,6 +13,7 @@ import org.una.tramites.entities.Cliente;
  *
  * @author cordo
  */
+
 public interface IClienteService {
     public Optional<List<Cliente>> findAll();
 

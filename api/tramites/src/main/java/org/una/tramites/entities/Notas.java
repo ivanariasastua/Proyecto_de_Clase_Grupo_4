@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -29,42 +31,49 @@ import lombok.ToString;
  * @author cordo
  */
 @Entity
-@Table(name = "Clientes")
+@Table(name = "Notas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Cliente implements Serializable {
-
+public class Notas implements Serializable  {
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nombre_completo", length = 100)
-    private String nombreCompleto;
-    @Column(length = 25, unique = true)
-    private String cedula;
-    @Column(length = 10)
-    private String telefono;
-    @Column(length = 100)
-    private String direccion;
+    
+    @Column
+    private boolean estado;
+    
+    @Column
+    private boolean tipo;
+    
+    
+    @Column(name = "titulo", length = 50)
+    private String titulo;
+    
+    @Column(name = "contenido", length = 80)
+    private String contenido;
+    
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date fechaRegistro;
+
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
     private Date fechaModificacion;
-    @Column
-    private boolean estado;
-    @Column(length = 100, name = "password_encriptado")
-    private String passwordEncriptado;
-
-    private static final long serialVersionUID = 1L;
-
+    
+    @ManyToOne 
+    @JoinColumn(name="tramites_registrados_id")
+    private TramitesRegistrados tramitesRegistrados;
+    
+    
     @PrePersist
     public void prePersist() {
-        estado = true;
+        estado=true;
         fechaRegistro = new Date();
         fechaModificacion = new Date();
     }

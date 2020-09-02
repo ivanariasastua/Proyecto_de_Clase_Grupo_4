@@ -13,6 +13,7 @@ import org.una.tramites.entities.TramitesRegistrados;
  *
  * @author cordo
  */
+
 public interface ITramitesRegistradosService {
     public Optional<List<TramitesRegistrados>> findAll();
 

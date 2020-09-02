@@ -34,14 +34,14 @@ import org.una.tramites.utils.MapperUtils;
  */
 @RestController
 @RequestMapping("/variaciones")
-@Api(tags = {"Tramites"})
+@Api(tags = {"Variaciones"})
 public class VariacionesController {
 
     @Autowired
     private VariacionesServiceImplemantation varService;
     
     @GetMapping()
-    @ApiOperation(value = "Obtiene una lista de todos las Variaciones", response = VariacionesDTO.class, responseContainer = "List", tags = "Tramites")
+    @ApiOperation(value = "Obtiene una lista de todos las Variaciones", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
     public @ResponseBody ResponseEntity<?> findAll(){
         try{
             Optional<List<Variaciones>> result = varService.findAll();
@@ -56,7 +56,7 @@ public class VariacionesController {
     }
     
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtiene una variacion a travez de su identificador unico", response = VariacionesDTO.class, tags = "Tramites")
+    @ApiOperation(value = "Obtiene una variacion a travez de su identificador unico", response = VariacionesDTO.class, tags = "Variaciones")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
 
