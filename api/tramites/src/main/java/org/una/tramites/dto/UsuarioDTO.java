@@ -1,6 +1,8 @@
 package org.una.tramites.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,6 @@ public class UsuarioDTO {
     private Date fechaModificacion; 
     private Departamento departamentoId; 
     private boolean esJefe;
-    
     
 }
 

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.una.tramites.entities.TramitesRegistrados;
 
 /**
  *
@@ -17,7 +18,7 @@ import lombok.ToString;
 public class ArchivoRelacionadoDTO {
     
     private Long id;
-    //private TramiteRegistrado tramiteRegistradoId;
+    private TramitesRegistrados tramiteRegistradoId;
     private String nombre;
     private boolean estado;
     private String rutaArchivo;

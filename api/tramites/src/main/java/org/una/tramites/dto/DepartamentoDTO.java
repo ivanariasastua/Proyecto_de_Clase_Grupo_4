@@ -30,4 +30,5 @@ public class DepartamentoDTO {
     private Date fechaRegistro;
     private Date fechaModificacion;
     private List<UsuarioDTO> usuarios = new ArrayList<>();
+    private List<TramitesTiposDTO> tramitesTipos = new ArrayList<>();
 }

@@ -5,6 +5,8 @@
  */
 package org.una.tramites.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +26,5 @@ public class TramitesRegistradosDTO {
     private Long id;
     private TramitesTipos tramitesTiposId;
     private Cliente clienteId;
+    private List<ArchivoRelacionadoDTO> archivosRelacionados = new ArrayList<>();
 }

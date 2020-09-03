@@ -6,7 +6,9 @@
 
 package org.una.tramites.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

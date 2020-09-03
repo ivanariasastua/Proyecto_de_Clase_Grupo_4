@@ -6,6 +6,7 @@
 
 package org.una.tramites.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,8 @@ public class TramitesTiposDTO {
     private String descripcion;
     private boolean estado;
     private DepartamentoDTO departamento;
-    private List<Variaciones> variaciones;
     private Date fechaRegistro;
     private Date fechaModificacion;
+    private List<VariacionesDTO> variaciones = new ArrayList<>();
+    
 }

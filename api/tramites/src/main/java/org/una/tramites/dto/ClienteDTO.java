@@ -5,7 +5,9 @@
  */
 package org.una.tramites.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,4 +31,5 @@ public class ClienteDTO {
     private Date fechaRegistro; 
     private Date fechaModificacion; 
     private String passwordEncriptado;
+    private List<TramitesRegistradosDTO> tramitesRegistrados = new ArrayList<>();
 }
