@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author cordo
  */
-public class UsuariosController implements Initializable {
+public class DepartamentosInfoController implements Initializable {
 
     /**
      * Initializes the controller class.

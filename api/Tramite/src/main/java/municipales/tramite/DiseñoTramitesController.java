@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author cordo
  */
-public class TipoTramitesController implements Initializable {
+public class DiseñoTramitesController implements Initializable {
 
     /**
      * Initializes the controller class.
