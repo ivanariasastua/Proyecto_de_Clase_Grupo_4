@@ -2,6 +2,9 @@ municipales\tramite\DiseñoTramitesController.class
 municipales\tramite\App.class
 municipales\tramite\LogInController.class
 municipales\tramite\DepartamentosController.class
+municipales\tramite\util\AppContext.class
 module-info.class
+municipales\tramite\Controller.class
 municipales\tramite\PrincipalController.class
 municipales\tramite\DepartamentosInfoController.class
+municipales\tramite\util\FlowController.class
