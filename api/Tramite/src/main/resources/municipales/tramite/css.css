@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3 sep. 2020, 15:16:20
+    Author     : cordo
+*/
+
+.stack{
+    -fx-background-color: #9fb5cc;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+
+}
+
+.Button{
+    -fx-background-color: #002082;
+
+}
+
+.Button:hover{
+    -fx-background-color: #1841bb;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
