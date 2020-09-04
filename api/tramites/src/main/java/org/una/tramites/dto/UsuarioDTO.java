@@ -22,6 +22,7 @@ public class UsuarioDTO {
     private Date fechaRegistro; 
     private Date fechaModificacion; 
     private Departamento departamentoId; 
+    private List<PermisoOtorgadoDTO> permisos;
     private boolean esJefe;
     
 }

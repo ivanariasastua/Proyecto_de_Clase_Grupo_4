@@ -112,8 +112,9 @@ public class UsuarioController {
             String token = usuarioService.login(authenticationRequest);
             if (!token.isBlank()) {
                 authenticationResponse.setJwt(token);
-                //TODO: Complete this   authenticationResponse.setUsuario(usuario);
-                //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
+                UsuarioDTO userDto = MapperUtils.DtoFromEntity(usuarioService.findByCedula(authenticationRequest.getCedula()), UsuarioDTO.class);
+                authenticationResponse.setUsuario(userDto);
+                authenticationResponse.setPermisos(userDto.getPermisos());
                 return new ResponseEntity(authenticationResponse, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Credenciales invalidos", HttpStatus.UNAUTHORIZED);
