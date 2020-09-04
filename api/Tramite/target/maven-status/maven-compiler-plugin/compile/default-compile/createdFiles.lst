@@ -1,4 +1,7 @@
-module-info.class
-municipales\tramite\PrincipalController.class
 municipales\tramite\App.class
 municipales\tramite\LogInController.class
+municipales\tramite\DepartamentosController.class
+municipales\tramite\TipoTramitesController.class
+municipales\tramite\UsuariosController.class
+module-info.class
+municipales\tramite\PrincipalController.class
