@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.una.tramites.controller;
+package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,47 +22,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.una.tramites.dto.DepartamentoDTO;
-import org.una.tramites.entities.Departamento;
-import org.una.tramites.services.IDepartamentoService;
+import org.una.tramites.dto.NotasDTO;
+import org.una.tramites.dto.TramitesTiposDTO;
+import org.una.tramites.entities.Notas;
+import org.una.tramites.entities.TramitesTipos;
+import org.una.tramites.services.NotasServiceImplementation;
 import org.una.tramites.utils.MapperUtils;
 
 /**
  *
- * @author Ivan Josué Arias Astúa
+ * @author cordo
  */
 @RestController
-@RequestMapping("/departamentos")
-@Api(tags = {"Departamentos"})
-public class DepartamentoController {
+@RequestMapping("/notas")
+@Api(tags = {"Notas"})
+public class NotasController {
 
     @Autowired
-    private IDepartamentoService departamentoService;
+    private NotasServiceImplementation notasService;
 
     @GetMapping()
-    @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
+    @ApiOperation(value = "Obtiene una lista de todos las notas", response = NotasDTO.class, responseContainer = "List", tags = "Notas")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
-            Optional<List<Departamento>> result = departamentoService.findAll();
+            Optional<List<Notas>> result = notasService.findAll();
             if (result.isPresent()) {
-                List<DepartamentoDTO> departamentosDTO = MapperUtils.DtoListFromEntityList(result.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(departamentosDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                List<NotasDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), NotasDTO.class);
+                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
             }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Obtiene una notas a travez de su identificador unico", response = NotasDTO.class, tags = "Notas")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-            Optional<Departamento> departamentoFound = departamentoService.findById(id);
-            if (departamentoFound.isPresent()) {
-                DepartamentoDTO depDto = MapperUtils.DtoFromEntity(departamentoFound.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(depDto, HttpStatus.OK);
+
+            Optional<Notas> notasFound = notasService.findById(id);
+            if (notasFound.isPresent()) {
+                NotasDTO notasDto = MapperUtils.DtoFromEntity(notasFound.get(), NotasDTO.class);
+                return new ResponseEntity<>(notasDto, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -74,11 +77,11 @@ public class DepartamentoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Departamento dep) {
+    public ResponseEntity<?> create(@RequestBody Notas notas) {
         try {
-            Departamento depCreated = departamentoService.create(dep);
-            DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depCreated, DepartamentoDTO.class);
-            return new ResponseEntity<>(depDto, HttpStatus.CREATED);
+            Notas notasCreated = notasService.create(notas);
+            NotasDTO notasDto = MapperUtils.DtoFromEntity(notasCreated, NotasDTO.class);
+            return new ResponseEntity<>(notasDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -86,15 +89,14 @@ public class DepartamentoController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Departamento depModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Notas notasModified) {
         try {
-            Optional<Departamento> depUpdated = departamentoService.update(depModified, id);
-            if (depUpdated.isPresent()) {
-                DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depUpdated.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(depDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            Optional<Notas> notasUpdated = notasService.update(notasModified, id);
+            if (notasUpdated.isPresent()) {
+                NotasDTO notasDto = MapperUtils.DtoFromEntity(notasUpdated.get(), NotasDTO.class);
+                return new ResponseEntity<>(notasDto, HttpStatus.OK);
             }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -103,7 +105,7 @@ public class DepartamentoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
-            departamentoService.delete(id);
+            notasService.delete(id);
             if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -116,7 +118,7 @@ public class DepartamentoController {
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() {
         try {
-            departamentoService.deleteAll();
+            notasService.deleteAll();
             if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -125,4 +127,19 @@ public class DepartamentoController {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+//    @GetMapping("/titulo")
+//    public ResponseEntity<?> findByTitulo(@PathVariable(value = "titulo") String titulo) {
+//        try {
+//            Optional<List<Notas>> result = notasService.findByTitulo(titulo);
+//            if (result.isPresent()) {
+//                List<NotasDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), NotasDTO.class);
+//                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
+//            }
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } catch (Exception ex) {
+//            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+    
 }

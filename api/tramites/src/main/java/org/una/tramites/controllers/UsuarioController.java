@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.una.tramites.controller;
+package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -125,6 +125,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/cedula/{term}")
+    @ApiOperation(value = "Obtiene una lista de usuarios por medio de su cedula", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
             Optional<List<Usuario>> result = usuarioService.findByCedulaAproximate(term);
@@ -140,6 +141,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/nombre/{term}")
+    @ApiOperation(value = "Obtiene una lista de usuarios por medio de su nombre", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
             Optional<List<Usuario>> result = usuarioService.findByNombreCompletoAproximateIgnoreCase(term);
@@ -157,6 +159,7 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
+    @ApiOperation(value = "Crea un nuevo usuario", response = UsuarioDTO.class, tags = "Usuarios")
     public ResponseEntity<?> create(@RequestBody Usuario usuario) {
         try {
             Usuario usuarioCreated = usuarioService.create(usuario);
@@ -169,6 +172,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @ResponseBody
+    @ApiOperation(value = "Modifica un usuario existente", response = UsuarioDTO.class, tags = "Usuarios")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Usuario usuarioModified) {
         try {
             Optional<Usuario> usuarioUpdated = usuarioService.update(usuarioModified, id);
@@ -186,6 +190,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Borra un usario por su identificador unico", tags = "Usuarios")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             usuarioService.delete(id);
@@ -199,6 +204,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/")
+    @ApiOperation(value = "Borra todos los usuario", tags = "Usuarios")
     public ResponseEntity<?> deleteAll() {
         try {
             usuarioService.deleteAll();
@@ -212,6 +218,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuarios_en_departamento/{id}")
+    @ApiOperation(value = "Obtiene una lista de usuarios segun el departamento donde se desempeña", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") Long id) {
         try {
             Optional<List<Usuario>> result = usuarioService.findUsersByDepartamentoId(id);
@@ -226,6 +233,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/jefe/{id}")
+    @ApiOperation(value = "Obtiene una lista de los jefes de los departemntos", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id") Long id) {
         try {
             Optional<Usuario> result = usuarioService.findJefesDepartemento(id);

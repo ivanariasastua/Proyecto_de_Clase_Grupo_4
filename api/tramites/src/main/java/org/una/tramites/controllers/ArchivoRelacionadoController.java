@@ -1,4 +1,4 @@
-package org.una.tramites.controller;
+package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,4 +1,5 @@
-package org.una.tramites.controller;
+
+package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.PermisoDTO;
-import org.una.tramites.entities.Departamento;
+import org.una.tramites.dto.PermisoOtorgadoDTO;
 import org.una.tramites.entities.Permiso;
+import org.una.tramites.entities.PermisoOtorgado;
+import org.una.tramites.services.IPermisoOtorgadoService;
 import org.una.tramites.services.IPermisoService;
 import org.una.tramites.utils.MapperUtils;
 
@@ -27,23 +30,24 @@ import org.una.tramites.utils.MapperUtils;
  *
  * @author Dios
  */
+
 @RestController
-@RequestMapping("/permisos")
-@Api(tags = {"Permisos"})
-public class PermisoController {
+@RequestMapping("/permisos_otorgados")
+@Api(tags = {"Permisos_Otorgados"})
+public class PermisoOtorgadoController {
     
     @Autowired
-    private IPermisoService permisoService;
+    private IPermisoOtorgadoService perOtorgadoService;
 
     @GetMapping()
-    @ApiOperation(value = "Obtiene una lista de todos los permisos", response = PermisoDTO.class, responseContainer = "List", tags = "Permisos")
+    @ApiOperation(value = "Obtiene una lista de todos los permisos otorgados", response = PermisoOtorgadoDTO.class, responseContainer = "List", tags = "Permisos_Otorgados")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
-            Optional<List<Permiso>> result = permisoService.findAll();
+            Optional<List<PermisoOtorgado>> result = perOtorgadoService.findAll();
             if (result.isPresent()) {
-                List<PermisoDTO> permisosDTO = MapperUtils.DtoListFromEntityList(result.get(), PermisoDTO.class);
-                return new ResponseEntity<>(permisosDTO, HttpStatus.OK);
+                List<PermisoOtorgadoDTO> perOtorgadosDTO = MapperUtils.DtoListFromEntityList(result.get(), PermisoOtorgadoDTO.class);
+                return new ResponseEntity<>(perOtorgadosDTO, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -55,10 +59,10 @@ public class PermisoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-            Optional<Permiso> permisoFound = permisoService.findById(id);
-            if (permisoFound.isPresent()) {
-                PermisoDTO perDto = MapperUtils.DtoFromEntity(permisoFound.get(), PermisoDTO.class);
-                return new ResponseEntity<>(perDto, HttpStatus.OK);
+            Optional<PermisoOtorgado> perOtorgadoFound = perOtorgadoService.findById(id);
+            if (perOtorgadoFound.isPresent()) {
+                PermisoOtorgadoDTO perOtorDto = MapperUtils.DtoFromEntity(perOtorgadoFound.get(), PermisoOtorgadoDTO.class);
+                return new ResponseEntity<>(perOtorDto, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -70,11 +74,11 @@ public class PermisoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Permiso per) {
+    public ResponseEntity<?> create(@RequestBody PermisoOtorgado perOto) {
         try {
-            Permiso perCreated = permisoService.create(per);
-            PermisoDTO perDto = MapperUtils.DtoFromEntity(perCreated, PermisoDTO.class);
-            return new ResponseEntity<>(perDto, HttpStatus.CREATED);
+            PermisoOtorgado perOtorgadoCreated = perOtorgadoService.create(perOto);
+            PermisoOtorgadoDTO perOtorgadoDto = MapperUtils.DtoFromEntity(perOtorgadoCreated, PermisoOtorgadoDTO.class);
+            return new ResponseEntity<>(perOtorgadoDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -82,12 +86,12 @@ public class PermisoController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Permiso perModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgado perOtorgadoModified) {
         try {
-            Optional<Permiso> perUpdated = permisoService.update(perModified, id);
-            if (perUpdated.isPresent()) {
-                PermisoDTO perDto = MapperUtils.DtoFromEntity(perUpdated.get(), PermisoDTO.class);
-                return new ResponseEntity<>(perDto, HttpStatus.OK);
+            Optional<PermisoOtorgado> perOtorgadoUpdated = perOtorgadoService.update(perOtorgadoModified, id);
+            if (perOtorgadoUpdated.isPresent()) {
+                PermisoOtorgadoDTO perOtoDto = MapperUtils.DtoFromEntity(perOtorgadoUpdated.get(), PermisoOtorgadoDTO.class);
+                return new ResponseEntity<>(perOtoDto, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -99,7 +103,7 @@ public class PermisoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
-            permisoService.delete(id);
+            perOtorgadoService.delete(id);
             if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -112,7 +116,7 @@ public class PermisoController {
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() {
         try {
-            permisoService.deleteAll();
+            perOtorgadoService.deleteAll();
             if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
