@@ -19,7 +19,7 @@ import org.una.tramites.repositories.IVariacionesRepository;
  * @author Ivan Josué Arias Astúa
  */
 @Service
-public class VariacionesServiceImplemantation implements IVariacionesService{
+public class VariacionesServiceImplementation implements IVariacionesService{
     
     @Autowired
     private IVariacionesRepository varRepository;

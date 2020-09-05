@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.tramites.entities.RequisitoPresentado;
-import org.una.tramites.repositories.IRequisitoPresentado;
+import org.una.tramites.repositories.IRequisitoPresentadoRepository;
 
 @Service
 public class RequisitoPresentadoServiceImplementation implements IRequisitoPresentadoService{
     
     @Autowired
-    private IRequisitoPresentado requisitoPresentadoRepository;
+    private IRequisitoPresentadoRepository requisitoPresentadoRepository;
 
     @Override
     @Transactional(readOnly = true)

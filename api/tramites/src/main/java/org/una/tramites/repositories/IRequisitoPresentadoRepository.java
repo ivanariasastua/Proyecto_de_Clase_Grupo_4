@@ -10,7 +10,7 @@ import org.una.tramites.entities.RequisitoPresentado;
  *
  * @author Dios
  */
-public interface IRequisitoPresentado extends JpaRepository<RequisitoPresentado, Long>{
+public interface IRequisitoPresentadoRepository extends JpaRepository<RequisitoPresentado, Long>{
     
     public List<RequisitoPresentado>findByRequisito(Long id);
     

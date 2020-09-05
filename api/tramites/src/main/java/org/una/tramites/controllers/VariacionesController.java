@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.VariacionesDTO;
 import org.una.tramites.entities.Variaciones;
-import org.una.tramites.services.VariacionesServiceImplemantation;
+import org.una.tramites.services.VariacionesServiceImplementation;
 import org.una.tramites.utils.MapperUtils;
 
 /**
@@ -38,7 +38,7 @@ import org.una.tramites.utils.MapperUtils;
 public class VariacionesController {
 
     @Autowired
-    private VariacionesServiceImplemantation varService;
+    private VariacionesServiceImplementation varService;
     
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos las Variaciones", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
