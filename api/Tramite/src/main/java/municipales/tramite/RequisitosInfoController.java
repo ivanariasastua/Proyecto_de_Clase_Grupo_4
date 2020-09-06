@@ -5,20 +5,18 @@
  */
 package municipales.tramite;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-
 /**
  * FXML Controller class
  *
  * @author cordo
  */
-public class LogInController implements Initializable {
+public class RequisitosInfoController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -26,12 +24,15 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
-    private void actIngresar(ActionEvent event) throws IOException {
-        App.goView("Principal",1100, 650);
+    private void actCancelar(ActionEvent event) {
         App.CerrarVentana(event);
     }
 
+    @FXML
+    private void actGuardar(ActionEvent event) {
+    }
+    
 }

@@ -10,29 +10,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.DiseñoTramitesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.DiseñoTramitesController">
    <children>
-      <Label layoutX="292.0" layoutY="21.0" prefHeight="25.0" prefWidth="333.0" text="Diseño de Trámites">
+      <Label layoutX="286.0" layoutY="14.0" prefHeight="25.0" prefWidth="333.0" text="Diseño de Trámites">
          <font>
             <Font size="35.0" />
          </font>
       </Label>
-      <TextField layoutX="91.0" layoutY="121.0" prefHeight="25.0" prefWidth="603.0" />
-      <Button layoutX="709.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Buscar" />
-      <TabPane layoutX="81.0" layoutY="174.0" prefHeight="436.0" prefWidth="739.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="1.0" layoutY="71.0" prefHeight="580.0" prefWidth="905.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Variaciones">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="773.0">
                      <children>
-                        <TableView layoutX="13.0" layoutY="14.0" prefHeight="351.0" prefWidth="714.0">
+                        <TableView layoutX="37.0" layoutY="100.0" prefHeight="384.0" prefWidth="832.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button layoutX="625.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Agregar" />
+                        <Button layoutX="760.0" layoutY="512.0" mnemonicParsing="false" onAction="#acrAgregarVariaciones" prefHeight="25.0" prefWidth="109.0" text="Agregar" />
+                        <TextField layoutX="37.0" layoutY="40.0" prefHeight="25.0" prefWidth="693.0" promptText="Buscar" />
+                        <Button layoutX="767.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Buscar" />
                      </children>
                   </AnchorPane>
             </content>
@@ -41,13 +40,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="13.0" layoutY="14.0" prefHeight="351.0" prefWidth="714.0">
+                        <TableView layoutX="37.0" layoutY="100.0" prefHeight="384.0" prefWidth="832.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
                           </columns>
                         </TableView>
-                        <Button layoutX="626.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Agregar" />
+                        <Button layoutX="760.0" layoutY="512.0" mnemonicParsing="false" onAction="#actAgregarRequisitos" prefHeight="25.0" prefWidth="109.0" text="Agregar" />
+                        <TextField layoutX="37.0" layoutY="40.0" prefHeight="25.0" prefWidth="693.0" promptText="Buscar" />
+                        <Button layoutX="767.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Buscar" />
                      </children>
                   </AnchorPane>
             </content>

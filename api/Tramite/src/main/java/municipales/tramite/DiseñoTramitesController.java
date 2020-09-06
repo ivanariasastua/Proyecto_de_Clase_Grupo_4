@@ -5,8 +5,11 @@
  */
 package municipales.tramite;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -23,5 +26,15 @@ public class DiseñoTramitesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void acrAgregarVariaciones(ActionEvent event) throws IOException {
+        App.goView("VariacionesInfo", 750, 519);
+    }
+
+    @FXML
+    private void actAgregarRequisitos(ActionEvent event) throws IOException {
+        App.goView("RequisitosInfo", 750, 496);
+    }
     
 }

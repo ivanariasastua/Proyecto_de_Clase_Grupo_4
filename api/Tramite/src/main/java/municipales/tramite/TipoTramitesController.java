@@ -12,13 +12,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-
 /**
  * FXML Controller class
  *
  * @author cordo
  */
-public class LogInController implements Initializable {
+public class TipoTramitesController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -26,12 +25,11 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
-    private void actIngresar(ActionEvent event) throws IOException {
-        App.goView("Principal",1100, 650);
-        App.CerrarVentana(event);
+    private void actAgregar(ActionEvent event) throws IOException {
+        App.goView("TipoTramitesInfo",750,586);
     }
-
+    
 }

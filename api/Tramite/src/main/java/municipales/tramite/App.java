@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.scene.Node;
 
 /**
  * JavaFX App
@@ -22,6 +25,13 @@ public class App extends Application {
         stage.show();
     }
 
+    static void goView(String fxml, int ancho, int alto) throws IOException {
+        scene = new Scene(loadFXML(fxml), ancho, alto);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -33,6 +43,12 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+    
+    static void CerrarVentana(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 
 }

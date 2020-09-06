@@ -5,8 +5,11 @@
  */
 package municipales.tramite;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -23,5 +26,10 @@ public class DepartamentosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void actAgregar(ActionEvent event) throws IOException {
+        App.goView("DepartamentosInfo",750,518);
+    }
     
 }
