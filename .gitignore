@@ -10,3 +10,37 @@ api/Tramite/target/maven-status/maven-compiler-plugin/compile/default-compile/cr
 api/Tramite/target/classes/module-info.class
 api/Tramite/target/classes/.netbeans_automatic_build
 api/Tramite/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+api/Tramite/target/classes/module-info.class
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
