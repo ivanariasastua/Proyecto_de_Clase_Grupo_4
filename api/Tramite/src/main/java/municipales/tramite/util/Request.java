@@ -76,7 +76,8 @@ public class Request {
     }
     
     public Object readEntity(Class<?>[] clase) throws IOException{
-        return this.conection.getContent(clase);
+        System.out.println(this.conection.getContentType());
+        return null;
     }
 /*
     public Request(String direccion){
