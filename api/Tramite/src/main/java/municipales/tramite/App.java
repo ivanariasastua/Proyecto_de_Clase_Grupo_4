@@ -7,9 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
+import municipales.tramite.dto.UsuarioDTO;
 import municipales.tramite.util.Request;
 
 /**
@@ -21,7 +25,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Request.conectar();
         scene = new Scene(loadFXML("LogIn"), 900, 600);
         stage.setScene(scene);
         stage.show();
