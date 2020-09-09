@@ -1,3 +1,4 @@
+municipales\tramite\PermisosController.class
 municipales\tramite\DepartamentosController.class
 municipales\tramite\UsuariosInfoController.class
 municipales\tramite\util\Request.class
@@ -21,6 +22,7 @@ municipales\tramite\dto\UsuarioDTO.class
 municipales\tramite\util\AppContext.class
 module-info.class
 municipales\tramite\dto\PermisoDTO.class
+municipales\tramite\PermisosInfoController.class
 municipales\tramite\VariacionesInfoController.class
 municipales\tramite\util\FlowController.class
 municipales\tramite\dto\DepartamentoDTO.class
