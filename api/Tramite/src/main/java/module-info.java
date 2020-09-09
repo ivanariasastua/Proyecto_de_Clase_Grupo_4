@@ -5,5 +5,6 @@ module municipales.tramite {
       
     opens municipales.tramite to javafx.fxml;
     exports municipales.tramite;
+    requires com.google.gson;
     
 }

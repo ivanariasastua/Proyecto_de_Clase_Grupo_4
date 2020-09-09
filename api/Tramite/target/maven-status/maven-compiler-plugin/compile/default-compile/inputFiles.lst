@@ -1,35 +1,35 @@
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteTipoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\module-info.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\RequisitoPresentadoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\VariacionesInfoController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\Request.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\VariacionDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\UsuariosInfoController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\ParametroGeneralDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteEstadoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\TipoTramitesController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\Controller.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\DepartamentoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\RequisitosInfoController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\FlowController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\NotaDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\PrincipalController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\App.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\RequisitoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\UsuariosController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TransaccionDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\UsuarioDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\ClienteDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DepartamentosController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\LogInController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\ParametrosInfoController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\PermisoOtorgadoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteRegistradoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\AppContext.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\PermisoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DepartamentosInfoController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\ArchivoRelacionadoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\ParametrosController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DiseñoTramitesController.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteCambioEstadoDTO.java
-D:\Documentos de Ivan\Universidad\2020 - 2 Ciclo\Progra III\Proyecto_de_clase\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\TipoTramitesInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DepartamentosController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\AppContext.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\Request.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\VariacionesInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\TipoTramitesInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\DepartamentoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DepartamentosInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\RequisitosInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\ParametrosController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteCambioEstadoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DiseñoTramitesController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\RequisitoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\FlowController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TransaccionDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteTipoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\ParametroGeneralDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\TipoTramitesController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\ArchivoRelacionadoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\UsuariosController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\UsuarioDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\ClienteDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\VariacionDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\UsuariosInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\App.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\Controller.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteEstadoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\PrincipalController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\LogInController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\NotaDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\PermisoOtorgadoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\PermisoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\module-info.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\RequisitoPresentadoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteRegistradoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\ParametrosInfoController.java

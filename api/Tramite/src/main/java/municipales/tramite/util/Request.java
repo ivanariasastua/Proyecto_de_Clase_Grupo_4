@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Map;
+import com.google.gson.Gson; 
+import java.io.InputStream;
 /**
  *
  * @author Dios
@@ -75,9 +77,20 @@ public class Request {
         return "Transaccion existosa";
     }
     
-    public Object readEntity(Class<?>[] clase) throws IOException{
-        System.out.println(this.conection.getContentType());
-        return null;
+    public Object readEntity(Class clase) throws IOException{
+        Object obj = new Gson().fromJson(new Gson().toJson(convertRespuesta(this.conection.getInputStream())), Class.class);
+        return obj;
+    }
+    
+    public String convertRespuesta(InputStream respuesta) throws IOException{
+        InputStreamReader in = new InputStreamReader(respuesta);
+        BufferedReader br = new BufferedReader(in);
+        String output, retorno = "";
+        while ((output = br.readLine()) != null){
+            retorno += output;
+        }
+        this.conection.disconnect();
+        return retorno;
     }
 /*
     public Request(String direccion){

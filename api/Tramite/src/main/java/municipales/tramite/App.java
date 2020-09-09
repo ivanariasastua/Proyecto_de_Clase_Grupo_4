@@ -25,12 +25,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Request request = new Request("usuarios/1");
-        request.getMethod();
-        if(request.isError()){
-            System.out.println(request.getError());
-        }else{
-            request.readEntity(null);
+        try{
+            Request request = new Request("usuarios/1");
+            request.getMethod();
+            if(request.isError()){
+                System.out.println(request.getError());
+            }else{
+                UsuarioDTO user = (UsuarioDTO) request.readEntity(UsuarioDTO.class);
+            }
+        }catch(Exception ex){
+            System.out.println("Error: "+ex);
         }
         
         scene = new Scene(loadFXML("LogIn"), 900, 600);
