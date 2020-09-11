@@ -3,59 +3,25 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/*
+/* 
     Created on : 3 sep. 2020, 15:16:20
     Author     : cordo
 */
-
-
-.anchor{
+/*
+.stack{
     -fx-background-color: #9fb5cc;
     -fx-border-radius: 30px;
     -fx-background-radius: 30px;
+
 }
 
-.text{
-    -fx-prompt-text-fill: #504f4f;
-    -fx-font: bold 18px "Arial";
-    -fx-background-color: transparent;
-    -fx-border-color: black;
-    -fx-border-width: 0 0 2 0;
-    -fx-text-fill: white;
+.Button{
+    -fx-background-color: #002082;
+
 }
 
-.text:hover{
-    -fx-border-color: white;
-}
-
-.label{
-    -fx-alignment: CENTER;
-    -fx-font: bold 26px "Arial";
-}
-
-Button{
-    -fx-opacity: 0.8;
-    -fx-text-fill: white;
-    -fx-background-color: #002082;  
-}
-
-Button:hover{
+.Button:hover{
     -fx-background-color: #1841bb;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
-}
-.check{
-    -fx-font: bold 18px "Arial";
-    -fx-text-fill: #504f4f;
-}
-
-.check .box{
-    -fx-background-color: transparent;
-    -fx-border-color: white;
-    -fx-border-radius: 15;
-    -fx-border-width: 2;
-}
-
-.check:selected .mark{
-    -fx-background-color: green;
-}
+}*/

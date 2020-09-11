@@ -2,7 +2,6 @@
 package municipales.tramite.dto;
 
 import java.util.Date;
-import javax.json.bind.annotation.JsonbDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +19,10 @@ import lombok.ToString;
 @ToString
         
 class RequisitoDTO {
-
-public class RequisitoDTO {
-
+    
     private Long id;
     private String descripcion;
     private boolean estado;
-    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
     private VariacionDTO variaciones;
 }

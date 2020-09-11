@@ -1,8 +1,7 @@
- 
+
 package org.una.tramites.dto;
 
-import java.util.Date;
-import javax.json.bind.annotation.JsonbDateFormat;
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +17,11 @@ import org.una.tramites.entities.Usuario;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-public class PermisoOtorgadoDTO { 
+public class PermisoOtorgadoDTO {
+ 
     private Long id; 
-    private UsuarioDTO usuarioid;   
-    private PermisoDTO permisoid;
-    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private Usuario usuarioid;   
+    private Permiso permisoid; 
     private Date fechaRegistro; 
     private boolean estado; 
 }

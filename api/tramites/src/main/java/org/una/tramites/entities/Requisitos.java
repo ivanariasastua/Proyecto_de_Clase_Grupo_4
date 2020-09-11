@@ -55,7 +55,7 @@ public class Requisitos implements Serializable {
     private boolean estado;
     
     @Column(name = "fecha_registro", updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date fechaRegistro;
     

@@ -61,9 +61,9 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="286.0" layoutY="21.0" text="Información de Usuarios">
+      <Label layoutX="335.0" layoutY="26.0" text="Información de Usuarios">
          <font>
-            <Font size="31.0" />
+            <Font size="23.0" />
          </font>
       </Label>
    </children>

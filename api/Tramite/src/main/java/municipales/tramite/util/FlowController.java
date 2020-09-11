@@ -62,7 +62,7 @@ public class FlowController {
     private FXMLLoader getFXMLLoader(String name){
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(App.class.getResource(name + ".fxml"));
+            loader = new FXMLLoader(App.class.getResource("view/" + name + ".fxml"));
             //Parent root = FXMLLoader.load(Main.class.getResource("view/" + name + ".fxml"));
             loader.load();
             loaders.put(name, loader);
@@ -76,7 +76,7 @@ public class FlowController {
     public void cargarFXMLLoader(String name){
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(App.class.getResource(name + ".fxml"));
+            loader = new FXMLLoader(App.class.getResource("view/" + name + ".fxml"));
             loader.load();
             loaders.put(name, loader);
         } catch (IOException ex) {

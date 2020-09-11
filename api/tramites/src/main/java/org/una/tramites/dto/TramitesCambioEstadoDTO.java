@@ -5,8 +5,7 @@
  */
 package org.una.tramites.dto;
 
-import java.util.Date;
-import javax.json.bind.annotation.JsonbDateFormat;
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +27,6 @@ public class TramitesCambioEstadoDTO {
     private Usuario usuarioId;
     private TramitesRegistrados tramitesRegistradosId;
     private TramitesCambioEstado tramitesEstadoId;
-    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro; 
     
 }

@@ -51,7 +51,7 @@ public class TramitesCambioEstado {
     private Usuario usuario;
     
     @Column(name = "fecha_registro", updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date fechaRegistro;
 }
