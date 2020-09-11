@@ -4,12 +4,14 @@ C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\j
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\VariacionesInfoController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\TipoTramitesInfoController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\DepartamentoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\service\UsuarioService.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DepartamentosInfoController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\RequisitosInfoController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\ParametrosController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteCambioEstadoDTO.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\DiseñoTramitesController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\RequisitoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\PermisosController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\FlowController.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TransaccionDTO.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteTipoDTO.java
@@ -31,4 +33,6 @@ C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\j
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\PermisoDTO.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\RequisitoPresentadoDTO.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\dto\TramiteRegistradoDTO.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\util\Respuesta.java
 C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\ParametrosInfoController.java
+C:\Users\ivana\Documents\GitHub\Proyecto_de_Clase_Grupo_4\api\Tramite\src\main\java\municipales\tramite\PermisosInfoController.java
