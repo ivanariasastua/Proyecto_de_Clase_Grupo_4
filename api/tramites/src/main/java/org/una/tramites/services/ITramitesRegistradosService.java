@@ -26,4 +26,8 @@ public interface ITramitesRegistradosService {
     public void delete(Long id);
 
     public void deleteAll();
+    
+    public Optional<List<TramitesRegistrados>> findByClienteId(Long id);
+    
+    public Optional<List<TramitesRegistrados>> findByTramiteTipoId(Long id);
 }
