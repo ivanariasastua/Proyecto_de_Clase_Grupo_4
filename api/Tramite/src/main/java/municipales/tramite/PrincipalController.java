@@ -62,7 +62,8 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-    private void actPermisos(ActionEvent event) {
+    private void actPermisos(ActionEvent event) throws IOException {
+        CargarVista("Permisos");
     }
 
     @FXML
