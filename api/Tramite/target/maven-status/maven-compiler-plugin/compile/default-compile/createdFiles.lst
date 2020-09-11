@@ -8,9 +8,11 @@ municipales\tramite\util\Respuesta.class
 municipales\tramite\DepartamentosInfoController.class
 municipales\tramite\dto\TramiteCambioEstadoDTO.class
 municipales\tramite\dto\ArchivoRelacionadoDTO.class
+municipales\tramite\dto\AuthenticationResponse.class
 municipales\tramite\dto\VariacionDTO.class
 municipales\tramite\service\UsuarioService$2.class
 municipales\tramite\RequisitosInfoController.class
+municipales\tramite\dto\AuthenticationRequest.class
 municipales\tramite\UsuariosController.class
 municipales\tramite\dto\TramiteTipoDTO.class
 municipales\tramite\Controller.class
@@ -33,6 +35,7 @@ municipales\tramite\dto\DepartamentoDTO.class
 municipales\tramite\DiseñoTramitesController.class
 municipales\tramite\ParametrosController.class
 municipales\tramite\service\UsuarioService$4.class
+municipales\tramite\util\Mensaje.class
 municipales\tramite\dto\TramiteEstadoDTO.class
 municipales\tramite\dto\ClienteDTO.class
 municipales\tramite\ParametrosInfoController.class

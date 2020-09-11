@@ -7,17 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javax.ws.rs.core.GenericType;
-import municipales.tramite.dto.UsuarioDTO;
-import municipales.tramite.util.Request;
 
 /**
  * JavaFX App
