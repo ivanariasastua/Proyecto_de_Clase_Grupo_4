@@ -58,7 +58,7 @@ public class Variaciones implements Serializable {
     private boolean estado;
     
     @Column(name = "fecha_registro", updatable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Setter(AccessLevel.NONE)
     private Date fechaRegistro;
     

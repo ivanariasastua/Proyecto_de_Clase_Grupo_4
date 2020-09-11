@@ -1,4 +1,5 @@
 package org.una.tramites.entities;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -55,20 +56,20 @@ public class Usuario implements Serializable {
     private List<PermisoOtorgado> permisos;
     
     @Column(name = "fecha_registro", updatable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Setter(AccessLevel.NONE)
     private Date fechaRegistro;
 
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
 
     @Column(name = "es_jefe")
     private boolean esJefe;
 
     private static final long serialVersionUID = 1L;
-
+    
     @PrePersist
     public void prePersist() {
         estado=true;
