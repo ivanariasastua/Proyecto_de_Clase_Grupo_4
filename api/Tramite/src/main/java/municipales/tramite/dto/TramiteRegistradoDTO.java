@@ -17,7 +17,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 class TramiteRegistradoDTO {
     private Long id;
     private TramiteTipoDTO tramitesTiposId;

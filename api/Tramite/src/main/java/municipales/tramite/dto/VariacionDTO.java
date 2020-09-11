@@ -19,7 +19,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 class VariacionDTO {
     private Long id;
     private boolean grupo;

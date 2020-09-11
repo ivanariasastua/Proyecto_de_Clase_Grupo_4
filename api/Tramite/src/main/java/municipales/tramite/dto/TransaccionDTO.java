@@ -16,7 +16,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 public class TransaccionDTO {
     private Long id;
     Date fechaRegistro;

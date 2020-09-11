@@ -18,11 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-        
-class RequisitoDTO {
-
 public class RequisitoDTO {
-
     private Long id;
     private String descripcion;
     private boolean estado;

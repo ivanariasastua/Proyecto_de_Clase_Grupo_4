@@ -18,7 +18,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 public class UsuarioDTO {
     private Long id; 
     private String nombreCompleto; 

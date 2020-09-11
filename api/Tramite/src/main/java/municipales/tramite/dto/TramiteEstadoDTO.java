@@ -15,7 +15,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 public class TramiteEstadoDTO {
     private Long id;
     private String nombre;

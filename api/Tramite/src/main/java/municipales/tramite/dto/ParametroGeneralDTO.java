@@ -17,7 +17,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 public class ParametroGeneralDTO {
     private Long id;
     private String nombre;

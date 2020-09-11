@@ -17,9 +17,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
-class PermisoOtorgadoDTO {
-
 public class PermisoOtorgadoDTO {
     private Long id; 
     private UsuarioDTO usuarioid;   

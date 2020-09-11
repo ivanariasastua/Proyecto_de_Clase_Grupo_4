@@ -4,12 +4,7 @@ package municipales.tramite.dto;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-
 import javax.json.bind.annotation.JsonbDateFormat;
-
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +20,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 public class ClienteDTO {
     
     private Long id; 

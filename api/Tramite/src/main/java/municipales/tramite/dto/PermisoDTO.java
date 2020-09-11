@@ -16,7 +16,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 class PermisoDTO {
     private Long id; 
     private String codigo;

@@ -23,10 +23,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
-
-class ArchivoRelacionadoDTO {
-
 public class ArchivoRelacionadoDTO {
 
     private Long id;

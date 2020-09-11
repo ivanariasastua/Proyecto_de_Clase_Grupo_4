@@ -17,7 +17,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
 public class NotaDTO {
     private Long id;
     private boolean estado;
