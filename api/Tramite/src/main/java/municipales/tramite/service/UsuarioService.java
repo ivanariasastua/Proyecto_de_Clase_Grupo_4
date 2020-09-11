@@ -23,13 +23,13 @@ public class UsuarioService {
             Request request = new Request("usuarios/login");
             request.post(authetication);
             if(request.isError()){
-                return new Respuesta(false, "Error al iniciar Sesion", request.getError());
+                return new Respuesta(false, request.getError(), "Error al iniciar Sesion");
             }
             AuthenticationResponse usuario = (AuthenticationResponse) request.readEntity(AuthenticationResponse.class);
             AppContext.getInstance().set("UsuarioAutenticado", usuario);
             return new Respuesta(true, "Usuario", usuario);
         }catch(Exception ex){
-            return new Respuesta(false, "No puedo establecerce conexion con el servidor", ex.toString());
+            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }
     

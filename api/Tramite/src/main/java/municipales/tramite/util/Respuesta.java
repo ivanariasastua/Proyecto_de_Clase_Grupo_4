@@ -24,7 +24,7 @@ public class Respuesta implements Serializable{
         this.resultado = new HashMap<>();
     }
 
-    public Respuesta(Boolean estado, String mensaje, String mensajeInterno) {
+    public Respuesta(Boolean estado, String mensajeInterno, String mensaje) {
         this.estado = estado;
         this.mensaje = mensaje;
         this.mensajeInterno = mensajeInterno;

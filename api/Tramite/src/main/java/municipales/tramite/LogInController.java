@@ -74,7 +74,7 @@ public class LogInController extends Controller implements Initializable {
                 App.goView("Principal",1100, 650);
                 App.CerrarVentana(event);
             }else{
-                System.out.println(respuesta.getMensaje());
+                System.out.println(respuesta.getMensajeInterno());
                 alertas.show(Alert.AlertType.ERROR, "Inicio de sesion", respuesta.getMensaje());
             }
             
