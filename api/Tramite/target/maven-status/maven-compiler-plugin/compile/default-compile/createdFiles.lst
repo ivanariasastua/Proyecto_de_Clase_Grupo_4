@@ -19,7 +19,6 @@ municipales\tramite\LogInController.class
 municipales\tramite\dto\RequisitoPresentadoDTO.class
 municipales\tramite\dto\UsuarioDTO.class
 municipales\tramite\util\AppContext.class
-module-info.class
 municipales\tramite\dto\PermisoDTO.class
 municipales\tramite\VariacionesInfoController.class
 municipales\tramite\util\FlowController.class
@@ -32,4 +31,5 @@ municipales\tramite\ParametrosInfoController.class
 municipales\tramite\TipoTramitesController.class
 municipales\tramite\dto\ParametroGeneralDTO.class
 municipales\tramite\dto\PermisoOtorgadoDTO.class
+municipales\tramite\App$1.class
 municipales\tramite\TipoTramitesInfoController.class

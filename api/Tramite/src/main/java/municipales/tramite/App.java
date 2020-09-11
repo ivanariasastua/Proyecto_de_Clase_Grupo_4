@@ -7,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javax.ws.rs.core.GenericType;
 import municipales.tramite.dto.UsuarioDTO;
 import municipales.tramite.util.Request;
 
@@ -25,18 +28,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        try{
-            Request request = new Request("usuarios/1");
-            request.getMethod();
-            if(request.isError()){
-                System.out.println(request.getError());
-            }else{
-                UsuarioDTO user = (UsuarioDTO) request.readEntity(UsuarioDTO.class);
-            }
-        }catch(Exception ex){
-            System.out.println("Error: "+ex);
-        }
-        
         scene = new Scene(loadFXML("LogIn"), 900, 600);
         stage.setScene(scene);
         stage.show();
