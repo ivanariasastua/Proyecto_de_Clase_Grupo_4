@@ -8,9 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.scene.Node;
-import municipales.tramite.util.Request;
 
 /**
  * JavaFX App
@@ -21,7 +19,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Request.conectar();
         scene = new Scene(loadFXML("LogIn"), 900, 600);
         stage.setScene(scene);
         stage.show();

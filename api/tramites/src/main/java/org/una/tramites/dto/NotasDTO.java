@@ -6,6 +6,7 @@
 package org.una.tramites.dto;
 
 import java.util.Date;
+import javax.json.bind.annotation.JsonbDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,9 @@ public class NotasDTO {
     private boolean tipo;
     private String titulo;
     private String contenido;
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion;
     private TramitesRegistradosDTO tramitesRegistrados;
     
