@@ -41,7 +41,7 @@ public interface IUsuarioService {
     
     public Optional<Usuario> findByCedula(String cedula);
 
-    //public String login(AuthenticationRequest authenticationRequest);
+    public String login(AuthenticationRequest authenticationRequest);
     
-    public AuthenticationResponse login(AuthenticationRequest authenticationRequest); 
+    //public AuthenticationResponse login(AuthenticationRequest authenticationRequest); 
 }

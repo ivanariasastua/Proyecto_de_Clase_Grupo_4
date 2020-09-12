@@ -112,7 +112,7 @@ public class UsuarioController {
         }
         try {
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            String token = usuarioService.login(authenticationRequest).getJwt();
+            String token = usuarioService.login(authenticationRequest);
             if (!token.isBlank()) {
                 authenticationResponse.setJwt(token);
                 Optional<Usuario> user = usuarioService.findByCedula(authenticationRequest.getCedula());

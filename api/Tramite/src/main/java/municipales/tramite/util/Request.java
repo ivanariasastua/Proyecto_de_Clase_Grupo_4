@@ -14,24 +14,25 @@ import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import municipales.tramite.dto.AuthenticationResponse;
+
 /**
  *
  * @author Dios
  */
 public class Request {
-   
+
     private Client client;
     private Invocation.Builder builder;
     private WebTarget webTarget;
     private Response response;
     private final String apiUrl = "http://localhost:8989/";
-    
-    public Request(String direccion){
+
+    public Request(String direccion) {
         this.client = ClientBuilder.newClient();
         setDireccion(direccion);
     }
-    
-    public Request(String direccion,AuthenticationResponse aut){
+
+    public Request(String direccion, AuthenticationResponse aut) {
         this.client = ClientBuilder.newClient();
         this.webTarget = client.target(apiUrl + direccion);
         this.builder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -40,8 +41,8 @@ public class Request {
         headers.add("Authorization", "Bearer " + aut.getJwt());
         builder.headers(headers);
     }
-    
-    public Request(String direccion, String parametros, Map<String, Object> valores){
+
+    public Request(String direccion, String parametros, Map<String, Object> valores) {
         this.client = ClientBuilder.newClient();
         this.webTarget = client.target(apiUrl + direccion).path(parametros).resolveTemplates(valores);
         this.builder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -49,19 +50,19 @@ public class Request {
         headers.add("Content-Type", "application/json; charset=UTF-8");
         builder.headers(headers);
     }
-    
-    private void setDireccion(String direccion){
+
+    private void setDireccion(String direccion) {
         this.webTarget = client.target(apiUrl + direccion);
         this.builder = webTarget.request(MediaType.APPLICATION_JSON);
         MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
         headers.add("Content-Type", "application/json; charset=UTF-8");
         builder.headers(headers);
     }
-    
+
     public void get() {
         response = builder.get();
     }
-    
+
     public void post(Object clazz) {
         Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
         response = builder.post(entity);
@@ -75,15 +76,15 @@ public class Request {
     public void delete() {
         response = builder.delete();
     }
-    
+
     public int getStatus() {
         return response.getStatus();
     }
-    
-    public Boolean isError(){
+
+    public Boolean isError() {
         return getStatus() != HttpServletResponse.SC_OK;
     }
-  
+
     public String getError() {
         if (response.getStatus() != HttpServletResponse.SC_OK) {
             String mensaje;
@@ -96,11 +97,11 @@ public class Request {
         }
         return null;
     }
-    
-    public Object readEntity(Class clazz) {  
+
+    public Object readEntity(Class clazz) {
         return response.readEntity(clazz);
     }
-    
+
     public Object readEntity(GenericType<?> genericType) {
         return response.readEntity(genericType);
     }
