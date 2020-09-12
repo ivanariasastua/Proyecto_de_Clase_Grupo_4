@@ -75,11 +75,11 @@ public class DepartamentoController {
     @PostMapping("/")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo departamento", response = DepartamentoDTO.class, tags = "Departamentos")
-    public ResponseEntity<?> create(@RequestBody Departamento dep) {
-        System.out.println("entra al create del controller");
+    public ResponseEntity<?> create(@RequestBody DepartamentoDTO departamento) {
         try {
-            Departamento depCreated = departamentoService.create(dep);
-            DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depCreated, DepartamentoDTO.class);
+            Departamento depart = MapperUtils.EntityFromDto(departamento, Departamento.class);
+            depart = departamentoService.create(depart);
+            DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depart, DepartamentoDTO.class);
             return new ResponseEntity<>(depDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
