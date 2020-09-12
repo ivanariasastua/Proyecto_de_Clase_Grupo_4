@@ -6,6 +6,7 @@
 
 package org.una.tramites.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,12 +34,12 @@ import lombok.ToString;
  * @author IVAN
  */
 @Entity
-@Table(name = "departamento")
+@Table(name = "Departamentos")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Departamento {
+public class Departamento implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +67,7 @@ public class Departamento {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento") 
     private List<TramitesTipos> tramites = new ArrayList<>();
 
+    private static final long serialVersionUID = 1L;
     
     @PrePersist
     public void prePersist(){

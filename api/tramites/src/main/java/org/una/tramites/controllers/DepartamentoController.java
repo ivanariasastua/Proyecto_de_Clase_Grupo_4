@@ -74,7 +74,9 @@ public class DepartamentoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
+    @ApiOperation(value = "Crea un nuevo departamento", response = DepartamentoDTO.class, tags = "Departamentos")
     public ResponseEntity<?> create(@RequestBody Departamento dep) {
+        System.out.println("entra al create del controller");
         try {
             Departamento depCreated = departamentoService.create(dep);
             DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depCreated, DepartamentoDTO.class);

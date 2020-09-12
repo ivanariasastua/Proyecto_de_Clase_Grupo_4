@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.una.tramites.entities.Permiso;
 import org.una.tramites.entities.PermisoOtorgado;
 import org.una.tramites.entities.Usuario;
+import org.una.tramites.loaders.Permisos;
 import org.una.tramites.services.IUsuarioService;
 import org.una.tramites.services.IPermisoService;
 import org.una.tramites.services.IPermisoOtorgadoService;
@@ -37,36 +38,47 @@ public class DataLoader implements ApplicationRunner {
 
         if (usuarioService.findByCedula(cedula).isEmpty()) {
 
-            Permiso permiso;
-            final String codigo = "Usu01"; 
-            Optional<Permiso> permisoBuscado = permisoService.findByCodigo(codigo);
-
-            if (permisoBuscado.isEmpty()) { 
-                permiso = new Permiso();
-                permiso.setCodigo(codigo);
-                permiso.setDescripcion("Registrar usuario nuevo");
-                permiso = permisoService.create(permiso);
-
-            } else {
-                permiso = permisoBuscado.get();
-            }
-            
+//            Permiso permiso;
+//            final String codigo = "Usu01"; 
+//            Optional<Permiso> permisoBuscado = permisoService.findByCodigo(codigo);
+//
+//            if (permisoBuscado.isEmpty()) { 
+//                permiso = new Permiso();
+//                permiso.setCodigo(codigo);
+//                permiso.setDescripcion("Registrar usuario nuevo");
+//                permiso = permisoService.create(permiso);
+//
+//            } else {
+//                permiso = permisoBuscado.get();
+//            }
+//            
+            createPermisos();
             Usuario usuario = new Usuario();
             usuario.setNombreCompleto("Usuario Admin");
             usuario.setCedula(cedula);
             usuario.setPasswordEncriptado(password);
             usuario = usuarioService.create(usuario);
 
-            PermisoOtorgado permisoOtorgado = new PermisoOtorgado();
-            permisoOtorgado.setPermiso(permiso);
-            permisoOtorgado.setUsuario(usuario);
-            permisoOtorgadoService.create(permisoOtorgado);
+//            PermisoOtorgado permisoOtorgado = new PermisoOtorgado();
+//            permisoOtorgado.setPermiso(permiso);
+//            permisoOtorgado.setUsuario(usuario);
+//            permisoOtorgadoService.create(permisoOtorgado);
 
             System.out.println("Se agrega el usuario inicial");
         } else {
             System.out.println("Se encontro el admin");
         }
-
+        
     }
+    
+    private void createPermisos() {
+        for (Permisos permiso : Permisos.values()) {
+            Permiso nuevoPermiso = new Permiso();
+            nuevoPermiso.setCodigo(permiso.getCodigo());
+            nuevoPermiso.setDescripcion(permiso.name());
+            permisoService.create(nuevoPermiso);
+        } 
+    }
+
 }
 

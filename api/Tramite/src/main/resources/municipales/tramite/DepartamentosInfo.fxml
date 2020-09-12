@@ -24,10 +24,10 @@
       <Label layoutX="122.0" layoutY="315.0" text="Fecha de Creación" />
       <VBox layoutX="261.0" layoutY="152.0" prefHeight="319.0" prefWidth="367.0" spacing="50.0">
          <children>
-            <TextField prefHeight="27.0" prefWidth="316.0" />
-            <ComboBox prefHeight="27.0" prefWidth="367.0" />
-            <DatePicker prefHeight="27.0" prefWidth="367.0" />
-            <DatePicker prefHeight="27.0" prefWidth="369.0" />
+            <TextField fx:id="txtNombre" prefHeight="27.0" prefWidth="316.0" />
+            <ComboBox fx:id="cbxEstado" prefHeight="27.0" prefWidth="367.0" />
+            <DatePicker fx:id="fechaCreacion" prefHeight="27.0" prefWidth="367.0" />
+            <DatePicker fx:id="fechaModificacion" prefHeight="27.0" prefWidth="369.0" />
          </children>
       </VBox>
    </children>

@@ -8,10 +8,12 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import municipales.tramite.dto.AuthenticationResponse;
 /**
  *
  * @author Dios
@@ -27,6 +29,16 @@ public class Request {
     public Request(String direccion){
         this.client = ClientBuilder.newClient();
         setDireccion(direccion);
+    }
+    
+    public Request(String direccion,AuthenticationResponse aut){
+        this.client = ClientBuilder.newClient();
+        this.webTarget = client.target(apiUrl + direccion);
+        this.builder = webTarget.request(MediaType.APPLICATION_JSON);
+        MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
+        headers.add("Content-Type", "application/json; charset=UTF-8");
+        headers.add("Authorization", "Bearer " + aut.getJwt());
+        builder.headers(headers);
     }
     
     public Request(String direccion, String parametros, Map<String, Object> valores){
