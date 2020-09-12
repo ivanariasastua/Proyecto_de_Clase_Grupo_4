@@ -55,4 +55,14 @@ public class TramitesRegistradosServiceImplementation implements ITramitesRegist
     public Optional<TramitesRegistrados> findById(Long id) {
         return tramitesRegistradosRepository.findById(id);
     }
+
+    @Override
+    public Optional<List<TramitesRegistrados>> findByClienteId(Long id) {
+        return Optional.ofNullable(tramitesRegistradosRepository.findByClientesId(id));
+    }
+
+    @Override
+    public Optional<List<TramitesRegistrados>> findByTramiteTipoId(Long id) {
+        return Optional.ofNullable(tramitesRegistradosRepository.findByTramitesTiposId(id));
+    }
 }

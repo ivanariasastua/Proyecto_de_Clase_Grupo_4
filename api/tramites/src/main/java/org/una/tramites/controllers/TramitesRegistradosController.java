@@ -129,5 +129,35 @@ public class TramitesRegistradosController {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("/cliente/{id}")
+    @ApiOperation(value = "Obtiene una lista de tramites registrados por el cliente", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
+    public ResponseEntity<?> findByClienteId(@PathVariable(value = "id") Long id) {
+        try {
+            Optional<List<TramitesRegistrados>> result = tramitesRegistradosService.findByClienteId(id);
+            if (result.isPresent()) {
+                List<TramitesRegistradosDTO> tramitesRegistradosDTO = MapperUtils.DtoListFromEntityList(result.get(), TramitesRegistradosDTO.class);
+                return new ResponseEntity<>(tramitesRegistradosDTO, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("/tipo_tramite/{id}")
+    @ApiOperation(value = "Obtiene una lista de tramites según el tipo", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
+    public ResponseEntity<?> findByTipoTramiteId(@PathVariable(value = "id") Long id) {
+        try {
+            Optional<List<TramitesRegistrados>> result = tramitesRegistradosService.findByTramiteTipoId(id);
+            if (result.isPresent()) {
+                List<TramitesRegistradosDTO> tramitesRegistradosDTO = MapperUtils.DtoListFromEntityList(result.get(), TramitesRegistradosDTO.class);
+                return new ResponseEntity<>(tramitesRegistradosDTO, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

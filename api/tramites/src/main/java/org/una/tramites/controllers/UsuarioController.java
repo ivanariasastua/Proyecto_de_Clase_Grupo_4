@@ -237,7 +237,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/jefe/{id}")
-    @ApiOperation(value = "Obtiene una lista de los jefes de los departemntos", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
+    @ApiOperation(value = "Obtiene una lista de los jefes de los departementos", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id") Long id) {
         try {
             Optional<Usuario> result = usuarioService.findJefesDepartemento(id);
