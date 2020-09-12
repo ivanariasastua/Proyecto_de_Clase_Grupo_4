@@ -6,10 +6,15 @@
 package municipales.tramite;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import municipales.tramite.util.Respuesta;
+import municipales.tramite.dto.UsuarioDTO;
+import municipales.tramite.service.UsuarioService;
+import municipales.tramite.util.Respuesta;
 
 /**
  * FXML Controller class
@@ -21,9 +26,12 @@ public class UsuariosInfoController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    private UsuarioService service;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        service = new UsuarioService();
     }    
 
     @FXML

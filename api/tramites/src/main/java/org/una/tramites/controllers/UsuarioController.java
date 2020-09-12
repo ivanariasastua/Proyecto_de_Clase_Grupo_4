@@ -161,13 +161,15 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo usuario", response = UsuarioDTO.class, tags = "Usuarios")
-    public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuario) {
         try {
-            Usuario usuarioCreated = usuarioService.create(usuario);
-            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuarioCreated, UsuarioDTO.class);
+            Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);
+            user.setPasswordEncriptado(value);
+            user = usuarioService.create(user);
+            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user, UsuarioDTO.class);
             return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);

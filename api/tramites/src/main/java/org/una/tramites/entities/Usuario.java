@@ -23,6 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.una.tramites.dto.UsuarioDTO;
 
 @Entity
 @Table(name = "Usuarios")
@@ -82,7 +83,6 @@ public class Usuario implements Serializable {
     public void preUpdate() {
         fechaModificacion = new Date();
     }
-
 }
 
 

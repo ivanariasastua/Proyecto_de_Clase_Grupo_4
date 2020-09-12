@@ -23,11 +23,10 @@ public class PermisosInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
 
     @FXML
-    private void actGuardar(ActionEvent event) {
+    private void actGuardar(ActionEvent event) {  
     }
 
     @FXML

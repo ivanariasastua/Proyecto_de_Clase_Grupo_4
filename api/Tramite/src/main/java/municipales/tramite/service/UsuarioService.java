@@ -127,9 +127,11 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta guardarUsuario(UsuarioDTO usuario){
+    public Respuesta guardarUsuario(UsuarioDTO usuario, String value){
         try{
-            Request request = new Request("usuarios");
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("value", value);
+            Request request = new Request("usuarios", "/{value}", parametros);
             request.post(usuario);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo guardar el usuario");

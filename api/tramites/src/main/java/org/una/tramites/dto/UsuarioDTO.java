@@ -22,7 +22,7 @@ public class UsuarioDTO {
     private Date fechaRegistro; 
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion; 
-    private Departamento departamentoId; 
+    private DepartamentoDTO departamentoId; 
     private List<PermisoOtorgadoDTO> permisos;
     private boolean esJefe;
 }
