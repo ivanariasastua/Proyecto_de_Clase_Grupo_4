@@ -115,7 +115,8 @@ public class UsuarioController {
             String token = usuarioService.login(authenticationRequest);
             if (!token.isBlank()) {
                 authenticationResponse.setJwt(token);
-                UsuarioDTO userDto = MapperUtils.DtoFromEntity(usuarioService.findByCedula(authenticationRequest.getCedula()), UsuarioDTO.class);
+                Optional<Usuario> user = usuarioService.findByCedula(authenticationRequest.getCedula());
+                UsuarioDTO userDto = MapperUtils.DtoFromEntity(user.get(), UsuarioDTO.class);
                 authenticationResponse.setUsuario(userDto);
                 authenticationResponse.setPermisos(userDto.getPermisos());
                 return new ResponseEntity(authenticationResponse, HttpStatus.OK);

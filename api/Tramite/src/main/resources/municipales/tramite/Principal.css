@@ -1,0 +1,48 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11 sep 2020, 14:15:45
+    Author     : ivana
+*/
+
+.contenedor{
+    -fx-background-color: #003366;
+}
+
+.lbl{
+    -fx-text-fill: white;
+    -fx-text-fill: white;
+    -fx-font: bold 18px "Courier";
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-font: bold 16.8px "Courier";
+    -fx-opacity: 0.8;
+}
+
+.boton{
+    -fx-background-color: #003366;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 0 5;
+}
+
+.boton:focused{
+    -fx-border-color: royalblue;
+    -fx-text-fill: royalblue
+}
+
+.btnActPel:focused{
+    -fx-background-color: #660000;
+}
+
+.btnActPel{
+    -fx-background-color: #990000; 
+    -fx-border-color: #660000;
+    -fx-border-width: 0 0 5 0;
+    -fx-border-insets: 0 0 -1 0;
+}
+

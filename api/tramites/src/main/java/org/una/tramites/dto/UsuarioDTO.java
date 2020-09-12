@@ -25,6 +25,5 @@ public class UsuarioDTO {
     private Departamento departamentoId; 
     private List<PermisoOtorgadoDTO> permisos;
     private boolean esJefe;
-    
 }
 

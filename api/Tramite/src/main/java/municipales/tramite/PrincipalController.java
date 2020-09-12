@@ -13,7 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import municipales.tramite.dto.AuthenticationResponse;
+import municipales.tramite.util.AppContext;
 
 /**
  * FXML Controller class
@@ -24,13 +27,18 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private VBox vBox;
+    @FXML
+    private Label lblUser;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        AuthenticationResponse user = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
+        System.out.println(user.toString());
+        lblUser.setText(user.getUsuario().getNombreCompleto());
+        lblUser.requestFocus();
     }
 
     public void CargarVista(String fxml) throws IOException {
