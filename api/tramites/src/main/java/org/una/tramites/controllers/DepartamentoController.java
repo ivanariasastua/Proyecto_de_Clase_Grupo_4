@@ -75,7 +75,7 @@ public class DepartamentoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/save")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo departamento", response = DepartamentoDTO.class, tags = "Departamentos")
     public ResponseEntity<?> create(@RequestBody DepartamentoDTO departamento) {

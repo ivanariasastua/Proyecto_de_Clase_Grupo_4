@@ -38,7 +38,7 @@ public class DepartamentoService {
     public Respuesta guardarDepartamento(DepartamentoDTO departamento) {
         try {
             AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
-            Request request = new Request("departamentos", usuario);
+            Request request = new Request("departamentos/save", usuario);
             request.post(departamento);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo guardar el departamento");

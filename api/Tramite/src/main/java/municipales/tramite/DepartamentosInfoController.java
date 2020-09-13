@@ -54,9 +54,9 @@ public class DepartamentosInfoController implements Initializable {
 
     @FXML
     private void actGuardar(ActionEvent event) {
-        //departDto = new DepartamentoDTO(Long.valueOf("0"), "Recursos Humanos", true, new Date(), new Date(), null, null);
-        //Respuesta res = departService.guardarDepartamento(departDto);
-        Respuesta res = departService.getAll();
+        departDto = new DepartamentoDTO(Long.valueOf("0"), "Recursos Humanos", true, new Date(), new Date(), null, null);
+        Respuesta res = departService.guardarDepartamento(departDto);
+        //Respuesta res = departService.getAll();
         System.out.println("\nMenInt: "+res.getMensajeInterno()+"\nMen: "+res.getMensaje());
     }
 

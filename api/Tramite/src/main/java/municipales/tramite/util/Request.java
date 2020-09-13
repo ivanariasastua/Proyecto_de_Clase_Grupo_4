@@ -58,7 +58,6 @@ public class Request {
         MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
         headers.add("Content-Type", "application/json; charset=UTF-8");
         headers.add("Accept", "application/json");
-        System.out.println(AppContext.getInstance().get("token"));
         headers.add("Authorization", AppContext.getInstance().get("token"));
         builder.headers(headers);
     }
