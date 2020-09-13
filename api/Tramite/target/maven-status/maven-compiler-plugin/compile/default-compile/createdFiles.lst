@@ -6,6 +6,7 @@ municipales\tramite\service\UsuarioService$1.class
 municipales\tramite\UsuariosInfoController.class
 municipales\tramite\util\Request.class
 municipales\tramite\dto\TransaccionDTO.class
+municipales\tramite\service\TramiteEstadoService.class
 municipales\tramite\util\Respuesta.class
 municipales\tramite\DepartamentosInfoController.class
 municipales\tramite\dto\ArchivoRelacionadoDTO.class
@@ -18,6 +19,7 @@ municipales\tramite\dto\TramitesRegistradosDTO.class
 municipales\tramite\RequisitosInfoController.class
 municipales\tramite\dto\AuthenticationRequest.class
 municipales\tramite\UsuariosController.class
+municipales\tramite\service\TramiteEstadoService$1.class
 municipales\tramite\Controller.class
 municipales\tramite\PrincipalController.class
 municipales\tramite\dto\NotasDTO.class

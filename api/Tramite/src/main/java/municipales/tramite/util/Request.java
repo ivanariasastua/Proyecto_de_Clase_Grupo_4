@@ -49,6 +49,8 @@ public class Request {
         this.builder = webTarget.request(MediaType.APPLICATION_JSON);
         MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
         headers.add("Content-Type", "application/json; charset=UTF-8");
+         headers.add("Accept", "application/json");
+        headers.add("Authorization", AppContext.getInstance().get("token"));
         builder.headers(headers);
     }
 
@@ -85,7 +87,7 @@ public class Request {
     }
 
     public Boolean isError() {
-        System.out.println(getStatus());
+        System.out.println(response.getStatusInfo());
         return getStatus() != HttpServletResponse.SC_OK;
     }
 
