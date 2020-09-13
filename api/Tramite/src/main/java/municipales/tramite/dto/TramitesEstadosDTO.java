@@ -1,8 +1,6 @@
 
 package municipales.tramite.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +15,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-
-public class TramiteRegistradoDTO {
+public class TramitesEstadosDTO {
     private Long id;
-    private TramiteTipoDTO tramitesTiposId;
-    private ClienteDTO clienteId;
-    private List<ArchivoRelacionadoDTO> archivosRelacionados = new ArrayList<>();
+    private String nombre;
+    private String descripcion;
+    private String estadosSucesores;
 }

@@ -79,29 +79,7 @@ public class UsuarioController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-/*
-    @PutMapping("/login")
-    @ResponseBody
-    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
-    public ResponseEntity<?> login(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "password") String password) {
-        try {
-            Usuario usuario = new Usuario();
-            usuario.setCedula(cedula);
-            usuario.setPasswordEncriptado(password);
-            Optional<Usuario> usuarioFound = usuarioService.login(usuario);
-            if (usuarioFound.isPresent()) {
-                UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuarioFound.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuarioDto, HttpStatus.OK);
-
-            } else {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-*/
+    
     @PostMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
@@ -161,13 +139,15 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo usuario", response = UsuarioDTO.class, tags = "Usuarios")
-    public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuario) {
         try {
-            Usuario usuarioCreated = usuarioService.create(usuario);
-            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuarioCreated, UsuarioDTO.class);
+            Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);
+            user.setPasswordEncriptado(value);
+            user = usuarioService.create(user);
+            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user, UsuarioDTO.class);
             return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);

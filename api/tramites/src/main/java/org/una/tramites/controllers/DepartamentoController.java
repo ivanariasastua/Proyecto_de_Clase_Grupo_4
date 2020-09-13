@@ -9,9 +9,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.DepartamentoDTO;
 import org.una.tramites.entities.Departamento;
+import org.una.tramites.jwt.JwtAuthenticationFilter;
 import org.una.tramites.services.IDepartamentoService;
 import org.una.tramites.utils.MapperUtils;
 
@@ -38,7 +41,7 @@ public class DepartamentoController {
 
     @Autowired
     private IDepartamentoService departamentoService;
-
+  
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
     public @ResponseBody
@@ -72,14 +75,14 @@ public class DepartamentoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/save")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo departamento", response = DepartamentoDTO.class, tags = "Departamentos")
-    public ResponseEntity<?> create(@RequestBody Departamento dep) {
-        System.out.println("entra al create del controller");
+    public ResponseEntity<?> create(@RequestBody DepartamentoDTO departamento) {
         try {
-            Departamento depCreated = departamentoService.create(dep);
-            DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depCreated, DepartamentoDTO.class);
+            Departamento depart = MapperUtils.EntityFromDto(departamento, Departamento.class);
+            depart = departamentoService.create(depart);
+            DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depart, DepartamentoDTO.class);
             return new ResponseEntity<>(depDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);

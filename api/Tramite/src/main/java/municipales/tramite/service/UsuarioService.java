@@ -27,6 +27,7 @@ public class UsuarioService {
             }
             AuthenticationResponse usuario = (AuthenticationResponse) request.readEntity(AuthenticationResponse.class);
             AppContext.getInstance().set("UsuarioAutenticado", usuario);
+            AppContext.getInstance().set("token", "bearer " + usuario.getJwt());
             return new Respuesta(true, "Usuario", usuario);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
@@ -127,9 +128,11 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta guardarUsuario(UsuarioDTO usuario){
+    public Respuesta guardarUsuario(UsuarioDTO usuario, String value){
         try{
-            Request request = new Request("usuarios");
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("value", value);
+            Request request = new Request("usuarios", "/{value}", parametros);
             request.post(usuario);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo guardar el usuario");

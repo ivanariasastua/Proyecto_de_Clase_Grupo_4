@@ -2,6 +2,7 @@
 package org.una.tramites.dto;
 
 import java.util.Date;
+import javax.json.bind.annotation.JsonbDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,9 @@ import org.una.tramites.entities.PermisoOtorgado;
 @ToString
 public class TransaccionDTO {
     private Long id;
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     Date fechaRegistro;
-    PermisoOtorgado permisoOtorgado;
+    PermisoOtorgadoDTO permisoOtorgado;
     String objeto;
     String información;
 }
