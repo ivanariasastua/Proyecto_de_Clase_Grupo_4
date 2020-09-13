@@ -87,6 +87,7 @@ public class Request {
     }
 
     public Boolean isError() {
+        System.out.println(response.getStatusInfo());
         return getStatus() != HttpServletResponse.SC_OK;
     }
 
@@ -104,9 +105,7 @@ public class Request {
     }
     
     public String getMensajeRespuesta(){
-        if(response.getStatus() == HttpServletResponse.SC_OK)
-            return "Realizado con exito";
-        else if(response.getStatus() == HttpServletResponse.SC_NO_CONTENT)
+        if(response.getStatus() == HttpServletResponse.SC_NO_CONTENT)
             return "No existen registros";
         else if(response.getStatus() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
             return "No se pudo comunicar con el servidor";
