@@ -1,7 +1,6 @@
 
 package municipales.tramite.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.json.bind.annotation.JsonbDateFormat;
@@ -33,5 +32,5 @@ public class ClienteDTO {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion; 
     private String passwordEncriptado;
-    private List<TramiteRegistradoDTO> tramitesRegistrados = new ArrayList<>();
+    private List<TramitesRegistradosDTO> tramitesRegistrados;
 }

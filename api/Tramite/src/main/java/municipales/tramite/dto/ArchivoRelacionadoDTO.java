@@ -2,12 +2,7 @@
 package municipales.tramite.dto;
 
 import java.util.Date;
-
-
 import javax.json.bind.annotation.JsonbDateFormat;
-
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +21,7 @@ import lombok.ToString;
 public class ArchivoRelacionadoDTO {
 
     private Long id;
-    private TramiteRegistradoDTO tramiteRegistradoId;
+    private TramitesRegistradosDTO tramiteRegistradoId;
     private String nombre;
     private boolean estado;
     private String rutaArchivo;

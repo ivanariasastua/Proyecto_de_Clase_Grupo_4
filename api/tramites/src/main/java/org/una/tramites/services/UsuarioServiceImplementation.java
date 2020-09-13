@@ -137,6 +137,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
             UserDetails userDetails = new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
             return userDetails;
         } else {
+            System.out.println("loadUserByUserName: fail");
             return null;
         }
 

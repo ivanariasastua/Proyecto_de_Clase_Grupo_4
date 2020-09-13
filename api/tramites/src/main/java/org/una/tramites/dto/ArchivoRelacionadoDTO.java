@@ -19,12 +19,13 @@ import org.una.tramites.entities.TramitesRegistrados;
 public class ArchivoRelacionadoDTO {
     
     private Long id;
-    private TramitesRegistrados tramiteRegistradoId;
+    private TramitesRegistradosDTO tramiteRegistradoId;
     private String nombre;
     private boolean estado;
     private String rutaArchivo;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
     private String etiqueta;
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion;
 }

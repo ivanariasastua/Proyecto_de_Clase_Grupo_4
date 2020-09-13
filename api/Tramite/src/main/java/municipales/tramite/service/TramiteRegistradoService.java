@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.core.GenericType;
-import municipales.tramite.dto.TramiteRegistradoDTO;
+import municipales.tramite.dto.TramitesRegistradosDTO;
 import municipales.tramite.util.Request;
 import municipales.tramite.util.Respuesta;
-import municipales.tramite.dto.AuthenticationRequest;
-import municipales.tramite.dto.AuthenticationResponse;
-import municipales.tramite.util.AppContext;
 /**
  *
  * @author Dios
@@ -23,7 +20,7 @@ public class TramiteRegistradoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener los tramites");
             }
-            List<TramiteRegistradoDTO> result = (List<TramiteRegistradoDTO>) request.readEntity(new GenericType<List<TramiteRegistradoDTO>>(){});
+            List<TramitesRegistradosDTO> result = (List<TramitesRegistradosDTO>) request.readEntity(new GenericType<List<TramitesRegistradosDTO>>(){});
             return new Respuesta(true, "TramitesRegistrados",result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
@@ -39,7 +36,7 @@ public class TramiteRegistradoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener el tramite");
             }
-            TramiteRegistradoDTO result = (TramiteRegistradoDTO) request.readEntity(TramiteRegistradoDTO.class);
+            TramitesRegistradosDTO result = (TramitesRegistradosDTO) request.readEntity(TramitesRegistradosDTO.class);
             return new Respuesta(true, "TramiteRegistrado", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
@@ -55,7 +52,7 @@ public class TramiteRegistradoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener los tramites registrados del cliente");
             }
-            List<TramiteRegistradoDTO> result = (List<TramiteRegistradoDTO>) request.readEntity(new GenericType<List<TramiteRegistradoDTO>>(){});
+            List<TramitesRegistradosDTO> result = (List<TramitesRegistradosDTO>) request.readEntity(new GenericType<List<TramitesRegistradosDTO>>(){});
             return new Respuesta(true, "Clientes_Tramites",result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
@@ -71,28 +68,28 @@ public class TramiteRegistradoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener los tramites");
             }
-            List<TramiteRegistradoDTO> result = (List<TramiteRegistradoDTO>) request.readEntity(new GenericType<List<TramiteRegistradoDTO>>(){});
+            List<TramitesRegistradosDTO> result = (List<TramitesRegistradosDTO>) request.readEntity(new GenericType<List<TramitesRegistradosDTO>>(){});
             return new Respuesta(true, "Tipo_Tramites",result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }
     
-    public Respuesta guardarTramiteRegistrado(TramiteRegistradoDTO tramiteRegistrado){
+    public Respuesta guardarTramiteRegistrado(TramitesRegistradosDTO tramiteRegistrado){
         try{
             Request request = new Request("tramites_registrados");
             request.post(tramiteRegistrado);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo guardar el tramite");
             }
-            TramiteRegistradoDTO result = (TramiteRegistradoDTO) request.readEntity(TramiteRegistradoDTO.class);
+            TramitesRegistradosDTO result = (TramitesRegistradosDTO) request.readEntity(TramitesRegistradosDTO.class);
             return new Respuesta(true, "TramiteRegistrado", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }
     
-    public Respuesta modificarTramiteRegistrado(Long id, TramiteRegistradoDTO tramiteRegistrado){
+    public Respuesta modificarTramiteRegistrado(Long id, TramitesRegistradosDTO tramiteRegistrado){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
@@ -101,7 +98,7 @@ public class TramiteRegistradoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo modificar el tramite");
             }
-            TramiteRegistradoDTO result = (TramiteRegistradoDTO) request.readEntity(TramiteRegistradoDTO.class);
+            TramitesRegistradosDTO result = (TramitesRegistradosDTO) request.readEntity(TramitesRegistradosDTO.class);
             return new Respuesta(true, "TramiteRegistrado", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");

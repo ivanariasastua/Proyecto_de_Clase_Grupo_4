@@ -18,11 +18,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-public class RequisitoDTO {
+public class RequisitosDTO {
     private Long id;
     private String descripcion;
     private boolean estado;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
-    private VariacionDTO variaciones;
+    private VariacionesDTO variaciones;
 }

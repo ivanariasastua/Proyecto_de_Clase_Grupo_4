@@ -20,7 +20,7 @@ import lombok.ToString;
 public class TramiteCambioEstadoDTO {
     private Long id;
     private UsuarioDTO usuarioId;
-    private TramiteRegistradoDTO tramitesRegistradosId;
+    private TramitesRegistradosDTO tramitesRegistradosId;
     private TramiteCambioEstadoDTO tramitesEstadoId;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro; 

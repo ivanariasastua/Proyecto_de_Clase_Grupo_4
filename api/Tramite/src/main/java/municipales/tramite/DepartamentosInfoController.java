@@ -6,14 +6,13 @@
 package municipales.tramite;
 
 import java.net.URL;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -55,12 +54,10 @@ public class DepartamentosInfoController implements Initializable {
 
     @FXML
     private void actGuardar(ActionEvent event) {
-            departDto.setNombre(txtNombre.getText());
-//            departDto.setFechaModificacion(Date.valueOf(fechaModificacion.getValue()));
-//            departDto.setFechaRegistro(Date.valueOf(fechaCreacion.getValue()));
-            // departDto.setEstado(true);
-            departService.guardarDepartamento(departDto);
-
+        //departDto = new DepartamentoDTO(Long.valueOf("0"), "Recursos Humanos", true, new Date(), new Date(), null, null);
+        //Respuesta res = departService.guardarDepartamento(departDto);
+        Respuesta res = departService.getAll();
+        System.out.println("\nMenInt: "+res.getMensajeInterno()+"\nMen: "+res.getMensaje());
     }
 
     @FXML

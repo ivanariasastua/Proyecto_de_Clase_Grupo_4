@@ -19,13 +19,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-class VariacionDTO {
+class TramitesTiposDTO {
     private Long id;
-    private boolean grupo;
     private String descripcion;
     private boolean estado;
+    private DepartamentoDTO departamento;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
-    private TramiteTipoDTO tramites; 
-    private List<RequisitoDTO> requisitos = new ArrayList<>();
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private Date fechaModificacion;
+    private List<VariacionesDTO> variaciones;
 }

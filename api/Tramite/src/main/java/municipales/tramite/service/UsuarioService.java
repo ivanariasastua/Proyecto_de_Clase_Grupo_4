@@ -27,6 +27,7 @@ public class UsuarioService {
             }
             AuthenticationResponse usuario = (AuthenticationResponse) request.readEntity(AuthenticationResponse.class);
             AppContext.getInstance().set("UsuarioAutenticado", usuario);
+            AppContext.getInstance().set("token", "bearer " + usuario.getJwt());
             return new Respuesta(true, "Usuario", usuario);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");

@@ -24,7 +24,7 @@ import org.una.tramites.entities.TramitesTipos;
 @ToString
 public class TramitesRegistradosDTO {
     private Long id;
-    private TramitesTipos tramitesTiposId;
-    private Cliente clienteId;
-    private List<ArchivoRelacionadoDTO> archivosRelacionados = new ArrayList<>();
+    private TramitesTiposDTO tramitesTiposId;
+    private ClienteDTO clienteId;
+    private List<ArchivoRelacionadoDTO> archivosRelacionados;
 }

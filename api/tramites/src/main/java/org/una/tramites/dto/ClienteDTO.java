@@ -34,5 +34,5 @@ public class ClienteDTO {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion; 
     private String passwordEncriptado;
-    private List<TramitesRegistradosDTO> tramitesRegistrados = new ArrayList<>();
+    private List<TramitesRegistradosDTO> tramitesRegistrados;
 }
