@@ -4,6 +4,7 @@ municipales\tramite\dto\ParametrosGeneralesDTO.class
 municipales\tramite\DepartamentosController.class
 municipales\tramite\service\UsuarioService$1.class
 municipales\tramite\UsuariosInfoController.class
+municipales\tramite\service\PermisosOtorgadosService.class
 municipales\tramite\util\Request.class
 municipales\tramite\dto\TransaccionDTO.class
 municipales\tramite\service\TramiteEstadoService.class
@@ -14,6 +15,7 @@ municipales\tramite\dto\AuthenticationResponse.class
 municipales\tramite\service\TramiteTipoService$2.class
 municipales\tramite\service\TramiteRegistradoService$2.class
 municipales\tramite\dto\RequisitosDTO.class
+municipales\tramite\service\PermisosService.class
 municipales\tramite\service\UsuarioService$2.class
 municipales\tramite\dto\TramitesRegistradosDTO.class
 municipales\tramite\RequisitosInfoController.class
@@ -23,6 +25,7 @@ municipales\tramite\service\TramiteEstadoService$1.class
 municipales\tramite\Controller.class
 municipales\tramite\PrincipalController.class
 municipales\tramite\dto\NotasDTO.class
+municipales\tramite\service\PermisosService$1.class
 municipales\tramite\service\TramiteTipoService.class
 municipales\tramite\service\TramiteRegistradoService$1.class
 municipales\tramite\service\TramiteTipoService$1.class
@@ -42,9 +45,11 @@ municipales\tramite\VariacionesInfoController.class
 municipales\tramite\service\UsuarioService$3.class
 municipales\tramite\util\FlowController.class
 municipales\tramite\dto\DepartamentoDTO.class
+municipales\tramite\service\TramiteCambioEstadoService.class
 municipales\tramite\DiseñoTramitesController.class
 municipales\tramite\ParametrosController.class
 municipales\tramite\service\UsuarioService$4.class
+municipales\tramite\service\TramiteCambioEstadoService$1.class
 municipales\tramite\util\Mensaje.class
 municipales\tramite\dto\ClienteDTO.class
 municipales\tramite\ParametrosInfoController.class

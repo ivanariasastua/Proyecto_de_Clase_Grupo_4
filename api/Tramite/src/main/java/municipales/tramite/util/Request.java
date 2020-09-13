@@ -87,7 +87,6 @@ public class Request {
     }
 
     public Boolean isError() {
-        System.out.println(response.getStatusInfo());
         return getStatus() != HttpServletResponse.SC_OK;
     }
 
@@ -102,6 +101,25 @@ public class Request {
             return mensaje;
         }
         return null;
+    }
+    
+    public String getMensajeRespuesta(){
+        if(response.getStatus() == HttpServletResponse.SC_OK)
+            return "Realizado con exito";
+        else if(response.getStatus() == HttpServletResponse.SC_NO_CONTENT)
+            return "No existen registros";
+        else if(response.getStatus() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
+            return "No se pudo comunicar con el servidor";
+        else if(response.getStatus() == HttpServletResponse.SC_BAD_REQUEST)
+            return "Las credenciales ingresadas no coinciden";
+        else if(response.getStatus() == HttpServletResponse.SC_UNAUTHORIZED)
+            return "Hubo problemas procesando su solicitud, el servidor rechazo la solicitud";
+        else if(response.getStatus() == HttpServletResponse.SC_CREATED)
+            return "El registro ha sido guardado con exito";
+        else if(response.getStatus() == HttpServletResponse.SC_NOT_FOUND)
+            return "No se encontraron coincidencias con el registro";
+        else
+            return "Error inesperado";
     }
 
     public Object readEntity(Class clazz) {
