@@ -130,7 +130,7 @@ public class TramitesTiposController {
         }
     }
     
-    @GetMapping("/usuarios_en_departamento/{id}")
+    @GetMapping("/tipo_departamento/{id}")
     public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") Long id) {
         try {
             Optional<List<TramitesTipos>> result = traService.findByDepartamentoId(id);
