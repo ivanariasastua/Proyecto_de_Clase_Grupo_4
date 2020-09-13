@@ -26,6 +26,6 @@ class VariacionesDTO {
     private boolean estado;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
-    private TramiteTipoDTO tramites; 
+    private TramitesTiposDTO tramites; 
     private List<RequisitosDTO> requisitos;
 }

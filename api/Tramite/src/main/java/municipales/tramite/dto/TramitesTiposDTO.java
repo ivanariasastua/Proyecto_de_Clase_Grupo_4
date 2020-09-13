@@ -1,7 +1,9 @@
 
 package municipales.tramite.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.json.bind.annotation.JsonbDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,11 +19,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor 
 @ToString
-public class TramiteCambioEstadoDTO {
+
+public class TramitesTiposDTO {
+
     private Long id;
-    private UsuarioDTO usuarioId;
-    private TramitesRegistradosDTO tramitesRegistradosId;
-    private TramiteCambioEstadoDTO tramitesEstadoId;
+    private String descripcion;
+    private boolean estado;
+    private DepartamentoDTO departamento;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    private Date fechaRegistro; 
+    private Date fechaRegistro;
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private Date fechaModificacion;
+    private List<VariacionesDTO> variaciones;
 }

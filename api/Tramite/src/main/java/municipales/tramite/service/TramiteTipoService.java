@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.core.GenericType;
-import municipales.tramite.dto.TramiteTipoDTO;
+import municipales.tramite.dto.TramitesTiposDTO;
 import municipales.tramite.util.Request;
 import municipales.tramite.util.Respuesta;
 import municipales.tramite.dto.AuthenticationRequest;
@@ -24,7 +24,7 @@ public class TramiteTipoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener todos los tipos de tramites");
             }
-            List<TramiteTipoDTO> result = (List<TramiteTipoDTO>) request.readEntity(new GenericType<List<TramiteTipoDTO>>(){});
+            List<TramitesTiposDTO> result = (List<TramitesTiposDTO>) request.readEntity(new GenericType<List<TramitesTiposDTO>>(){});
             return new Respuesta(true, "TipoTramites",result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
@@ -40,8 +40,8 @@ public class TramiteTipoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener el tipo de tramite");
             }
-            TramiteTipoDTO result = (TramiteTipoDTO) request.readEntity(TramiteTipoDTO.class);
-            return new Respuesta(true, "Usuario", result);
+            TramitesTiposDTO result = (TramitesTiposDTO) request.readEntity(TramitesTiposDTO.class);
+            return new Respuesta(true, "TramiteTipo", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
@@ -56,7 +56,7 @@ public class TramiteTipoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener los tipos de tramites");
             }
-            List<TramiteTipoDTO> result = (List<TramiteTipoDTO>) request.readEntity(new GenericType<List<TramiteTipoDTO>>(){});
+            List<TramitesTiposDTO> result = (List<TramitesTiposDTO>) request.readEntity(new GenericType<List<TramitesTiposDTO>>(){});
             return new Respuesta(true, "TipoTramite_Departamento",result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
@@ -72,28 +72,28 @@ public class TramiteTipoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener los tipos de tramites");
             }
-            List<TramiteTipoDTO> result = (List<TramiteTipoDTO>) request.readEntity(new GenericType<List<TramiteTipoDTO>>(){});
+            List<TramitesTiposDTO> result = (List<TramitesTiposDTO>) request.readEntity(new GenericType<List<TramitesTiposDTO>>(){});
             return new Respuesta(true, "TipoTramite_Descripcion",result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }
     
-    public Respuesta guardarTramiteTipo(TramiteTipoDTO tramiteTipo){
+    public Respuesta guardarTramiteTipo(TramitesTiposDTO tramiteTipo){
         try{
             Request request = new Request("tramites_tipos");
             request.post(tramiteTipo);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo guardar el tipo de tramite");
             }
-            TramiteTipoDTO result = (TramiteTipoDTO) request.readEntity(TramiteTipoDTO.class);
+            TramitesTiposDTO result = (TramitesTiposDTO) request.readEntity(TramitesTiposDTO.class);
             return new Respuesta(true, "TramiteTipo", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }
     
-    public Respuesta modificarTramiteTipo(Long id, TramiteTipoDTO tipoTramite){
+    public Respuesta modificarTramiteTipo(Long id, TramitesTiposDTO tipoTramite){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
@@ -102,7 +102,7 @@ public class TramiteTipoService {
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo modificar el tipo de tramite");
             }
-            TramiteTipoDTO result = (TramiteTipoDTO) request.readEntity(TramiteTipoDTO.class);
+            TramitesTiposDTO result = (TramitesTiposDTO) request.readEntity(TramitesTiposDTO.class);
             return new Respuesta(true, "TramiteTipo", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
