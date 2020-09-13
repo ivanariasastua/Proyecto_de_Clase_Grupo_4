@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.una.tramites.entities.Departamento;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +14,8 @@ import org.una.tramites.entities.Departamento;
 @ToString
 public class UsuarioDTO {
     private Long id; 
-    private String nombreCompleto;   
+    private String nombreCompleto; 
+    private String passwordEncriptado;
     private String cedula; 
     private boolean estado; 
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
