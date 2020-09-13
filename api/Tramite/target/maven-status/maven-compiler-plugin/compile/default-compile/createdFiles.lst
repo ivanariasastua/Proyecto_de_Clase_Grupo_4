@@ -10,6 +10,7 @@ municipales\tramite\DepartamentosInfoController.class
 municipales\tramite\dto\TramiteCambioEstadoDTO.class
 municipales\tramite\dto\ArchivoRelacionadoDTO.class
 municipales\tramite\dto\AuthenticationResponse.class
+municipales\tramite\service\TramiteTipoService$2.class
 municipales\tramite\service\TramiteRegistradoService$2.class
 municipales\tramite\dto\RequisitosDTO.class
 municipales\tramite\service\UsuarioService$2.class
@@ -17,10 +18,13 @@ municipales\tramite\dto\TramitesRegistradosDTO.class
 municipales\tramite\RequisitosInfoController.class
 municipales\tramite\dto\AuthenticationRequest.class
 municipales\tramite\UsuariosController.class
+municipales\tramite\dto\TramiteTipoDTO.class
 municipales\tramite\Controller.class
 municipales\tramite\PrincipalController.class
 municipales\tramite\dto\NotasDTO.class
+municipales\tramite\service\TramiteTipoService.class
 municipales\tramite\service\TramiteRegistradoService$1.class
+municipales\tramite\service\TramiteTipoService$1.class
 municipales\tramite\dto\TramitesEstadosDTO.class
 municipales\tramite\service\UsuarioService.class
 municipales\tramite\App.class
@@ -28,7 +32,6 @@ municipales\tramite\LogInController.class
 municipales\tramite\dto\RequisitoPresentadoDTO.class
 municipales\tramite\dto\UsuarioDTO.class
 municipales\tramite\util\AppContext.class
-municipales\tramite\dto\TramitesTiposDTO.class
 municipales\tramite\service\DepartamentoService$1.class
 municipales\tramite\dto\PermisoDTO.class
 municipales\tramite\service\TramiteRegistradoService.class
@@ -47,5 +50,6 @@ municipales\tramite\TipoTramitesController.class
 municipales\tramite\service\DepartamentoService.class
 municipales\tramite\dto\PermisoOtorgadoDTO.class
 municipales\tramite\service\TramiteRegistradoService$3.class
+municipales\tramite\service\TramiteTipoService$3.class
 municipales\tramite\TipoTramitesInfoController.class
 municipales\tramite\dto\VariacionesDTO.class

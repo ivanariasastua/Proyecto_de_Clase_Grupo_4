@@ -22,8 +22,6 @@ import lombok.ToString;
 
 public class TramiteTipoDTO {
 
-class TramitesTiposDTO {
-
     private Long id;
     private String descripcion;
     private boolean estado;
