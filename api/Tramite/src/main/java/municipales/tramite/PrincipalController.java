@@ -27,6 +27,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private VBox vBox;
+    
     @FXML
     private Label lblUser;
 

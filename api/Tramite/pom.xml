@@ -72,6 +72,7 @@
                         <groupId>org.openjfx</groupId>
                         <artifactId>javafx-fxml</artifactId>
                         <version>13</version>
+                        <type>jar</type>
                 </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
