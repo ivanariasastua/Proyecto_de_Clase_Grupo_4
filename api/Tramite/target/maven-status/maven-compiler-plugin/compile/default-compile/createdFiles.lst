@@ -29,9 +29,9 @@ municipales\tramite\Controller.class
 municipales\tramite\PrincipalController.class
 municipales\tramite\dto\NotasDTO.class
 municipales\tramite\service\ClienteService$2.class
+municipales\tramite\service\PermisosService$1.class
 municipales\tramite\service\ClienteService.class
 municipales\tramite\ClientesController.class
-municipales\tramite\service\PermisosService$1.class
 municipales\tramite\service\TramiteTipoService.class
 municipales\tramite\service\TramiteRegistradoService$1.class
 municipales\tramite\service\TramiteTipoService$1.class
