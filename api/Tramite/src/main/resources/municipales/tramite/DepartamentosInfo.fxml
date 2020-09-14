@@ -4,18 +4,32 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="451.0" prefWidth="708.0" stylesheets="@Principal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.DepartamentosInfoController">
    <children>
+      <ImageView fitHeight="451.0" fitWidth="708.0" opacity="0.41" pickOnBounds="true">
+         <image>
+            <Image url="@fondo.jpg" />
+         </image>
+      </ImageView>
       <Label layoutX="134.0" layoutY="29.0" styleClass="titulo" text="Información de Departamentos">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Button layoutX="593.0" layoutY="402.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="27.0" prefWidth="89.0" text="Guardar" />
-      <Button layoutX="22.0" layoutY="402.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="27.0" prefWidth="89.0" text="Cancelar" />
+      <Button layoutX="593.0" layoutY="402.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="27.0" prefWidth="89.0" text="Guardar">
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <Button layoutX="22.0" layoutY="402.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="27.0" prefWidth="89.0" text="Cancelar">
+         <effect>
+            <InnerShadow />
+         </effect></Button>
       <Label layoutX="134.0" layoutY="172.0" text="Nombre" textFill="#1e6b3f">
          <font>
             <Font name="System Bold" size="15.0" />
