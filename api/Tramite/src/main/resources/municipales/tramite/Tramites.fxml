@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.TramitesController">
+   <top>
+      <VBox prefHeight="142.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="85.0" prefWidth="900.0" text="Diseño de Trámites">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="38.0" prefWidth="876.0">
+               <children>
+                  <TextField fx:id="txtBuscar" prefHeight="38.0" prefWidth="694.0" promptText="Buscar">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#actBuscar" prefHeight="37.0" prefWidth="98.0" text="Buscar">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <TabPane prefHeight="500.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Variaciones">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <Button mnemonicParsing="false" onAction="#actAgregarVariacion" prefHeight="37.0" prefWidth="116.0" text="Agregar" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="735.0" top="10.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </top>
+                     <center>
+                        <TableView fx:id="tvVariaciones" prefHeight="362.0" prefWidth="845.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="tcIdVariaciones" prefWidth="83.0" text="Id" />
+                            <TableColumn fx:id="tcVariaciones" prefWidth="306.0" text="Variación" />
+                              <TableColumn fx:id="tcEstadoVariaciones" prefWidth="134.0" text="Estado" />
+                              <TableColumn fx:id="tcVariacionesGrupo" prefWidth="321.0" text="Grupo de Exclusión" />
+                          </columns>
+                           <BorderPane.margin>
+                              <Insets left="15.0" right="10.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <Button mnemonicParsing="false" onAction="#actVerModificar" prefHeight="31.0" prefWidth="125.0" text="Ver/Modificar" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="725.0" top="10.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </bottom>
+                  </BorderPane>
+               </content>
+          </Tab>
+          <Tab text="Requisitos">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <Button mnemonicParsing="false" onAction="#actAgregarRequisito" prefHeight="37.0" prefWidth="116.0" text="Agregar" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="735.0" top="10.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </top>
+                     <center>
+                        <TableView fx:id="tvRequisitos" prefHeight="361.0" prefWidth="841.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="tcIdRequisitos" minWidth="0.0" prefWidth="84.0" text="Id" />
+                            <TableColumn fx:id="tcRequisitos" prefWidth="144.0" text="Requisito" />
+                              <TableColumn fx:id="tcRequisitosVariaciones" prefWidth="143.0" text="Variación" />
+                              <TableColumn fx:id="tcRequisitosEstados" prefWidth="101.0" text="Estado" />
+                              <TableColumn fx:id="tcRequisitosFechas" prefWidth="148.0" text="Fecha de Registro" />
+                              <TableColumn fx:id="tcRequisitosDescripcion" prefWidth="249.0" text="Descripción" />
+                          </columns>
+                           <BorderPane.margin>
+                              <Insets left="15.0" right="10.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" text="Ver/Modificar" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="725.0" top="10.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </bottom>
+                  </BorderPane>
+               </content>
+          </Tab>
+        </tabs>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </BorderPane.margin>
+      </TabPane>
+   </center>
+</BorderPane>
