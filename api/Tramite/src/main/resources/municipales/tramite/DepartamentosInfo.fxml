@@ -16,11 +16,11 @@
       </Label>
       <Button layoutX="593.0" layoutY="402.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="27.0" prefWidth="89.0" text="Guardar" />
       <Button layoutX="22.0" layoutY="402.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="27.0" prefWidth="89.0" text="Cancelar" />
-      <Label layoutX="134.0" layoutY="172.0" text="Nombre" textFill="#063c6b">
+      <Label layoutX="134.0" layoutY="172.0" text="Nombre" textFill="#1e6b3f">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="138.0" layoutY="273.0" text="Estado" textFill="#063c6b">
+      <Label layoutX="138.0" layoutY="273.0" text="Estado" textFill="#1e6b3f">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>

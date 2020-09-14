@@ -8,7 +8,6 @@ and open the template in the editor.
     Author     : cordo
 */
 
-
 .fondoLogIn{
     -fx-image:url('fondo.jpg')
 }
@@ -56,26 +55,14 @@ Button{
 }
 
 Button:hover{
-    -fx-background-color: #3ccd5b;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
-     -fx-font: bold 14px "Arial";
-    -fx-text-fill: white;
-    -fx-background-color: #003366;  
-}
-
-Button:hover{
 	-fx-font: bold 14px "Arial";
     -fx-text-fill: white;
-    -fx-background-color: #003366;  
 }
 
-Button:hover{
-    -fx-font: bold 14px "Arial";
-    -fx-background-color: #184d82;
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
+
+
 
 .check{
     -fx-font: bold 18px "Arial";
@@ -92,3 +79,4 @@ Button:hover{
 .check:selected .mark{
     -fx-background-color: #3ccd5b;
 }
+

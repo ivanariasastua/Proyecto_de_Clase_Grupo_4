@@ -9,16 +9,16 @@ and open the template in the editor.
 */
 
 .texto{
-    -fx-prompt-text-fill: #504f4f;
+   /* -fx-prompt-text-fill: #3cb371;*/
     -fx-font: regular 14px "Courier";
     -fx-background-color: transparent;
-    -fx-border-color: black;
+    -fx-border-color: #3cb371;
     -fx-border-width: 0 0 2 0;
 }
 
 .titulo{
     -fx-font: bold 31px "Arial";
-    -fx-text-fill: #003366;
+    -fx-text-fill: #1e6b3f;
 }
 
 .contenedor{
@@ -33,13 +33,13 @@ and open the template in the editor.
 .button{
     -fx-text-fill: white;
     -fx-font: bold 14.8px "Courier";
-    -fx-background-color: #003366;
+    -fx-background-color: #5bda92;
 }
 
 .button:hover{
     -fx-text-fill: white;
     -fx-font: bold 14.8px "Courier";
-    -fx-background-color:#184d82;
+    -fx-background-color:#84dda9;
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
@@ -47,6 +47,7 @@ and open the template in the editor.
 .boton{
     -fx-background-color: #3cb371;
     -fx-background-radius: 0 25 25 0;
+    -fx-background-color:#84dda9;
 }
 
 .boton:hover{
