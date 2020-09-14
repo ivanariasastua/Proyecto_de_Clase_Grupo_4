@@ -22,6 +22,7 @@ municipales\tramite\RequisitosInfoController.class
 municipales\tramite\dto\AuthenticationRequest.class
 municipales\tramite\UsuariosController.class
 municipales\tramite\service\TramiteEstadoService$1.class
+municipales\tramite\util\Formato.class
 municipales\tramite\Controller.class
 municipales\tramite\PrincipalController.class
 municipales\tramite\dto\NotasDTO.class
