@@ -21,7 +21,6 @@ and open the template in the editor.
     -fx-image:url('clave.png')
 }
 
-
 .anchor{
     -fx-background-color: white;
     -fx-opacity: 0.85;
@@ -60,8 +59,13 @@ Button:hover{
     -fx-background-color: #3ccd5b;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
-  /*  -fx-opacity: 0.8;*/
-  -fx-font: bold 14px "Arial";
+     -fx-font: bold 14px "Arial";
+    -fx-text-fill: white;
+    -fx-background-color: #003366;  
+}
+
+Button:hover{
+	-fx-font: bold 14px "Arial";
     -fx-text-fill: white;
     -fx-background-color: #003366;  
 }
@@ -88,4 +92,3 @@ Button:hover{
 .check:selected .mark{
     -fx-background-color: #3ccd5b;
 }
-

@@ -123,3 +123,48 @@ and open the template in the editor.
     -fx-background-radius: 1;
 }
 
+
+.table-view{
+   -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#003366 0%, #1f5993 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-font: bold 13px "Courier";
+    -fx-background-color: -fx-table-cell-border-color, #84a3c2;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:odd{
+    -fx-font: bold 13px "Courier";
+    -fx-background-color: -fx-table-cell-border-color, #376fa4;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #a79f9f ;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
