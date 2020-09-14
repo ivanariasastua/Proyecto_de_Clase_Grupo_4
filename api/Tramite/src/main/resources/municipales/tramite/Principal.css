@@ -79,7 +79,7 @@ and open the template in the editor.
     -fx-text-fill: white;
 }
 
-
+/*
 .table-view{
    -fx-background-color: transparent;
 }
@@ -168,4 +168,4 @@ and open the template in the editor.
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
-
+*/
