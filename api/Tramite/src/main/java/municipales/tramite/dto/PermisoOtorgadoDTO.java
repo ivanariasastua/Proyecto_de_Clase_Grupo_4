@@ -18,9 +18,8 @@ import lombok.ToString;
 @NoArgsConstructor 
 @ToString
 public class PermisoOtorgadoDTO {
-    private Long id; 
-    private UsuarioDTO usuarioid;   
-    private PermisoDTO permisoid; 
+    private Long id;   
+    private PermisoDTO permiso; 
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro; 
     private boolean estado; 

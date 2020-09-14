@@ -9,22 +9,24 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import municipales.tramite.dto.UsuarioDTO;
+import municipales.tramite.dto.PermisoOtorgadoDTO;
 import municipales.tramite.service.UsuarioService;
 import municipales.tramite.util.Respuesta;
 import municipales.tramite.util.Mensaje;
@@ -54,8 +56,24 @@ public class UsuariosController implements Initializable {
     private TableColumn<UsuarioDTO, String> colesJefe;
     @FXML
     private TextField txtBuscar;
+    @FXML
+    private TableView<PermisoOtorgadoDTO> tvPermisos;
+    @FXML
+    private TableColumn<PermisoOtorgadoDTO, String> colIdA;
+    @FXML
+    private TableColumn<PermisoOtorgadoDTO, String> colCod;
+    @FXML
+    private TableColumn<PermisoOtorgadoDTO, String> colDes;
+    @FXML
+    private TableColumn<PermisoOtorgadoDTO, String> colEstadoA;
+    @FXML
+    private TableColumn<PermisoOtorgadoDTO, Void> colAccionEstado;
+    @FXML
+    private TableColumn<PermisoOtorgadoDTO, Button> colEliminar;
     private Mensaje mensaje;
-    private UsuarioService service;
+    private UsuarioService service; 
+    private UsuarioDTO select;
+    
     
     
     @Override
@@ -71,18 +89,31 @@ public class UsuariosController implements Initializable {
 
     @FXML
     private void accionTabla(MouseEvent event) {
-        
+        if(tvUsuarios.getSelectionModel().getSelectedItem() != null){
+            select = tvUsuarios.getSelectionModel().getSelectedItem();
+            System.out.println(select.toString());
+            tvPermisos.getItems().clear();
+            tvPermisos.getItems().addAll(select.getPermisos());
+        }
     }
 
     @FXML
     private void accionBuscar(ActionEvent event) {
+        Respuesta respuesta;
         if(txtBuscar.getText() != null && !txtBuscar.getText().isEmpty()){
-            Respuesta respuesta;
             if(validarBuscar(txtBuscar.getText())){
                 respuesta = service.getUsersByCedula(txtBuscar.getText());
             }else{
                 respuesta = service.getUsersByNombre(txtBuscar.getText());
             }
+            if(respuesta.getEstado()){
+                tvUsuarios.getItems().clear();
+                tvUsuarios.getItems().addAll((List<UsuarioDTO>)respuesta.getResultado("Usuarios"));
+            }else{
+                mensaje.show(Alert.AlertType.ERROR, "Busqueda de usuarios", respuesta.getMensaje());
+            }
+        }else{
+            respuesta = service.getAll();
             if(respuesta.getEstado()){
                 tvUsuarios.getItems().clear();
                 tvUsuarios.getItems().addAll((List<UsuarioDTO>)respuesta.getResultado("Usuarios"));
@@ -137,6 +168,43 @@ public class UsuariosController implements Initializable {
             property.setValue(dateFormat.format(data.getValue().getFechaModificacion()));
             return property;
         });
+        colIdA.setCellValueFactory(new PropertyValueFactory("id"));
+        colCod.setCellValueFactory(data -> {
+            return new ReadOnlyStringWrapper(data.getValue().getPermiso().getCodigo());
+        });
+        colDes.setCellValueFactory(data -> {
+            return new ReadOnlyStringWrapper(data.getValue().getPermiso().getDescripcion());
+        });
+        colEstadoA.setCellValueFactory(per -> {
+            String estadoString;
+            if(per.getValue().isEstado())
+                estadoString = "Sí";
+            else
+                estadoString = "No";
+            return new ReadOnlyStringWrapper(estadoString);
+        });
+        colEliminar.setCellFactory(param -> new TableCell<PermisoOtorgadoDTO, Button>() {
+            private final Button deleteButton = new Button("Unfriend");
+
+            @Override
+            protected void updateItem(Button per, boolean empty) {
+                super.updateItem(per, empty);
+                if (per == null) {
+                    setGraphic(null);
+                    return;
+                }
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(event -> tvUsuarios.getItems().remove(param));
+            }
+        });
+    }
+
+    @FXML
+    private void accionPregunta(ActionEvent event) {
+    }
+
+    @FXML
+    private void accionTablaPermiso(MouseEvent event) {
     }
     
 }
