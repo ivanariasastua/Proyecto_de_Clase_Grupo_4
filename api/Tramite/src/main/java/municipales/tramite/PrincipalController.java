@@ -88,5 +88,9 @@ public class PrincipalController implements Initializable {
     @FXML
     private void actClientes(ActionEvent event) throws IOException {
         CargarVista("Clientes");
+
+    @FXML
+    private void actClientes(ActionEvent event) {
+
     }
 }

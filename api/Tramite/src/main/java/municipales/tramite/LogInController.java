@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import municipales.tramite.service.UsuarioService;
 import municipales.tramite.util.Mensaje;
 import municipales.tramite.util.Respuesta;
+import municipales.tramite.util.Formato;
 
 
 /**
@@ -63,6 +64,8 @@ public class LogInController extends Controller implements Initializable {
                 cbShow.setText("Mostrar Contraseña");
             }
         });
+        txtCedula.setTextFormatter(Formato.getInstance().maxLengthFormat(25));
+        txtPassword.setTextFormatter(Formato.getInstance().maxLengthFormat(100));
     }
 
     @FXML
@@ -76,7 +79,6 @@ public class LogInController extends Controller implements Initializable {
             }else{
                 alertas.show(Alert.AlertType.ERROR, "Inicio de sesion", respuesta.getMensaje());
             }
-            
         }
     }
 
