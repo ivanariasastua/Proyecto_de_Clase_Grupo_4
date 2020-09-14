@@ -44,9 +44,6 @@ public class ClientesController implements Initializable {
     @FXML
     private void buscarCliente(ActionEvent event) throws IOException {
         Respuesta respuesta = clienteService.getAll();
-        System.out.println(respuesta.getMensaje());
-        System.out.println(respuesta.getMensajeInterno());
-        System.out.println(respuesta.getEstado());
     }
     
     @FXML
