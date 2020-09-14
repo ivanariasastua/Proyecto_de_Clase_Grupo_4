@@ -130,3 +130,9 @@ and open the template in the editor.
     -fx-text-fill: white;
     -fx-font: bold 15pt "Courier";
 }
+
+.table-row-cell:selected {
+    -fx-background-color: #a79f9f ;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
