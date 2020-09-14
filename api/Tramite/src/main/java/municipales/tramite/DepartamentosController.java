@@ -62,6 +62,7 @@ public class DepartamentosController implements Initializable {
 
     private DepartamentoDTO departClick;
     Mensaje alertas = new Mensaje();
+    boolean seleccionado=false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,6 +111,7 @@ public class DepartamentosController implements Initializable {
                     departClick = row.getItem();
                     System.out.println(departClick.getNombre());
                     AppContext.getInstance().set("DepartamentoSeleccionado", departClick);
+                    seleccionado=true;
                 }
             });
             return row;
@@ -140,7 +142,7 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actModificar(ActionEvent event) throws IOException {
-        if (departClick != null) {
+        if (seleccionado==true) {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("DepartamentosInfo.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -148,7 +150,7 @@ public class DepartamentosController implements Initializable {
             stage.show();
             DepartamentosInfoController editar = loader.getController();
             editar.EditarDepartamento(departClick);
-            departClick = null;
+            seleccionado=false;
         } else {
             alertas.show(Alert.AlertType.WARNING, "Modificar departamento", "Debe seleccionar un departamento");
         }
@@ -156,12 +158,12 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actEliminar(ActionEvent event) {
-        if (departClick != null) {
+        if (seleccionado==true) {
             if (alertas.showConfirmation("Eliminar Departamento", null, "Esta seguro que desea eliminar el departamento de " + departClick.getNombre()) == true) {
                 depService.deleteDepartamento(departClick.getId());
                 cargarTabla();
                 alertas.show(Alert.AlertType.INFORMATION, "Departamento eliminado", "Departamento eliminado correctamente");
-                departClick = null;
+                seleccionado=false;
             }
         } else {
             alertas.show(Alert.AlertType.WARNING, "Eliminar departamento", "Debe seleccionar un departamento");
