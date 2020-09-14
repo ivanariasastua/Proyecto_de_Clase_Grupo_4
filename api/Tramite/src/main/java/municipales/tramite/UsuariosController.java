@@ -7,9 +7,13 @@ package municipales.tramite;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,13 +45,13 @@ public class UsuariosController implements Initializable {
     @FXML
     private TableColumn<UsuarioDTO, String> colNombre;
     @FXML
-    private TableColumn<UsuarioDTO, Date> colRegistrado;
+    private TableColumn<UsuarioDTO, String> colRegistrado;
     @FXML
-    private TableColumn<UsuarioDTO, Date> colModificacion;
+    private TableColumn<UsuarioDTO, String> colModificacion;
     @FXML
-    private TableColumn<UsuarioDTO, Boolean> colEstado;
+    private TableColumn<UsuarioDTO, String> colEstado;
     @FXML
-    private TableColumn<UsuarioDTO, Boolean> colesJefe;
+    private TableColumn<UsuarioDTO, String> colesJefe;
     @FXML
     private TextField txtBuscar;
     private Mensaje mensaje;
@@ -105,10 +109,34 @@ public class UsuariosController implements Initializable {
         colId.setCellValueFactory(new PropertyValueFactory("id"));
         colCedula.setCellValueFactory(new PropertyValueFactory("cedula"));
         colNombre.setCellValueFactory(new PropertyValueFactory("nombreCompleto"));
-        colEstado.setCellValueFactory(new PropertyValueFactory("estado"));
-        colesJefe.setCellValueFactory(new PropertyValueFactory("esJefe"));
-        colRegistrado.setCellValueFactory(new PropertyValueFactory("fechaRegistro"));
-        colModificacion.setCellValueFactory(new PropertyValueFactory("fechaModificacion"));
+        colEstado.setCellValueFactory(per -> {
+            String estadoString;
+            if(per.getValue().isEstado())
+                estadoString = "Activo";
+            else
+                estadoString = "Inactivo";
+            return new ReadOnlyStringWrapper(estadoString);
+        });
+        colesJefe.setCellValueFactory(per -> {
+            String estadoString;
+            if(per.getValue().isEsJefe())
+                estadoString = "Sí";
+            else
+                estadoString = "No";
+            return new ReadOnlyStringWrapper(estadoString);
+        });
+        colRegistrado.setCellValueFactory(data -> {
+            SimpleStringProperty property = new SimpleStringProperty();
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            property.setValue(dateFormat.format(data.getValue().getFechaRegistro()));
+            return property;
+        });
+        colModificacion.setCellValueFactory(data -> {
+            SimpleStringProperty property = new SimpleStringProperty();
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            property.setValue(dateFormat.format(data.getValue().getFechaModificacion()));
+            return property;
+        });
     }
     
 }

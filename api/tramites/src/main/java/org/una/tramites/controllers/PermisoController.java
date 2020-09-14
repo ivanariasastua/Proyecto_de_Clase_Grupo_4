@@ -67,12 +67,32 @@ public class PermisoController {
         }
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
-    @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Permiso per) {
+    @GetMapping("/Codigo/{codigo}")
+    @ApiOperation(value = "Obtiene una lista de los permisos segun el codigo", response = PermisoDTO.class, responseContainer = "List", tags = "Permisos")
+    public ResponseEntity<?> findByCodigo(@PathVariable(value = "codigo") String codigo) {
         try {
-            Permiso perCreated = permisoService.create(per);
+            Optional<List<Permiso>> result = permisoService.findByCodigoAproximate(codigo);
+            if (result.isPresent()) {
+                List<PermisoDTO> permisosDTO = MapperUtils.DtoListFromEntityList(result.get(), PermisoDTO.class);
+                return new ResponseEntity<>(permisosDTO, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/save")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody PermisoDTO per) {
+        if(permisoService.findByCodigo(per.getCodigo()).isPresent()){
+            return new ResponseEntity<>("Ya existe ese permiso", HttpStatus.CONFLICT);
+        }
+        try {
+            Permiso perCreated = MapperUtils.EntityFromDto(per, Permiso.class);
+            perCreated = permisoService.create(perCreated);
             PermisoDTO perDto = MapperUtils.DtoFromEntity(perCreated, PermisoDTO.class);
             return new ResponseEntity<>(perDto, HttpStatus.CREATED);
         } catch (Exception e) {

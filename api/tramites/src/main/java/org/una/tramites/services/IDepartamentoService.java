@@ -23,4 +23,7 @@ public interface IDepartamentoService {
     public void delete(Long id);
     
     public void deleteAll();
+    
+    public Optional<List<Departamento>> findByNombreAproximate(String nombre);
+    
 }

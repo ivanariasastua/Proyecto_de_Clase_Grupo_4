@@ -42,7 +42,7 @@ public class DepartamentoController {
     @Autowired
     private IDepartamentoService departamentoService;
   
-    @GetMapping()
+    @GetMapping("/dep")
     @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
     public @ResponseBody
     ResponseEntity<?> findAll() {
@@ -89,7 +89,8 @@ public class DepartamentoController {
         }
     }
 
-    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/editar/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Departamento depModified) {
         try {
@@ -130,4 +131,21 @@ public class DepartamentoController {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("/nombre/{term}")
+    @ApiOperation(value = "Obtiene una lista de departamentos por medio de su nombre", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
+    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
+        try {
+            Optional<List<Departamento>> result = departamentoService.findByNombreAproximate(term);
+            if (result.isPresent()) {
+                List<DepartamentoDTO> depDTO = MapperUtils.DtoListFromEntityList(result.get(), DepartamentoDTO.class);
+                return new ResponseEntity<>(depDTO, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

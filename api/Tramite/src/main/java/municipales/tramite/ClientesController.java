@@ -14,6 +14,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import municipales.tramite.service.ClienteService;
+import municipales.tramite.util.Respuesta;
 
 /**
  * FXML Controller class
@@ -32,6 +34,8 @@ public class ClientesController implements Initializable {
     @FXML
     private TableView tvCliente;
        
+    ClienteService clienteService = new ClienteService();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -39,7 +43,10 @@ public class ClientesController implements Initializable {
     
     @FXML
     private void buscarCliente(ActionEvent event) throws IOException {
-        
+        Respuesta respuesta = clienteService.getAll();
+        System.out.println(respuesta.getMensaje());
+        System.out.println(respuesta.getMensajeInterno());
+        System.out.println(respuesta.getEstado());
     }
     
     @FXML

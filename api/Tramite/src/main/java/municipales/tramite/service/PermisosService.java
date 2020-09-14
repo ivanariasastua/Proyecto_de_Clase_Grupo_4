@@ -25,7 +25,22 @@ public class PermisosService {
             if(request.isError())
                 return new Respuesta(false, request.getError(), "No se pudo obtener los permiso");
             List<PermisoDTO> result = (List<PermisoDTO>) request.readEntity(new GenericType<List<PermisoDTO>>(){});
-            return new Respuesta(true, "Permisos");
+            return new Respuesta(true, "Permisos", result);
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "No se pudo establecer comunicacion con el servidor");
+        }
+    }
+    
+    public Respuesta getByCodigo(String codigo){
+        try{
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("codigo", codigo);
+            Request request = new Request("permisos/Codigo", "/{codigo}", parametros);
+            request.get();
+            if(request.isError())
+                return new Respuesta(false, request.getError(), "No se pudo obtener los permiso");
+            List<PermisoDTO> result = (List<PermisoDTO>) request.readEntity(new GenericType<List<PermisoDTO>>(){});
+            return new Respuesta(true, "Permisos", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No se pudo establecer comunicacion con el servidor");
         }
@@ -46,9 +61,9 @@ public class PermisosService {
         }
     }
     
-    public Respuesta guardarUsuario(PermisoDTO permiso){
+    public Respuesta guardarPermiso(PermisoDTO permiso){
         try{
-            Request request = new Request("permisos");
+            Request request = new Request("permisos/save");
             request.post(permiso);
             if(request.isError())
                 return new Respuesta(false, request.getError(), "No se pudo guardar el permiso");

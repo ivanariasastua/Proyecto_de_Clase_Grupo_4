@@ -26,7 +26,7 @@ public interface IVariacionesService {
 
     public void deleteAll();
     
-    public Optional<List<Variaciones>> findByGrupo(String grupo);
+    public Optional<List<Variaciones>> findByGrupoAproximate(String grupo);
     
     public Optional<List<Variaciones>> findByDescripcion(String descripcion);
 }

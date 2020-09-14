@@ -71,7 +71,6 @@ public class Departamento implements Serializable{
     
     @PrePersist
     public void prePersist(){
-        estado = true;
         fechaRegistro = new Date();
         fechaModificacion = new Date();
     }

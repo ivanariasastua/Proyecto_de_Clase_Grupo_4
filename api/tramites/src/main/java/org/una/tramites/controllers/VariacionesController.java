@@ -73,11 +73,12 @@ public class VariacionesController {
     }
     
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/{value}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Variaciones variacion) {
+    public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody Variaciones variacion) {
         try {
-            Variaciones varCreated = varService.create(variacion);
+            Variaciones varCreated = MapperUtils.EntityFromDto(variacion,Variaciones.class);
+            varCreated= varService.create(varCreated);
             VariacionesDTO varDto = MapperUtils.DtoFromEntity(varCreated, VariacionesDTO.class);
             return new ResponseEntity<>(varDto, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -126,10 +127,11 @@ public class VariacionesController {
         }
     }
     
-    @GetMapping("/grupo")
-    public ResponseEntity<?> findByGrupo(@PathVariable(value = "grupo")String codigo){
+    @GetMapping("/grupo/{term}")
+    @ApiOperation(value = "Obtiene una lista de las variaciones por medio de su grupo", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
+    public ResponseEntity<?> findByGrupo(@PathVariable(value = "term") String term){
         try{
-            Optional<List<Variaciones>> result = varService.findByGrupo(codigo);
+            Optional<List<Variaciones>> result = varService.findByGrupoAproximate(term);
             if(result.isPresent()){
                 List<VariacionesDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), VariacionesDTO.class);
                 return new ResponseEntity<>(resultDTO, HttpStatus.OK);

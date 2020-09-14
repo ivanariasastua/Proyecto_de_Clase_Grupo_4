@@ -38,7 +38,7 @@ public class PrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         AuthenticationResponse user = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
         System.out.println(user.toString());
-        lblUser.setText(user.getUsuario().getNombreCompleto());
+    //    lblUser.setText(user.getUsuario().getNombreCompleto());
         lblUser.requestFocus();
     }
 
@@ -84,8 +84,14 @@ public class PrincipalController implements Initializable {
     private void actUsuarios(ActionEvent event) throws IOException {
         CargarVista("Usuarios");
     }
-
+    
     @FXML
-    private void actClientes(ActionEvent event) {
-    }
+    private void actClientes(ActionEvent event) throws IOException {
+        CargarVista("Clientes");
+
+//    @FXML
+//    private void actClientes(ActionEvent event) {
+//
+//    }
+}
 }

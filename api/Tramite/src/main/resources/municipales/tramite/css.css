@@ -9,23 +9,39 @@ and open the template in the editor.
 */
 
 
+.fondoLogIn{
+    -fx-image:url('fondo.jpg')
+}
+
+.imvUser{
+    -fx-image:url('usuario.png')
+}
+
+.imvPass{
+    -fx-image:url('clave.png')
+}
+
+
 .anchor{
-    -fx-background-color: #9fb5cc;
+    -fx-background-color: white;
+    -fx-opacity: 0.85;
     -fx-border-radius: 30px;
     -fx-background-radius: 30px;
 }
 
-.text{
+.campostext{
     -fx-prompt-text-fill: #504f4f;
-    -fx-font: bold 18px "Arial";
+    -fx-font: bold 17px "Courier";
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-border-width: 0 0 2 0;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
-.text:hover{
-    -fx-border-color: white;
+.campostext:hover{
+    -fx-border-color: #3cb371;
+    -fx-prompt-text-fill: #3cb371;
+    -fx-text-fill: #3cb371;
 }
 
 .label{
@@ -34,16 +50,29 @@ and open the template in the editor.
 }
 
 Button{
-    -fx-opacity: 0.8;
+    -fx-font: bold 22px "Arial";
     -fx-text-fill: white;
-    -fx-background-color: #002082;  
+    -fx-background-color: #3cb371;  
+    -fx-background-radius: 15;
 }
 
 Button:hover{
-    -fx-background-color: #1841bb;
+    -fx-background-color: #3ccd5b;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
+  /*  -fx-opacity: 0.8;*/
+  -fx-font: bold 14px "Arial";
+    -fx-text-fill: white;
+    -fx-background-color: #003366;  
 }
+
+Button:hover{
+    -fx-font: bold 14px "Arial";
+    -fx-background-color: #184d82;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
 .check{
     -fx-font: bold 18px "Arial";
     -fx-text-fill: #504f4f;
@@ -51,11 +80,12 @@ Button:hover{
 
 .check .box{
     -fx-background-color: transparent;
-    -fx-border-color: white;
-    -fx-border-radius: 15;
+    -fx-border-color: #3cb371;
+    -fx-border-radius: 5;
     -fx-border-width: 2;
 }
 
 .check:selected .mark{
-    -fx-background-color: green;
+    -fx-background-color: #3ccd5b;
 }
+
