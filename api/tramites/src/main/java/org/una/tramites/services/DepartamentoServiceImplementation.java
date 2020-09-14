@@ -45,7 +45,7 @@ public class DepartamentoServiceImplementation implements IDepartamentoService{
     @Override
     public Optional<Departamento> update(Departamento departamento, Long id) {
         if(departamentoRepository.findById(id).isPresent())
-            return Optional.ofNullable(departamentoRepository.save(departamento));
+            return Optional.ofNullable(departamentoRepository.saveAndFlush(departamento));
         else
             return null;
     }
@@ -59,4 +59,11 @@ public class DepartamentoServiceImplementation implements IDepartamentoService{
     public void deleteAll() {
         departamentoRepository.deleteAll();
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<Departamento>> findByNombreAproximate(String nombre) {
+        return Optional.ofNullable(departamentoRepository.findByNombreContaining(nombre));
+    }
+
 }

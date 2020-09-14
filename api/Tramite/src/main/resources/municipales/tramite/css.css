@@ -7,8 +7,6 @@ and open the template in the editor.
     Created on : 3 sep. 2020, 15:16:20
     Author     : cordo
 */
-
-
 .anchor{
     -fx-background-color: #9fb5cc;
     -fx-border-radius: 30px;
@@ -17,7 +15,7 @@ and open the template in the editor.
 
 .text{
     -fx-prompt-text-fill: #504f4f;
-    -fx-font: bold 18px "Arial";
+    -fx-font: bold 17px "Courier";
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-border-width: 0 0 2 0;
@@ -34,15 +32,17 @@ and open the template in the editor.
 }
 
 Button{
-    -fx-opacity: 0.8;
+  /*  -fx-opacity: 0.8;*/
+  -fx-font: bold 14px "Arial";
     -fx-text-fill: white;
-    -fx-background-color: #002082;  
+    -fx-background-color: #003366;  
 }
 
 Button:hover{
-    -fx-background-color: #1841bb;
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+    -fx-font: bold 14px "Arial";
+    -fx-background-color: #184d82;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
 }
 .check{
     -fx-font: bold 18px "Arial";
@@ -59,3 +59,5 @@ Button:hover{
 .check:selected .mark{
     -fx-background-color: green;
 }
+
+

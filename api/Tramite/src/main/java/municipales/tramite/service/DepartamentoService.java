@@ -5,9 +5,12 @@
  */
 package municipales.tramite.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.GenericType;
 import municipales.tramite.dto.AuthenticationResponse;
 import municipales.tramite.dto.DepartamentoDTO;
@@ -23,7 +26,8 @@ public class DepartamentoService {
 
     public Respuesta getAll() {
         try {
-            Request request = new Request("departamentos");
+            AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
+            Request request = new Request("departamentos/dep",usuario);
             request.get();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "Error al obtener todos los departamentos");
@@ -34,6 +38,7 @@ public class DepartamentoService {
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }
+
 
     public Respuesta guardarDepartamento(DepartamentoDTO departamento) {
         try {
@@ -54,7 +59,8 @@ public class DepartamentoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("departamentos", "/{id}", parametros);
+            AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
+            Request request = new Request("departamentos/editar", "/{id}", parametros,usuario);
             request.put(departamento);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo modificar el departamento");
@@ -70,7 +76,8 @@ public class DepartamentoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("departamentos", "/{id}", parametros);
+            AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
+            Request request = new Request("departamentos", "/{id}", parametros,usuario);
             request.delete();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo eliminar el departamento");
@@ -90,6 +97,23 @@ public class DepartamentoService {
             }
             return new Respuesta(true, "Todos los departamentos fueron eliminados con exito");
         } catch (Exception ex) {
+            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
+        }
+    }
+    
+    public Respuesta getByNombre(String nombre){
+        try{
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("term", nombre);
+            AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
+            Request request = new Request("departamentos/nombre", "/{term}", parametros,usuario);
+            request.get();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "Error al obtener los departamentos");
+            }
+            List<DepartamentoDTO> result = (List<DepartamentoDTO>) request.readEntity(new GenericType<List<DepartamentoDTO>>(){});
+            return new Respuesta(true, "Departamentos",result);
+        }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
         }
     }

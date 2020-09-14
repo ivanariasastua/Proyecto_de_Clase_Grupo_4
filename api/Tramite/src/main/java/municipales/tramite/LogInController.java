@@ -45,6 +45,8 @@ public class LogInController extends Controller implements Initializable {
     private Mensaje alertas;
     
     private UsuarioService service;
+    @FXML
+    private TextField txtContrasena;
     
     
 
@@ -58,10 +60,13 @@ public class LogInController extends Controller implements Initializable {
         cbShow.selectedProperty().addListener( estado -> {
             if(cbShow.isSelected()){
                 if(txtPassword.getText() != null && !txtPassword.getText().isEmpty()){
-                    cbShow.setText(txtPassword.getText());
+                    txtContrasena.setVisible(true);
+                    txtContrasena.setText(txtPassword.getText());
+                    txtPassword.setVisible(false);
                 }
             }else{
-                cbShow.setText("Mostrar Contraseña");
+                txtPassword.setVisible(true);
+                txtContrasena.setVisible(false);
             }
         });
         txtCedula.setTextFormatter(Formato.getInstance().maxLengthFormat(25));

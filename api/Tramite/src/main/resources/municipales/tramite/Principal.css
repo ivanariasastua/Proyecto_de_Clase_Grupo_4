@@ -8,6 +8,19 @@ and open the template in the editor.
     Author     : ivana
 */
 
+.texto{
+    -fx-prompt-text-fill: #504f4f;
+    -fx-font: regular 14px "Courier";
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 2 0;
+}
+
+.titulo{
+    -fx-font: bold 31px "Arial";
+    -fx-text-fill: #003366;
+}
+
 .contenedor{
     -fx-background-color: #003366;
 }
@@ -20,8 +33,16 @@ and open the template in the editor.
 
 .button{
     -fx-text-fill: white;
-    -fx-font: bold 16.8px "Courier";
-    -fx-opacity: 0.8;
+    -fx-font: bold 14.8px "Courier";
+    -fx-background-color: #003366;
+}
+
+.button:hover{
+    -fx-text-fill: white;
+    -fx-font: bold 14.8px "Courier";
+    -fx-background-color:#184d82;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
 }
 
 .boton{
@@ -35,8 +56,9 @@ and open the template in the editor.
     -fx-text-fill: royalblue
 }
 
-.btnActPel:focused{
-    -fx-background-color: #660000;
+
+.btnActPel:hover{
+    -fx-background-color: #b13131;
 }
 
 .btnActPel{
@@ -44,5 +66,50 @@ and open the template in the editor.
     -fx-border-color: #660000;
     -fx-border-width: 0 0 5 0;
     -fx-border-insets: 0 0 -1 0;
+}
+
+
+.table-view{
+   -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#003366 0%, #1f5993 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-font: bold 13px "Courier";
+    -fx-background-color: -fx-table-cell-border-color, #84a3c2;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:odd{
+    -fx-font: bold 13px "Courier";
+    -fx-background-color: -fx-table-cell-border-color, #376fa4;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #a79f9f ;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
 }
 
