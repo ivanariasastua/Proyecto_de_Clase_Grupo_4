@@ -46,3 +46,4 @@ build/
 .vscode/
 api/Tramite/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 api/Tramite/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+*.class

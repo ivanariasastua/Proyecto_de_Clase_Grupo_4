@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -28,21 +27,8 @@
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font></Label>
-                  <TextField fx:id="txtCedula" alignment="TOP_CENTER" layoutX="123.0" layoutY="113.0" prefHeight="40.0" prefWidth="354.0" promptText="Cedula" styleClass="text" />
-                  <Button focusTraversable="false" layoutX="200.0" layoutY="355.0" mnemonicParsing="false" onAction="#actIngresar" prefHeight="40.0" prefWidth="201.0" text="Ingresar" />
-                  <PasswordField fx:id="txtPassword" alignment="TOP_CENTER" layoutX="124.0" layoutY="228.0" prefHeight="40.0" prefWidth="354.0" promptText="Contraseña" styleClass="text" />
-                  <ImageView fitHeight="33.0" fitWidth="32.0" layoutX="71.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@usuario.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="33.0" fitWidth="32.0" layoutX="71.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@clave.png" />
-                     </image>
-                  </ImageView>
                   <CheckBox fx:id="cbShow" focusTraversable="false" layoutX="123.0" layoutY="297.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="354.0" styleClass="check" text="Mostrar Contraseña" />
-                  <TextField fx:id="txtContrasena" alignment="TOP_CENTER" editable="false" layoutX="123.0" layoutY="229.0" prefHeight="32.0" prefWidth="354.0" styleClass="text" visible="false" />
+                  <TextField fx:id="txtContrasena" alignment="TOP_CENTER" editable="false" layoutX="123.0" layoutY="229.0" prefHeight="32.0" prefWidth="354.0" styleClass="campostext" visible="false" />
                </children>
             </AnchorPane>
          </children>
