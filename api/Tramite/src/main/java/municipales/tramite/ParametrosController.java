@@ -29,7 +29,7 @@ public class ParametrosController implements Initializable {
 
     @FXML
     private void actAgregarParametros(ActionEvent event) throws IOException {
-        App.goView("ParametrosInfo", 750, 585);
+        App.goView("ParametrosInfo", 750, 585,true,false);
     }
     
 }

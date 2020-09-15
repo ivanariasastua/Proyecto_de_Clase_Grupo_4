@@ -29,12 +29,12 @@ public class DiseñoTramitesController implements Initializable {
 
     @FXML
     private void acrAgregarVariaciones(ActionEvent event) throws IOException {
-        App.goView("VariacionesInfo", 750, 519);
+        App.goView("VariacionesInfo", 0, 0,true,false);
     }
 
     @FXML
     private void actAgregarRequisitos(ActionEvent event) throws IOException {
-        App.goView("RequisitosInfo", 750, 496);
+        App.goView("RequisitosInfo", 0, 0,true,false);
     }
     
 }

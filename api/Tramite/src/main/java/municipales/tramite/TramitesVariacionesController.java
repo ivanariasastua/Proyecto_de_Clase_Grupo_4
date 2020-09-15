@@ -26,6 +26,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -35,56 +37,32 @@ import javafx.util.Callback;
  *
  * @author Dios
  */
-public class TramitesController implements Initializable {
+public class TramitesVariacionesController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
     
     @FXML
-    private TextField txtBuscar;
+    private TextField txtGrupo;
     
     @FXML
-    private TableView tvVariaciones;
+    private TextField txtDescripcion;
     
     @FXML
-    private TableColumn tcIdVariaciones;
+    private ComboBox cbTipoTramite;
     
     @FXML
-    private TableColumn tcVariaciones;
+    private ComboBox cbEstado;
     
     @FXML
-    private TableColumn tcEstadoVariaciones;
+    private ListView lvRequisitos;
+    
+    @FXML 
+    private Label lbfechaCreacion;
     
     @FXML
-    private TableColumn tcVariacionesGrupo;
-    
-    @FXML
-    private TableView tvRequisitos;
-    
-    @FXML
-    private TableColumn tcIdRequisitos;
-    
-    @FXML
-    private TableColumn tcRequisitos;
-    
-    @FXML
-    private TableColumn tcRequisitosVariaciones;
-    
-    @FXML
-    private TableColumn tcRequisitosEstados;
-    
-    @FXML
-    private TableColumn tcRequisitosFechas;
-    
-    @FXML
-    private TableColumn tcRequisitosDescripcion;
-    /*
-    @FXML
-    private BorderPane bpPrincipal;*/
-    
-    
-    
+    private Label lbfechaModificación;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,28 +70,7 @@ public class TramitesController implements Initializable {
     }
     
     @FXML
-    void actBuscar(ActionEvent event) {
-        
-    }
-    
-    @FXML
-    void actAgregarVariacion(ActionEvent event) throws IOException {
-        
-        App.goView("TramitesVariaciones", 0, 0, true, false);
-    }
-    
-    @FXML
-    void actEditarVariacion(ActionEvent event) {
-        
-    }
-    
-    @FXML
-    void actAgregarRequisito(ActionEvent event) {
-        
-    }
-    
-    @FXML
-    void actEditarRequisito(ActionEvent event) {
+    private void actAgregarEditar(ActionEvent event) throws IOException {
         
     }
     

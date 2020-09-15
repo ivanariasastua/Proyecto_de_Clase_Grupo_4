@@ -27,6 +27,7 @@ municipales\tramite\dto\UsuarioDTO.class
 municipales\tramite\dto\TramitesTiposDTO.class
 municipales\tramite\service\ArchivoRelacionadoService$3.class
 municipales\tramite\ClienteInfoController.class
+municipales\tramite\TramitesVariacionesController.class
 municipales\tramite\service\ArchivoRelacionadoService.class
 municipales\tramite\service\TramiteCambioEstadoService.class
 municipales\tramite\service\ClienteService$3.class

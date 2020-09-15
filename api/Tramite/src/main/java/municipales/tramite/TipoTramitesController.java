@@ -29,7 +29,7 @@ public class TipoTramitesController implements Initializable {
 
     @FXML
     private void actAgregar(ActionEvent event) throws IOException {
-        App.goView("TipoTramitesInfo",750,586);
+        App.goView("TipoTramitesInfo",750,586,true,false);
     }
     
 }

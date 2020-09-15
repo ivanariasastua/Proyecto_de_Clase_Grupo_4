@@ -84,7 +84,7 @@ public class UsuariosController implements Initializable {
 
     @FXML
     private void actAgregarUsuarios(ActionEvent event) throws IOException {
-        App.goView("UsuariosInfo", 750, 561);
+        App.goView("UsuariosInfo", 750, 561,true,false);
     }
 
     @FXML
