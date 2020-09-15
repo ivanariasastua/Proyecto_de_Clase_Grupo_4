@@ -62,7 +62,7 @@ public class DepartamentosController implements Initializable {
 
     private DepartamentoDTO departClick;
     Mensaje alertas = new Mensaje();
-    boolean seleccionado=false;
+    boolean seleccionado = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,7 +75,7 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actAgregar(ActionEvent event) throws IOException {
-        App.goView("DepartamentosInfo", 708, 451,true,false);
+        App.goView("DepartamentosInfo", 708, 451, true, false);
     }
 
     @FXML
@@ -85,7 +85,7 @@ public class DepartamentosController implements Initializable {
             TableColumn<DepartamentoDTO, String> colNombre = new TableColumn<>("Nombre");
             colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getNombre()));
             TableColumn<DepartamentoDTO, String> colEstado = new TableColumn<>("Estado");
-            colEstado.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().isEstado())));
+            colEstado.setCellValueFactory((p) -> new SimpleStringProperty(estado(p.getValue().isEstado())));
             TableColumn<DepartamentoDTO, String> colCreacion = new TableColumn<>("Fecha de creación");
             colCreacion.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().getFechaRegistro())));
             TableColumn<DepartamentoDTO, String> colModificacion = new TableColumn<>("Última modificación");
@@ -111,11 +111,18 @@ public class DepartamentosController implements Initializable {
                     departClick = row.getItem();
                     System.out.println(departClick.getNombre());
                     AppContext.getInstance().set("DepartamentoSeleccionado", departClick);
-                    seleccionado=true;
+                    seleccionado = true;
                 }
             });
             return row;
         });
+    }
+
+    public String estado(boolean p) {
+        if (p == true) {
+            return "Activo";
+        }
+        return "Inactivo";
     }
 
     public void cargarTabla() {
@@ -123,7 +130,7 @@ public class DepartamentosController implements Initializable {
         TableColumn<DepartamentoDTO, String> colNombre = new TableColumn<>("Nombre");
         colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getNombre()));
         TableColumn<DepartamentoDTO, String> colEstado = new TableColumn<>("Estado");
-        colEstado.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().isEstado())));
+        colEstado.setCellValueFactory((p) -> new SimpleStringProperty(estado(p.getValue().isEstado())));
         TableColumn<DepartamentoDTO, String> colCreacion = new TableColumn<>("Fecha de creación");
         colCreacion.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().getFechaRegistro())));
         TableColumn<DepartamentoDTO, String> colModificacion = new TableColumn<>("Última modificación");
@@ -142,7 +149,7 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actModificar(ActionEvent event) throws IOException {
-        if (seleccionado==true) {
+        if (seleccionado == true) {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("DepartamentosInfo.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -157,17 +164,17 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actEliminar(ActionEvent event) {
-        if (seleccionado==true) {
+        if (seleccionado == true) {
             if (alertas.showConfirmation("Eliminar Departamento", null, "Esta seguro que desea eliminar el departamento de " + departClick.getNombre()) == true) {
                 depService.deleteDepartamento(departClick.getId());
                 cargarTabla();
                 alertas.show(Alert.AlertType.INFORMATION, "Departamento eliminado", "Departamento eliminado correctamente");
-                seleccionado=false;
+                seleccionado = false;
             }
         } else {
             alertas.show(Alert.AlertType.WARNING, "Eliminar departamento", "Debe seleccionar un departamento");
         }
-        
+
     }
 
 }

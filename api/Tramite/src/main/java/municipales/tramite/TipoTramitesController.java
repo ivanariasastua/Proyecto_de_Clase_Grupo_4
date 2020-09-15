@@ -91,7 +91,7 @@ public class TipoTramitesController implements Initializable {
             TableColumn<TramitesTiposDTO, String> colNombre = new TableColumn<>("Departamento");
             colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getDepartamento().getNombre()));
             TableColumn<TramitesTiposDTO, String> colEstado = new TableColumn<>("Estado");
-            colEstado.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().isEstado())));
+            colEstado.setCellValueFactory((p) -> new SimpleStringProperty(estado(p.getValue().isEstado())));
             TableColumn<TramitesTiposDTO, String> colCreacion = new TableColumn<>("Fecha de creación");
             colCreacion.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().getFechaRegistro())));
             TableColumn<TramitesTiposDTO, String> colModificacion = new TableColumn<>("Última modificación");
@@ -111,6 +111,13 @@ public class TipoTramitesController implements Initializable {
         }
     }
 
+    public String estado(boolean p) {
+        if (p == true) {
+            return "Activo";
+        }
+        return "Inactivo";
+    }
+    
     @FXML
     private void actModificar(ActionEvent event) throws IOException {
         if (seleccionado == true) {
@@ -161,7 +168,7 @@ public class TipoTramitesController implements Initializable {
         TableColumn<TramitesTiposDTO, String> colNombre = new TableColumn<>("Departamento");
         colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getDepartamento().getNombre()));
         TableColumn<TramitesTiposDTO, String> colEstado = new TableColumn<>("Estado");
-        colEstado.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().isEstado())));
+        colEstado.setCellValueFactory((p) -> new SimpleStringProperty(estado(p.getValue().isEstado())));
         TableColumn<TramitesTiposDTO, String> colCreacion = new TableColumn<>("Fecha de creación");
         colCreacion.setCellValueFactory((p) -> new SimpleStringProperty(String.valueOf(p.getValue().getFechaRegistro())));
         TableColumn<TramitesTiposDTO, String> colModificacion = new TableColumn<>("Última modificación");
