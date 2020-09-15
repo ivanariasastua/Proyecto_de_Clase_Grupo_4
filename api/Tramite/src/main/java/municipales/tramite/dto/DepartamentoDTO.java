@@ -33,7 +33,7 @@ public class DepartamentoDTO {
     
     @Override
     public String toString() {
-        return nombre.toString();
+        return nombre;
     }
     
 }

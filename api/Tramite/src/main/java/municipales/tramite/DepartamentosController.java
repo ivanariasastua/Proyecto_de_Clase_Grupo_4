@@ -150,7 +150,6 @@ public class DepartamentosController implements Initializable {
             stage.show();
             DepartamentosInfoController editar = loader.getController();
             editar.EditarDepartamento(departClick);
-            seleccionado=false;
         } else {
             alertas.show(Alert.AlertType.WARNING, "Modificar departamento", "Debe seleccionar un departamento");
         }

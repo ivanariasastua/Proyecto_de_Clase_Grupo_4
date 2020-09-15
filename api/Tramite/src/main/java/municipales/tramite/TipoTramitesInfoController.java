@@ -13,12 +13,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import municipales.tramite.dto.DepartamentoDTO;
 import municipales.tramite.dto.TramitesTiposDTO;
 import municipales.tramite.service.DepartamentoService;
 import municipales.tramite.service.TramiteTipoService;
+import municipales.tramite.util.Mensaje;
 import municipales.tramite.util.Respuesta;
 
 /**
@@ -41,6 +43,10 @@ public class TipoTramitesInfoController implements Initializable {
     private TramitesTiposDTO tramitDto = new TramitesTiposDTO();
     private TramiteTipoService tramitService = new TramiteTipoService();
 
+    boolean modificar = false;
+    Mensaje alertas = new Mensaje();
+    Long id = null;
+
     /**
      * Initializes the controller class.
      */
@@ -61,19 +67,34 @@ public class TipoTramitesInfoController implements Initializable {
 
     @FXML
     private void actGuardar(ActionEvent event) {
-        if(cbxDepartamento.getValue()==null || cbxEstado.getValue()==null){
-            
-        }else{
-            System.out.println(cbxDepartamento.getValue().getId());
-        //    tramitDto.setDepartamento(cbxDepartamento.getValue());
-            if(cbxEstado.getValue()=="Activo"){
+        if (modificar == true) {
+            tramitDto.setId(id);
+            tramitDto.setDepartamento(cbxDepartamento.getValue());
+            if (cbxEstado.getValue() == "Activo") {
                 tramitDto.setEstado(true);
-            }else{
+            } else {
                 tramitDto.setEstado(false);
             }
             tramitDto.setDescripcion(txtDescripcion.getText());
-            
-            tramitService.guardarTramiteTipo(tramitDto);
+            tramitService.modificarTramiteTipo(id, tramitDto);
+            alertas.show(Alert.AlertType.INFORMATION, "Tipo de trámite Guardado", "Se ha guardado correctamente el tipo de trámite");
+            App.CerrarVentana(event);
+        } else {
+            if (cbxDepartamento.getValue() == null || cbxEstado.getValue() == null) {
+                alertas.show(Alert.AlertType.WARNING, "Campos requeridos", "Los campos son obligatorios");
+            } else {
+                tramitDto.setDepartamento(cbxDepartamento.getValue());
+                if (cbxEstado.getValue() == "Activo") {
+                    tramitDto.setEstado(true);
+                } else {
+                    tramitDto.setEstado(false);
+                }
+                tramitDto.setDescripcion(txtDescripcion.getText());
+
+                tramitService.guardarTramiteTipo(tramitDto);
+                alertas.show(Alert.AlertType.INFORMATION, "Tipo de trámite Guardado", "Se ha guardado correctamente el tipo de trámite");
+                App.CerrarVentana(event);
+            }
         }
     }
 
@@ -82,5 +103,16 @@ public class TipoTramitesInfoController implements Initializable {
         App.CerrarVentana(event);
     }
 
-    
+    void EditarTipoTramite(TramitesTiposDTO tramitClick) {
+        id = tramitClick.getId();
+        txtDescripcion.setText(tramitClick.getDescripcion());
+        if (tramitClick.isEstado() == true) {
+            cbxEstado.setValue("Activo");
+        } else {
+            cbxEstado.setValue("Inactivo");
+        }
+        cbxDepartamento.setValue(tramitClick.getDepartamento());
+        modificar = true;
+    }
+
 }

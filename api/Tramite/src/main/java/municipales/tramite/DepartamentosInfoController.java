@@ -45,7 +45,7 @@ public class DepartamentosInfoController implements Initializable {
     private Mensaje alertas = new Mensaje();
 
     private boolean modificar = false;
-    Long id=null;
+    Long id = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,7 +67,7 @@ public class DepartamentosInfoController implements Initializable {
             }
             departService.modificarDepartamento(id, departDto);
             alertas.show(Alert.AlertType.INFORMATION, "Departamento Editado", "Se ha editado correctamente el departamento");
-                App.CerrarVentana(event);
+            App.CerrarVentana(event);
         } else {
             if (txtNombre.getText().isEmpty() || txtNombre.getText() == null || cbxEstado.getValue() == null) {
                 alertas.show(Alert.AlertType.WARNING, "Campos requeridos", "Los campos son obligatorios");
@@ -90,9 +90,8 @@ public class DepartamentosInfoController implements Initializable {
         App.CerrarVentana(event);
     }
 
-    
     public void EditarDepartamento(DepartamentoDTO dep) {
-        id=dep.getId();
+        id = dep.getId();
         txtNombre.setText(dep.getNombre());
         if (dep.isEstado() == true) {
             cbxEstado.setValue("Activo");
