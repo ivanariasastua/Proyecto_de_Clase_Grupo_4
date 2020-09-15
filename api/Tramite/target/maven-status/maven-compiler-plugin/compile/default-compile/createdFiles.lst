@@ -35,7 +35,6 @@ municipales\tramite\util\Mensaje.class
 municipales\tramite\dto\ClienteDTO.class
 municipales\tramite\ParametrosInfoController.class
 municipales\tramite\TipoTramitesController.class
-municipales\tramite\UsuariosController$1.class
 municipales\tramite\dto\PermisoOtorgadoDTO.class
 municipales\tramite\service\TramiteRegistradoService$3.class
 municipales\tramite\service\ArchivoRelacionadoService$2.class

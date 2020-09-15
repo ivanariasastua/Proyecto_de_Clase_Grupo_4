@@ -15,7 +15,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
-@ToString
 public class PermisoDTO {
     private Long id; 
     private String codigo;
@@ -25,4 +24,11 @@ public class PermisoDTO {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion;
     private boolean estado; 
+
+    @Override
+    public String toString() {
+        return codigo +": "+descripcion;
+    }
+    
+    
 }

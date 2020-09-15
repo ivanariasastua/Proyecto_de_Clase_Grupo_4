@@ -100,8 +100,8 @@ and open the template in the editor.
 .tab-pane {
     -fx-tab-min-width:120px;
     -fx-tab-max-width:120px;
-    -fx-tab-min-height:40px;
-    -fx-tab-max-height:40px;
+    -fx-tab-min-height:30px;
+    -fx-tab-max-height:30px;
 }
 
 .tab {
@@ -131,7 +131,7 @@ and open the template in the editor.
     -fx-background-radius: 1;
 }
 
-.btnAdd, .btnOrd, .btnInf{
+.btnAdd, .btnOrd, .btnInf, .btnDangerMedium, .btnDangerHard{
     -fx-text-fill: white;
     -fx-font: bold 15pt "Courier";
     -fx-background-radius: 15;
@@ -147,4 +147,17 @@ and open the template in the editor.
 
 .btnInf{
     -fx-background-color: #efb810;
+}
+
+.btnDangerMedium{
+    -fx-background-color: #ff6600;
+}
+
+.btnDangerHard{
+    -fx-background-color: #b13131;
+}
+
+.label{
+    -fx-font: bold 16pt "Courier";
+    -fx-text-fill: #1d1d1d;
 }
