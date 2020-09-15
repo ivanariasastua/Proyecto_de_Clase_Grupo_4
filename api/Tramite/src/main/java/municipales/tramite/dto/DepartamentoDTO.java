@@ -29,4 +29,11 @@ public class DepartamentoDTO {
     private Date fechaModificacion;
     private List<UsuarioDTO> usuarios;
     private List<TramitesTiposDTO> tramitesTipos;
+    
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }

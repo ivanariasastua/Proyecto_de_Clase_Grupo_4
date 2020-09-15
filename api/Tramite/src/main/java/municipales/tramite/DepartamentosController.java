@@ -75,7 +75,7 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actAgregar(ActionEvent event) throws IOException {
-        App.goView("DepartamentosInfo", 0, 0,true,false);
+        App.goView("DepartamentosInfo", 708, 451,true,false);
     }
 
     @FXML
@@ -150,7 +150,6 @@ public class DepartamentosController implements Initializable {
             stage.show();
             DepartamentosInfoController editar = loader.getController();
             editar.EditarDepartamento(departClick);
-            seleccionado=false;
         } else {
             alertas.show(Alert.AlertType.WARNING, "Modificar departamento", "Debe seleccionar un departamento");
         }
