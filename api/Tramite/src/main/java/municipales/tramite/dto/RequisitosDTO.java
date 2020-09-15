@@ -17,7 +17,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
-@ToString
+
 public class RequisitosDTO {
     private Long id;
     private String descripcion;
@@ -25,4 +25,9 @@ public class RequisitosDTO {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
     private VariacionesDTO variaciones;
+    
+    @Override
+    public String toString(){
+        return descripcion;
+    }
 }

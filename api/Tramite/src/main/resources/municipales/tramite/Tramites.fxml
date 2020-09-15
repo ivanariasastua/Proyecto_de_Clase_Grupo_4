@@ -24,7 +24,7 @@
             </Label>
             <HBox prefHeight="38.0" prefWidth="876.0">
                <children>
-                  <TextField fx:id="txtBuscar" prefHeight="38.0" prefWidth="694.0" promptText="Buscar">
+                  <TextField fx:id="txtBuscar" prefHeight="38.0" prefWidth="694.0" promptText="Buscar tipo de trámite">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -42,11 +42,33 @@
    <center>
       <TabPane prefHeight="500.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
+            <Tab text="Tipo de Trámite">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tvTramiteTipo" onMouseClicked="#actTablaTramiteTipo" prefHeight="361.0" prefWidth="841.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="tcIdTramiteTipo" minWidth="0.0" prefWidth="84.0" text="Id" />
+                              <TableColumn fx:id="tcTramiteTipoEstado" prefWidth="101.0" text="Estado" />
+                              <TableColumn fx:id="tcTramiteTipoFecha" prefWidth="166.0" text="Fecha de Registro" />
+                              <TableColumn fx:id="tcTramiteTipoDescripcion" prefWidth="493.0" text="Descripción" />
+                           </columns>
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <top>
+                        <HBox prefHeight="55.0" prefWidth="870.0" BorderPane.alignment="CENTER" />
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
           <Tab text="Variaciones">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tvVariaciones" prefHeight="362.0" prefWidth="845.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tvVariaciones" onMouseClicked="#actTablaVariaciones" prefHeight="362.0" prefWidth="845.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="tcIdVariaciones" prefWidth="83.0" text="Id" />
                             <TableColumn fx:id="tcDescripcion" prefWidth="306.0" text="Descripción" />
@@ -74,6 +96,22 @@
                            </children>
                         </HBox>
                      </top>
+                     <bottom>
+                        <HBox prefHeight="52.0" prefWidth="870.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#actVerVariacion" prefHeight="38.0" prefWidth="100.0" text="Ver">
+                                 <HBox.margin>
+                                    <Insets left="15.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#actEliminarVariacion" prefHeight="36.0" prefWidth="100.0" text="Eliminar">
+                                 <HBox.margin>
+                                    <Insets left="645.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
                   </BorderPane>
                </content>
           </Tab>
@@ -84,7 +122,6 @@
                         <TableView fx:id="tvRequisitos" prefHeight="361.0" prefWidth="841.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="tcIdRequisitos" minWidth="0.0" prefWidth="84.0" text="Id" />
-                              <TableColumn fx:id="tcRequisitosVariaciones" prefWidth="143.0" text="Variación" />
                               <TableColumn fx:id="tcRequisitosEstados" prefWidth="101.0" text="Estado" />
                               <TableColumn fx:id="tcRequisitosFechas" prefWidth="148.0" text="Fecha de Registro" />
                               <TableColumn fx:id="tcRequisitosDescripcion" prefWidth="249.0" text="Descripción" />
@@ -113,42 +150,6 @@
                   </BorderPane>
                </content>
           </Tab>
-            <Tab text="Requisitos">
-               <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tvRequisitos1" prefHeight="361.0" prefWidth="841.0" BorderPane.alignment="CENTER">
-                           <columns>
-                              <TableColumn fx:id="tcIdRequisitos1" minWidth="0.0" prefWidth="84.0" text="Id" />
-                              <TableColumn fx:id="tcRequisitosVariaciones1" prefWidth="143.0" text="Variación" />
-                              <TableColumn fx:id="tcRequisitosEstados1" prefWidth="101.0" text="Estado" />
-                              <TableColumn fx:id="tcRequisitosFechas1" prefWidth="148.0" text="Fecha de Registro" />
-                              <TableColumn fx:id="tcRequisitosDescripcion1" prefWidth="249.0" text="Descripción" />
-                           </columns>
-                           <BorderPane.margin>
-                              <Insets bottom="10.0" left="15.0" right="10.0" />
-                           </BorderPane.margin>
-                        </TableView>
-                     </center>
-                     <top>
-                        <HBox prefHeight="55.0" prefWidth="870.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#actAgregarRequisito" prefHeight="38.0" prefWidth="100.0" text="Agregar">
-                                 <HBox.margin>
-                                    <Insets left="650.0" top="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" onAction="#actEditarRequisito" prefHeight="38.0" prefWidth="100.0" text="Editar">
-                                 <HBox.margin>
-                                    <Insets left="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </top>
-                  </BorderPane>
-               </content>
-            </Tab>
         </tabs>
          <BorderPane.margin>
             <Insets left="15.0" right="15.0" />

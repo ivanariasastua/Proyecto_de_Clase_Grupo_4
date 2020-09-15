@@ -73,9 +73,9 @@ public class RequisitosController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/{value}")
-    @ApiOperation(value = "Crea un nuevo requisito ", response = RequisitosDTO.class, tags = "Requisitos")
-    public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody Requisitos requisito) {
+    @PostMapping("/save")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody Requisitos requisito) {
         try {
             Requisitos varCreated = MapperUtils.EntityFromDto(requisito, Requisitos.class);
             varCreated = reqService.create(varCreated);

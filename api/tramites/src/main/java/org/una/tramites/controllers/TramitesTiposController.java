@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
@@ -29,18 +28,18 @@ import org.una.tramites.services.ITramitesTiposService;
 import org.una.tramites.utils.MapperUtils;
 
 /**
- * 
+ *
  * @author Ivan Josué Arias Astúa
  */
 @RestController
 @RequestMapping("/tramites_tipos")
-@Api(tags = {"Tramites"})
+@Api(tags = {"Tramites_Tipos"})
 public class TramitesTiposController {
 
     @Autowired
     private ITramitesTiposService traService;
-    
-    @GetMapping()
+
+    @GetMapping("get")
     @ApiOperation(value = "Obtiene una lista de todos los Tipos de tramites", response = TramitesTiposDTO.class, responseContainer = "List", tags = "Tramites")
     public @ResponseBody
     ResponseEntity<?> findAll() {
@@ -56,7 +55,7 @@ public class TramitesTiposController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tipo de tramite a travez de su identificador unico", response = TramitesTiposDTO.class, tags = "Tramites")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -74,23 +73,25 @@ public class TramitesTiposController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/save")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody TramitesTipos usuario) {
+    @ApiOperation(value = "Crea un nuevo tipo de tramite", response = TramitesTiposDTO.class, tags = "Tramites_Tipos")
+    public ResponseEntity<?> create(@RequestBody TramitesTiposDTO tramites) {
         try {
-            TramitesTipos usuarioCreated = traService.create(usuario);
-            TramitesTiposDTO usuarioDto = MapperUtils.DtoFromEntity(usuarioCreated, TramitesTiposDTO.class);
+            TramitesTipos tramit = MapperUtils.EntityFromDto(tramites, TramitesTipos.class);
+            tramit = traService.create(tramit);
+            TramitesTiposDTO usuarioDto = MapperUtils.DtoFromEntity(tramit, TramitesTiposDTO.class);
             return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody TramitesTipos traModified) {
         try {
-            Optional <TramitesTipos> traUpdated = traService.update(traModified, id);
+            Optional<TramitesTipos> traUpdated = traService.update(traModified, id);
             if (traUpdated.isPresent()) {
                 TramitesTiposDTO traDto = MapperUtils.DtoFromEntity(traUpdated.get(), TramitesTiposDTO.class);
                 return new ResponseEntity<>(traDto, HttpStatus.OK);
@@ -129,7 +130,7 @@ public class TramitesTiposController {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping("/tipo_departamento/{id}")
     public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") Long id) {
         try {
@@ -144,7 +145,9 @@ public class TramitesTiposController {
         }
     }
     
-    @GetMapping("/{descripcion}")
+    @GetMapping("/descripcion/{descripcion}")
+
+   // @GetMapping("/{descripcion}")
     public ResponseEntity<?> findByDescripcion(@PathVariable(value = "descripcion") String descripcion) {
         try {
             Optional<List<TramitesTipos>> result = traService.findByDescripcion(descripcion);

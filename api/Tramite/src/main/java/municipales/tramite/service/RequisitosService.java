@@ -53,12 +53,9 @@ public class RequisitosService {
         }
     }
 
-    public Respuesta guardarRequisito(RequisitosDTO requisito, String value) {
+    public Respuesta guardarRequisito(RequisitosDTO requisito) {
         try {
-            AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("value", value);
-            Request request = new Request("requisitos", "/{value}", parametros,usuario);
+            Request request = new Request("requisitos/save");
             request.post(requisito);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo guardar el requisito");

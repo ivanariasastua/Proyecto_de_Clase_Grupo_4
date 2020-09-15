@@ -28,8 +28,10 @@ public class DepartamentoDTO {
     //private List<UsuarioDTO> usuarios;
     private List<TramitesTiposDTO> tramitesTipos;
     
+
     @Override
     public String toString(){
         return nombre;
     }
+    
 }
