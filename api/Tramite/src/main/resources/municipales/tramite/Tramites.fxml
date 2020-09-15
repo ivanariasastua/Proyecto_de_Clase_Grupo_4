@@ -113,6 +113,42 @@
                   </BorderPane>
                </content>
           </Tab>
+            <Tab text="Requisitos">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tvRequisitos1" prefHeight="361.0" prefWidth="841.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="tcIdRequisitos1" minWidth="0.0" prefWidth="84.0" text="Id" />
+                              <TableColumn fx:id="tcRequisitosVariaciones1" prefWidth="143.0" text="Variación" />
+                              <TableColumn fx:id="tcRequisitosEstados1" prefWidth="101.0" text="Estado" />
+                              <TableColumn fx:id="tcRequisitosFechas1" prefWidth="148.0" text="Fecha de Registro" />
+                              <TableColumn fx:id="tcRequisitosDescripcion1" prefWidth="249.0" text="Descripción" />
+                           </columns>
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <top>
+                        <HBox prefHeight="55.0" prefWidth="870.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#actAgregarRequisito" prefHeight="38.0" prefWidth="100.0" text="Agregar">
+                                 <HBox.margin>
+                                    <Insets left="650.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#actEditarRequisito" prefHeight="38.0" prefWidth="100.0" text="Editar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
         </tabs>
          <BorderPane.margin>
             <Insets left="15.0" right="15.0" />
