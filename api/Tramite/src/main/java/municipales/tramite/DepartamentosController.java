@@ -75,7 +75,7 @@ public class DepartamentosController implements Initializable {
 
     @FXML
     private void actAgregar(ActionEvent event) throws IOException {
-        App.goView("DepartamentosInfo", 708, 451);
+        App.goView("DepartamentosInfo", 0, 0,true,false);
     }
 
     @FXML

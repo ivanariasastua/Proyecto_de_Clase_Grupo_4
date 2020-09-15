@@ -79,7 +79,7 @@ public class LogInController extends Controller implements Initializable {
             Respuesta respuesta = service.LogIn(txtCedula.getText(), txtPassword.getText());
             if(respuesta.getEstado()){
                 alertas.show(Alert.AlertType.INFORMATION, "Inicio de sesion", "Inicio de sesion: Sesion iniciada correctamente");
-                App.goView("Principal",1100, 650);
+                App.goView("Principal",1100, 650,false,true);
                 App.CerrarVentana(event);
             }else{
                 alertas.show(Alert.AlertType.ERROR, "Inicio de sesion", respuesta.getMensaje());

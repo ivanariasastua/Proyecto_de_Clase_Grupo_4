@@ -64,14 +64,14 @@ public class VariacionesServiceImplementation implements IVariacionesService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<Variaciones>> findByGrupoAproximate(String grupo) {
+    public Optional<List<Variaciones>> findByGrupoContaining(int grupo) {
         return Optional.ofNullable(varRepository.findByGrupoContaining(grupo));
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<List<Variaciones>> findByDescripcion(String descripcion) {
-        return Optional.ofNullable(varRepository.findByDescripcion(descripcion));
+        return Optional.ofNullable(varRepository.findByDescripcionContaining(descripcion));
     }
 
 }

@@ -24,11 +24,16 @@ public class App extends Application {
         stage.show();
     }
 
-    static void goView(String fxml, int ancho, int alto) throws IOException {
+    static void goView(String fxml, int ancho, int alto, boolean esperar, boolean reajustar) throws IOException {
         scene = new Scene(loadFXML(fxml), ancho, alto);
         Stage stage = new Stage();
+        stage.setResizable(reajustar);
         stage.setScene(scene);
-        stage.show();
+        if(!esperar){
+            stage.show();
+        }else{
+           stage.showAndWait();
+        }
     }
 
     static void setRoot(String fxml) throws IOException {

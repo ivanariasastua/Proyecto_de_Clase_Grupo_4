@@ -65,7 +65,7 @@ public class PermisosController implements Initializable {
     @FXML
     private void actAgregar(ActionEvent event) throws IOException {
         AppContext.getInstance().set("permisoFuncion", true);
-        App.goView("PermisosInfo", 750, 562);
+        App.goView("PermisosInfo", 750, 562,true,false);
     }
 
     @FXML
@@ -111,7 +111,7 @@ public class PermisosController implements Initializable {
         if(select != null){
             AppContext.getInstance().set("permisoFuncion", false);
             AppContext.getInstance().set("perSelect", select);
-            App.goView("PermisosInfo", 750, 562);
+            App.goView("PermisosInfo", 750, 562,true,false);
         }
     }
 

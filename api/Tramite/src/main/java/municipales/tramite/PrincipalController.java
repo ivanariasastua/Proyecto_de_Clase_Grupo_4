@@ -56,7 +56,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void actCerrarSesion(ActionEvent event) throws IOException {
-        App.goView("LogIn", 900, 600);
+        App.goView("LogIn",0,0,false,false);
         App.CerrarVentana(event);
     }
 
@@ -67,7 +67,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void actDisenoTramites(ActionEvent event) throws IOException {
-        CargarVista("DiseñoTramites");
+        CargarVista("Tramites");
     }
 
     @FXML
@@ -93,5 +93,5 @@ public class PrincipalController implements Initializable {
 //    private void actClientes(ActionEvent event) {
 //
 //    }
-}
+    }
 }
