@@ -84,12 +84,9 @@ public class VariacionesService {
         }
     }
     
-    public Respuesta guardarVariacion(VariacionesDTO variacion, String value){
+    public Respuesta guardarVariacion(VariacionesDTO variacion){
         try{
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("value", value);
-            AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
-            Request request = new Request("variaciones", "/{value}", parametros,usuario);
+            Request request = new Request("variaciones/save");
             request.post(variacion);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo guardar la variacion");

@@ -18,7 +18,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
-@ToString
+
 public class VariacionesDTO {
     private Long id;
     private int grupo;
@@ -26,6 +26,17 @@ public class VariacionesDTO {
     private boolean estado;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro;
-    private TramitesTiposDTO tramites; 
+    private TramitesTiposDTO tramites;
     private List<RequisitosDTO> requisitos;
+    
+    @Override
+    public String toString(){
+        String est = "Inactivo";
+        if(estado){
+            est = "Artivo";
+        }
+        
+        return "Id: "+String.valueOf(id)+"\n"+"Grupo de exclusión: "+String.valueOf(grupo)+"\n"+
+               "Estado: "+est+"\n"+"Fecha de registro: "+fechaRegistro.toString();
+    }
 }

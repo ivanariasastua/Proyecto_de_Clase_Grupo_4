@@ -67,7 +67,7 @@ public class TramiteTipoService {
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("descripcion", descripcion);
-            Request request = new Request("tramites_tipos", "/{descripcion}", parametros);
+            Request request = new Request("tramites_tipos/descripcion", "/{descripcion}", parametros);
             request.get();
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "Error al obtener los tipos de tramites");
