@@ -15,14 +15,19 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <TableView layoutX="60.0" layoutY="192.0" prefHeight="382.0" prefWidth="785.0">
+      <TableView fx:id="tabla" layoutX="60.0" layoutY="192.0" prefHeight="382.0" prefWidth="785.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <TextField layoutX="62.0" layoutY="136.0" prefHeight="27.0" prefWidth="663.0" promptText="Buscar" />
+      <TextField fx:id="txtBuscar" layoutX="62.0" layoutY="136.0" prefHeight="27.0" prefWidth="663.0" promptText="Buscar" />
       <Button layoutX="752.0" layoutY="590.0" mnemonicParsing="false" onAction="#actAgregar" prefHeight="27.0" prefWidth="93.0" text="Agregar" />
-      <Button layoutX="752.0" layoutY="136.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="93.0" text="Buscar" />
+      <Button layoutX="752.0" layoutY="136.0" mnemonicParsing="false" onAction="#actBuscar" prefHeight="27.0" prefWidth="93.0" text="Buscar" />
+      <Button layoutX="649.0" layoutY="590.0" mnemonicParsing="false" onAction="#actModificar" prefHeight="27.0" prefWidth="93.0" text="Modificar" />
+      <Button layoutX="546.0" layoutY="590.0" mnemonicParsing="false" onAction="#actEliminar" prefHeight="27.0" prefWidth="93.0" text="Eliminar" />
    </children>
 </AnchorPane>
