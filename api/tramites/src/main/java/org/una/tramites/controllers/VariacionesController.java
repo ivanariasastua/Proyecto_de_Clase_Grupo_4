@@ -127,11 +127,11 @@ public class VariacionesController {
         }
     }
     
-    @GetMapping("/grupo/{term}")
+    @GetMapping("/grupo/{grupo}")
     @ApiOperation(value = "Obtiene una lista de las variaciones por medio de su grupo", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
-    public ResponseEntity<?> findByGrupo(@PathVariable(value = "term") String term){
+    public ResponseEntity<?> findByGrupo(@PathVariable(value = "grupo") int grupo){
         try{
-            Optional<List<Variaciones>> result = varService.findByGrupoAproximate(term);
+            Optional<List<Variaciones>> result = varService.findByGrupoContaining(grupo);
             if(result.isPresent()){
                 List<VariacionesDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), VariacionesDTO.class);
                 return new ResponseEntity<>(resultDTO, HttpStatus.OK);
@@ -142,7 +142,7 @@ public class VariacionesController {
         }
     }
     
-    @GetMapping("/descripcion")
+    @GetMapping("descripcion/{descripcion}")
     public ResponseEntity<?> findByDescripcion(@PathVariable(value = "descripcion")String descripcion){
         try{
             Optional<List<Variaciones>> result = varService.findByDescripcion(descripcion);

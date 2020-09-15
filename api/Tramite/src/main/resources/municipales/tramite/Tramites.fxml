@@ -49,7 +49,7 @@
                         <TableView fx:id="tvVariaciones" prefHeight="362.0" prefWidth="845.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="tcIdVariaciones" prefWidth="83.0" text="Id" />
-                            <TableColumn fx:id="tcVariaciones" prefWidth="306.0" text="Variación" />
+                            <TableColumn fx:id="tcDescripcion" prefWidth="306.0" text="Descripción" />
                               <TableColumn fx:id="tcEstadoVariaciones" prefWidth="134.0" text="Estado" />
                               <TableColumn fx:id="tcVariacionesGrupo" prefWidth="321.0" text="Grupo de Exclusión" />
                           </columns>
@@ -84,7 +84,6 @@
                         <TableView fx:id="tvRequisitos" prefHeight="361.0" prefWidth="841.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="tcIdRequisitos" minWidth="0.0" prefWidth="84.0" text="Id" />
-                            <TableColumn fx:id="tcRequisitos" prefWidth="144.0" text="Requisito" />
                               <TableColumn fx:id="tcRequisitosVariaciones" prefWidth="143.0" text="Variación" />
                               <TableColumn fx:id="tcRequisitosEstados" prefWidth="101.0" text="Estado" />
                               <TableColumn fx:id="tcRequisitosFechas" prefWidth="148.0" text="Fecha de Registro" />

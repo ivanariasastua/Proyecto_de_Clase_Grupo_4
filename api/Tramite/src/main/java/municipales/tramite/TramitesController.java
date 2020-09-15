@@ -7,6 +7,7 @@ package municipales.tramite;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,8 +28,14 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import municipales.tramite.service.VariacionesService;
+import municipales.tramite.service.RequisitosService;
+import municipales.tramite.dto.VariacionesDTO;
+import municipales.tramite.dto.RequisitosDTO;
+import municipales.tramite.util.Respuesta;
 
 /**
  * FXML Controller class
@@ -45,44 +52,42 @@ public class TramitesController implements Initializable {
     private TextField txtBuscar;
     
     @FXML
-    private TableView tvVariaciones;
+    private TableView<VariacionesDTO> tvVariaciones;
     
     @FXML
-    private TableColumn tcIdVariaciones;
+    private TableColumn<VariacionesDTO,Long> tcIdVariaciones;
     
     @FXML
-    private TableColumn tcVariaciones;
+    private TableColumn<VariacionesDTO,String> tcDescripcion;
     
     @FXML
-    private TableColumn tcEstadoVariaciones;
+    private TableColumn<VariacionesDTO,Boolean> tcEstadoVariaciones;
     
     @FXML
-    private TableColumn tcVariacionesGrupo;
+    private TableColumn<VariacionesDTO,Integer> tcVariacionesGrupo;
     
     @FXML
-    private TableView tvRequisitos;
+    private TableView<RequisitosDTO> tvRequisitos;
     
     @FXML
-    private TableColumn tcIdRequisitos;
+    private TableColumn<RequisitosDTO,Long> tcIdRequisitos;
     
     @FXML
-    private TableColumn tcRequisitos;
+    private TableColumn<RequisitosDTO,RequisitosDTO> tcRequisitosVariaciones;
     
     @FXML
-    private TableColumn tcRequisitosVariaciones;
+    private TableColumn<RequisitosDTO,Boolean> tcRequisitosEstados;
     
     @FXML
-    private TableColumn tcRequisitosEstados;
+    private TableColumn<RequisitosDTO,Date> tcRequisitosFechas;
     
     @FXML
-    private TableColumn tcRequisitosFechas;
+    private TableColumn<RequisitosDTO,String> tcRequisitosDescripcion;
     
     @FXML
-    private TableColumn tcRequisitosDescripcion;
-    /*
-    @FXML
-    private BorderPane bpPrincipal;*/
+    private BorderPane bpPrincipal;
     
+    private VariacionesService variacionesService = new VariacionesService();
     
     
     
@@ -98,8 +103,9 @@ public class TramitesController implements Initializable {
     
     @FXML
     void actAgregarVariacion(ActionEvent event) throws IOException {
-        
-        App.goView("TramitesVariaciones", 0, 0, true, false);
+        bpPrincipal.setMouseTransparent(true);
+        App.goView("TramitesVariaciones", 750, 570, true, false);
+        bpPrincipal.setMouseTransparent(false);
     }
     
     @FXML

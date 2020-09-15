@@ -49,7 +49,7 @@ public class Variaciones implements Serializable {
     private Long id;
     
     @Column
-    private boolean grupo;
+    private int grupo;
     
     @Column
     private String descripcion;

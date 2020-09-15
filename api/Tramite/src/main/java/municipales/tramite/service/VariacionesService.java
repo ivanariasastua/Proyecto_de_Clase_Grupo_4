@@ -36,7 +36,7 @@ public class VariacionesService {
         }
     }
     
-    public Respuesta getUserById(Long id){
+    public Respuesta getVariacionById(Long id){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
@@ -49,6 +49,38 @@ public class VariacionesService {
             return new Respuesta(true, "Variaciones", result);
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
+        }
+    }
+    
+    public Respuesta getByDescripcion(String descripcion){
+        try{
+            Map<String,Object> parametros = new HashMap<>();
+            parametros.put("descripcion",descripcion);
+            Request request = new Request("variaciones/descripcion","/{descripcion}",parametros);
+            request.get();
+            if(request.isError()){
+                return new Respuesta(false,request.getError(),"Error al obtener las variaciones");
+            }
+            List<VariacionesDTO> result = (List<VariacionesDTO>) request.readEntity(new GenericType<List<VariacionesDTO>>(){});
+            return new Respuesta(true,"Variaciones",result);
+        }catch(Exception ex){
+            return new Respuesta(false,ex.toString(),"Error al conectar al servidor");
+        }
+    }
+    
+    public Respuesta getByGrupo(int grupo){
+        try{
+            Map<String,Object> parametros = new HashMap<>();
+            parametros.put("grupo",grupo);
+            Request request = new Request("variaciones/grupo","/{grupo}",parametros);
+            request.get();
+            if(request.isError()){
+                return new Respuesta(false,request.getError(),"Error al obtener las variaciones");
+            }
+            List<VariacionesDTO> result = (List<VariacionesDTO>) request.readEntity(new GenericType<List<VariacionesDTO>>(){});
+            return new Respuesta(true,"Variaciones",result);
+        }catch(Exception ex){
+            return new Respuesta(false,ex.toString(),"Error al conectar al servidor");
         }
     }
     
