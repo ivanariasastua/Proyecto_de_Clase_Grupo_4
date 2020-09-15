@@ -18,6 +18,7 @@ municipales\tramite\PrincipalController.class
 municipales\tramite\dto\NotasDTO.class
 municipales\tramite\service\ClienteService$2.class
 municipales\tramite\service\PermisosService$1.class
+municipales\tramite\service\VariacionesService$4.class
 municipales\tramite\service\TramiteTipoService$1.class
 municipales\tramite\dto\TramitesEstadosDTO.class
 municipales\tramite\service\UsuarioService.class
@@ -47,6 +48,7 @@ municipales\tramite\service\PermisosOtorgadosService.class
 municipales\tramite\util\Respuesta.class
 municipales\tramite\service\ClienteService$1.class
 municipales\tramite\DepartamentosInfoController.class
+municipales\tramite\service\VariacionesService$3.class
 municipales\tramite\dto\AuthenticationResponse.class
 municipales\tramite\service\TramiteTipoService$2.class
 municipales\tramite\service\PermisosService.class

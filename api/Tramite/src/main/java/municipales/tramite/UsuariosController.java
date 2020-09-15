@@ -19,22 +19,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 import municipales.tramite.dto.UsuarioDTO;
 import municipales.tramite.dto.PermisoOtorgadoDTO;
 import municipales.tramite.service.UsuarioService;
 import municipales.tramite.service.PermisosService;
+import municipales.tramite.service.PermisosOtorgadosService;
 import municipales.tramite.util.Respuesta;
 import municipales.tramite.util.Mensaje;
+import municipales.tramite.util.AppContext;
 import municipales.tramite.dto.PermisoDTO;
 
 /**
@@ -61,19 +60,21 @@ public class UsuariosController implements Initializable {
     @FXML private ComboBox<PermisoDTO> cbPermisos;
     private Mensaje mensaje;
     private UsuarioService service; 
+    private PermisosOtorgadosService perOtorService;
     private UsuarioDTO select;
     private List<PermisoDTO> todos = new ArrayList<>();
     private List<PermisoDTO> especificos = new ArrayList<>();
     private List<PermisoOtorgadoDTO> usuario = new ArrayList<>();
     private List<PermisoOtorgadoDTO> eliminados = new ArrayList<>();
     private List<PermisoOtorgadoDTO> agregados = new ArrayList<>();
-    private List<PermisoOtorgadoDTO> tabla = new ArrayList<>();
     
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         service = new UsuarioService();
+        perOtorService = new PermisosOtorgadosService();
+        mensaje = new Mensaje();
         PermisosService perService = new PermisosService();
         Respuesta res = perService.getAll();
         if(res.getEstado()){
@@ -97,21 +98,22 @@ public class UsuariosController implements Initializable {
             usuario.clear();
             eliminados.clear();
             agregados.clear();
-            tabla.clear();
             select = tvUsuarios.getSelectionModel().getSelectedItem();
             tvPermisos.getItems().clear();
             usuario = select.getPermisos();
-            tabla = usuario;
-            tvPermisos.getItems().addAll(tabla);
-            select.getPermisos().forEach(po -> {
-                todos.stream().filter(p -> (!po.getPermiso().getId().equals(p.getId()))).forEachOrdered(p -> {
-                    if(especificos.isEmpty()){
-                        especificos.add(p);
-                    }else if(especificos.indexOf(p) == -1){
-                        especificos.add(p);
+            tvPermisos.getItems().addAll(usuario);
+            boolean add;
+            for(PermisoDTO cbper : todos){
+                add = true;
+                for(PermisoOtorgadoDTO per : select.getPermisos()){
+                    if(per.getPermiso().getId().equals(cbper.getId())){
+                        add = false;
                     }
-                });
-            });
+                }
+                if(add){
+                    especificos.add(cbper);
+                }
+            }
             cbPermisos.getItems().clear();
             cbPermisos.getItems().addAll(especificos);
         }
@@ -144,8 +146,12 @@ public class UsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionModificar(ActionEvent event) {
-        
+    private void accionModificar(ActionEvent event) throws IOException {
+        if(select != null){
+            AppContext.getInstance().set("usuSelect", select);
+            App.goView("UsuariosInfo", 750, 561,true,false);
+            AppContext.getInstance().set("usuSelect", null);
+        }
     }
     
     private Boolean validarBuscar(String buscar){
@@ -220,52 +226,68 @@ public class UsuariosController implements Initializable {
             PermisoDTO per = cbPermisos.getSelectionModel().getSelectedItem();
             cbPermisos.getItems().remove(per);
             PermisoOtorgadoDTO po = new PermisoOtorgadoDTO(Long.valueOf("0"), per, new Date(), true);
-            tabla.add(po);
             agregados.add(po);
-            tvPermisos.getItems().clear();
-            tvPermisos.getItems().addAll(tabla);
+            tvPermisos.getItems().add(po);
+            tvPermisos.refresh();
         }
     }
 
     @FXML
     private void accionGuardarPermisos(ActionEvent event) {
-        for(PermisoOtorgadoDTO per : eliminados){
-            if(per.getId().equals(0))
-                eliminados.remove(per);
-        }
-        for(PermisoOtorgadoDTO per : agregados){
-            for(PermisoOtorgadoDTO per2 : eliminados){
-                if(per.getPermiso().getCodigo().equals(per2.getPermiso().getCodigo())){
-                    agregados.remove(per);
-                    eliminados.remove(per2);
+        int errores = 0, correctos = 0;
+        List<PermisoOtorgadoDTO> registrados = new ArrayList<>();
+        if(!agregados.isEmpty()){
+            Respuesta res;
+            for(PermisoOtorgadoDTO per : agregados){
+                res = perOtorService.guardarPermiso(per, select.getId());
+                if(!res.getEstado()){
+                    mensaje.show(Alert.AlertType.INFORMATION, "Guardar permisos", res.getMensaje());
+                    errores++;
+                }else{
+                    correctos++;
+                    registrados.add((PermisoOtorgadoDTO) res.getResultado("Permiso"));
                 }
             }
-        }
-        System.out.println("Eliminar\n");
-        for(PermisoOtorgadoDTO per : eliminados){
-            System.out.println(per.toString());
-        }
-        System.out.println("Agregar\n");
-        for(PermisoOtorgadoDTO per : agregados){
-            System.out.println(per.toString());
+            mensaje.show(Alert.AlertType.INFORMATION, "Guardar permiso", "Se registro: "+correctos+": correctos y "+errores+": no se pudieron resgistrar");
+            agregados.clear();
+            select.getPermisos().addAll(registrados);
+            tvPermisos.getItems().clear();
+            tvPermisos.getItems().addAll(select.getPermisos());
+            tvUsuarios.refresh();
+        }else{
+            mensaje.show(Alert.AlertType.WARNING, "Guardar Permisos", "No hay permisos que agregar");
         }
     }
 
     @FXML
     private void accionEliminar(ActionEvent event) {
+        boolean borrar = false;
         if(tvPermisos.getSelectionModel().getSelectedItems() != null){
-            List<PermisoOtorgadoDTO> eliminar = List.copyOf(tvPermisos.getSelectionModel().getSelectedItems());
-            for(PermisoOtorgadoDTO delete : eliminar){
-                cbPermisos.getItems().add(delete.getPermiso());
-                tvPermisos.getItems().remove(delete);
-                if(agregados.indexOf(delete) != -1){
-                    agregados.remove(delete);
-                }
-                if(tabla.indexOf(delete) != -1){
-                    tabla.remove(delete);
-                }
-                eliminados.add(delete);
+            if(!agregados.isEmpty()){
+                borrar = mensaje.showConfirmation("Eliminar permisos", null, "Se perderan los cambios que no ha guardado, ¿Desea seguir?");
             }
+            if(agregados.isEmpty() || borrar){
+                int errores = 0, correctos = 0; 
+                List<PermisoOtorgadoDTO> eliminar = List.copyOf(tvPermisos.getSelectionModel().getSelectedItems());
+                Respuesta res;
+                for(PermisoOtorgadoDTO delete : eliminar){
+                    if(delete.getId() > 0){
+                        res = perOtorService.delteById(delete.getId());
+                        if(res.getEstado()){
+                            select.getPermisos().remove(delete);
+                            tvPermisos.getItems().remove(delete);
+                            correctos++;
+                        }else{
+                            errores++;
+                        }
+                    }
+                }
+                mensaje.show(Alert.AlertType.INFORMATION, "Eliminar permisos", "Se eliminaron "+correctos+": correctamente y "+errores+": no pudieron eliminarse");
+                tvPermisos.refresh();
+                tvUsuarios.refresh();
+            }
+        }else{
+            mensaje.show(Alert.AlertType.WARNING, "Eliminar permisos", "No hay datos seleccionados");
         }
         
     }
@@ -273,18 +295,31 @@ public class UsuariosController implements Initializable {
     @FXML
     private void accionInactivar(ActionEvent event) {
         if(tvPermisos.getSelectionModel().getSelectedItems() != null){
-            boolean estado;
-            List<PermisoOtorgadoDTO> inactivar = List.copyOf(tvPermisos.getSelectionModel().getSelectedItems());
-            for(PermisoOtorgadoDTO per : inactivar){
-                estado = per.isEstado();
-                per.setEstado(!estado);
-                if(agregados.indexOf(per) == -1){
-                    agregados.add(per);
-                }else{
-                    agregados.get(agregados.indexOf(per)).setEstado(per.isEstado());
+            if(mensaje.showConfirmation("Cambiar estado", null, "¿Seguro desea hacer estos cambios?")){
+                boolean estado;
+                int correctos = 0, errores = 0;
+                List<PermisoOtorgadoDTO> inactivar = List.copyOf(tvPermisos.getSelectionModel().getSelectedItems());
+                Respuesta res;
+                for(PermisoOtorgadoDTO per : inactivar){
+                    estado = per.isEstado();
+                    per.setEstado(!estado);
+                    res = perOtorService.modificarPermiso(per, per.getId(), select.getId());
+                    if(res.getEstado()){
+                        per = (PermisoOtorgadoDTO) res.getResultado("Permiso");
+                        correctos++;
+                    }else{
+                        errores++;
+                    }
                 }
+                for(PermisoOtorgadoDTO per : select.getPermisos()){
+                    for(PermisoOtorgadoDTO per2 : inactivar){
+                        if(per.getId().equals(per2.getId())){
+                            per.setEstado(per2.isEstado());
+                        }
+                    }
+                }
+                tvPermisos.refresh();
             }
-            tvPermisos.refresh();
         }
     }
     

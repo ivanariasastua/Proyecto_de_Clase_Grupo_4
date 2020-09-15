@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="650.0" prefWidth="905.0" stylesheets="@Secundarias.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.UsuariosController">
@@ -20,87 +21,158 @@
          <tabs>
             <Tab text="Información">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tvUsuarios" layoutX="21.0" layoutY="89.0" onMouseClicked="#accionTabla" prefHeight="391.0" prefWidth="858.0">
-                           <columns>
-                              <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="colCedula" prefWidth="75.0" text="Cedula" />
-                              <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
-                              <TableColumn fx:id="colRegistrado" prefWidth="75.0" text="Registrado" />
-                              <TableColumn fx:id="colModificacion" prefWidth="152.0" text="Modificación" />
-                              <TableColumn fx:id="colEstado" prefWidth="74.0" text="Estado" />
-                              <TableColumn fx:id="colesJefe" prefWidth="75.0" text="Es jefe" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <Button layoutX="729.0" layoutY="489.0" mnemonicParsing="false" onAction="#actAgregarUsuarios" prefHeight="40.0" prefWidth="150.0" styleClass="btnAdd" text="Agregar" />
-                        <TextField fx:id="txtBuscar" alignment="TOP_LEFT" layoutX="75.0" layoutY="33.0" prefHeight="40.0" prefWidth="634.0" promptText="Buscar: por nombre, cedula, o id" />
-                        <Button layoutX="725.0" layoutY="33.0" mnemonicParsing="false" onAction="#accionBuscar" prefHeight="40.0" prefWidth="150.0" styleClass="btnOrd" text="Buscar" />
-                        <Button layoutX="568.0" layoutY="489.0" mnemonicParsing="false" onAction="#accionModificar" prefHeight="40.0" prefWidth="150.0" styleClass="btnOrd" text="Modificar" />
-                        <Button layoutX="25.0" layoutY="33.0" mnemonicParsing="false" onAction="#accionPregunta" prefHeight="40.0" prefWidth="39.0" styleClass="btnInf" text="?" />
-                     </children>
-                  </AnchorPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <bottom>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="905.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#actAgregarUsuarios" prefHeight="40.0" prefWidth="150.0" styleClass="btnAdd" text="Agregar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#accionModificar" prefHeight="40.0" prefWidth="150.0" styleClass="btnOrd" text="Modificar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
+                     <center>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TableView fx:id="tvUsuarios" onMouseClicked="#accionTabla" prefHeight="391.0" prefWidth="858.0">
+                                 <columns>
+                                    <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="colCedula" prefWidth="75.0" text="Cedula" />
+                                    <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                                    <TableColumn fx:id="colRegistrado" prefWidth="75.0" text="Registrado" />
+                                    <TableColumn fx:id="colModificacion" prefWidth="152.0" text="Modificación" />
+                                    <TableColumn fx:id="colEstado" prefWidth="74.0" text="Estado" />
+                                    <TableColumn fx:id="colesJefe" prefWidth="75.0" text="Es jefe" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </center>
+                     <top>
+                        <HBox alignment="CENTER" prefHeight="73.0" prefWidth="905.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#accionPregunta" prefHeight="40.0" prefWidth="39.0" styleClass="btnInf" text="?" />
+                              <TextField fx:id="txtBuscar" alignment="TOP_LEFT" prefHeight="40.0" prefWidth="634.0" promptText="Buscar: por nombre, cedula, o id" />
+                              <Button mnemonicParsing="false" onAction="#accionBuscar" prefHeight="40.0" prefWidth="150.0" styleClass="btnOrd" text="Buscar" />
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
                </content>
             </Tab>
             <Tab text="Autorizaciones">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="348.0" layoutY="32.0" mnemonicParsing="false" onAction="#accionAgregarPermiso" prefHeight="44.0" prefWidth="204.0" styleClass="btnAdd" text="Añadir Permiso" />
-                        <TableView fx:id="tvPermisos" layoutX="27.0" layoutY="168.0" onMouseClicked="#accionTablaPermiso" prefHeight="312.0" prefWidth="849.0">
-                           <columns>
-                              <TableColumn fx:id="colIdA" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="colCod" prefWidth="75.0" text="Codigo" />
-                              <TableColumn fx:id="colDes" prefWidth="75.0" text="Descripcion" />
-                              <TableColumn fx:id="colEstadoA" prefWidth="75.0" text="Estado" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <Button layoutX="726.0" layoutY="494.0" mnemonicParsing="false" onAction="#accionGuardarPermisos" prefHeight="35.0" prefWidth="150.0" styleClass="btnAdd" text="Guardar" />
-                        <HBox alignment="CENTER_LEFT" layoutX="27.0" layoutY="88.0" prefHeight="57.0" prefWidth="849.0">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <VBox prefHeight="140.0" prefWidth="905.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label prefHeight="40.0" prefWidth="100.0" text="Usuario">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
+                              <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="905.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="43.0" styleClass="btnInf" text="?">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <ComboBox fx:id="cbPermisos" prefHeight="45.0" prefWidth="255.0" promptText="Seleccionar Permiso">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                    <Button mnemonicParsing="false" onAction="#accionAgregarPermiso" prefHeight="44.0" prefWidth="204.0" styleClass="btnAdd" text="Añadir Permiso">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#accionGuardarPermisos" prefHeight="35.0" prefWidth="150.0" styleClass="btnAdd" text="Guardar">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="849.0">
+                                 <children>
+                                    <Label prefHeight="40.0" prefWidth="100.0" text="Usuario">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="txtUser" editable="false" prefHeight="40.0" prefWidth="192.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Label prefHeight="40.0" prefWidth="100.0" text="Cédula">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="txtCed" editable="false" prefHeight="40.0" prefWidth="192.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </top>
+                     <center>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TableView fx:id="tvPermisos" onMouseClicked="#accionTablaPermiso" prefHeight="330.0" prefWidth="890.0">
+                                 <columns>
+                                    <TableColumn fx:id="colIdA" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="colCod" prefWidth="75.0" text="Codigo" />
+                                    <TableColumn fx:id="colDes" prefWidth="75.0" text="Descripcion" />
+                                    <TableColumn fx:id="colEstadoA" prefWidth="75.0" text="Estado" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                                  <HBox.margin>
-                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                    <Insets bottom="2.5" top="2.5" />
                                  </HBox.margin>
-                              </Label>
-                              <TextField prefHeight="40.0" prefWidth="192.0">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <Label prefHeight="40.0" prefWidth="100.0" text="Cédula">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <TextField prefHeight="40.0" prefWidth="192.0">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </TextField>
+                              </TableView>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="cbPermisos" layoutX="81.0" layoutY="31.0" prefHeight="45.0" prefWidth="255.0" promptText="Seleccionar Permiso" />
-                        <Button layoutX="27.0" layoutY="494.0" mnemonicParsing="false" onAction="#accionEliminar" prefHeight="35.0" prefWidth="150.0" styleClass="btnDangerHard" text="Eliminar" />
-                        <Button layoutX="184.0" layoutY="494.0" mnemonicParsing="false" onAction="#accionInactivar" prefHeight="44.0" prefWidth="182.0" styleClass="btnDangerMedium" text="Cambiar Estado" />
-                        <Button layoutX="27.0" layoutY="31.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="43.0" styleClass="btnInf" text="?" />
-                     </children>
-                  </AnchorPane>
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="70.0" prefWidth="905.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#accionEliminar" prefHeight="35.0" prefWidth="150.0" styleClass="btnDangerHard" text="Eliminar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#accionInactivar" prefHeight="44.0" prefWidth="182.0" styleClass="btnDangerMedium" text="Cambiar Estado">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
                </content>
             </Tab>
-            <Tab text="Constraseña">
+            <Tab text="Contraseña">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

@@ -7,7 +7,6 @@ import javax.json.bind.annotation.JsonbDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  *
@@ -18,7 +17,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
-@ToString
 public class DepartamentoDTO {
     private Long id;
     private String nombre;
@@ -27,6 +25,11 @@ public class DepartamentoDTO {
     private Date fechaRegistro;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion;
-    private List<UsuarioDTO> usuarios;
+    //private List<UsuarioDTO> usuarios;
     private List<TramitesTiposDTO> tramitesTipos;
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }

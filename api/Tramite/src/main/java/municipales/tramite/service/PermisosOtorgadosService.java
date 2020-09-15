@@ -16,9 +16,11 @@ import municipales.tramite.dto.PermisoOtorgadoDTO;
  */
 public class PermisosOtorgadosService {
     
-    public Respuesta guardarUsuario(PermisoOtorgadoDTO permiso){
+    public Respuesta guardarPermiso(PermisoOtorgadoDTO permiso, Long id){
         try{
-            Request request = new Request("permisos_otorgados");
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("id", id);
+            Request request = new Request("permisos_otorgados/create", "/{id}", parametros);
             request.post(permiso);
             if(request.isError())
                 return new Respuesta(false, request.getError(), "No se pudo guardar el permiso");
@@ -29,11 +31,12 @@ public class PermisosOtorgadosService {
         }
     }
     
-    public Respuesta modificarPermiso(PermisoOtorgadoDTO permiso, Long id){
+    public Respuesta modificarPermiso(PermisoOtorgadoDTO permiso, Long id, Long ID){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("permisos_otorgados", "/{id}", parametros);
+            parametros.put("ID", ID);
+            Request request = new Request("permisos_otorgados/update", "/{id}/{ID}", parametros);
             request.put(permiso);
             if(request.isError())
                 return new Respuesta(false, request.getError(), "No se pudo modificar el permiso");

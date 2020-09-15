@@ -22,8 +22,10 @@ import org.una.tramites.dto.PermisoDTO;
 import org.una.tramites.dto.PermisoOtorgadoDTO;
 import org.una.tramites.entities.Permiso;
 import org.una.tramites.entities.PermisoOtorgado;
+import org.una.tramites.entities.Usuario;
 import org.una.tramites.services.IPermisoOtorgadoService;
 import org.una.tramites.services.IPermisoService;
+import org.una.tramites.services.IUsuarioService;
 import org.una.tramites.utils.MapperUtils;
 
 /**
@@ -38,6 +40,9 @@ public class PermisoOtorgadoController {
     
     @Autowired
     private IPermisoOtorgadoService perOtorgadoService;
+    
+    @Autowired
+    private IUsuarioService usuService;
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los permisos otorgados", response = PermisoOtorgadoDTO.class, responseContainer = "List", tags = "Permisos_Otorgados")
@@ -72,23 +77,29 @@ public class PermisoOtorgadoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/create/{id}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody PermisoOtorgado perOto) {
+    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgadoDTO per) {
         try {
-            PermisoOtorgado perOtorgadoCreated = perOtorgadoService.create(perOto);
-            PermisoOtorgadoDTO perOtorgadoDto = MapperUtils.DtoFromEntity(perOtorgadoCreated, PermisoOtorgadoDTO.class);
+            Usuario user = usuService.findById(id).get();
+            PermisoOtorgado entity = MapperUtils.EntityFromDto(per, PermisoOtorgado.class);
+            entity.setUsuario(user);
+            entity = perOtorgadoService.create(entity);
+            PermisoOtorgadoDTO perOtorgadoDto = MapperUtils.DtoFromEntity(entity, PermisoOtorgadoDTO.class);
             return new ResponseEntity<>(perOtorgadoDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}/{ID}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgado perOtorgadoModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "ID") Long ID, @RequestBody PermisoOtorgadoDTO perOtorgadoModified) {
         try {
-            Optional<PermisoOtorgado> perOtorgadoUpdated = perOtorgadoService.update(perOtorgadoModified, id);
+            Usuario user = usuService.findById(ID).get();
+            PermisoOtorgado entity = MapperUtils.EntityFromDto(perOtorgadoModified, PermisoOtorgado.class);
+            entity.setUsuario(user);
+            Optional<PermisoOtorgado> perOtorgadoUpdated = perOtorgadoService.update(entity, id);
             if (perOtorgadoUpdated.isPresent()) {
                 PermisoOtorgadoDTO perOtoDto = MapperUtils.DtoFromEntity(perOtorgadoUpdated.get(), PermisoOtorgadoDTO.class);
                 return new ResponseEntity<>(perOtoDto, HttpStatus.OK);

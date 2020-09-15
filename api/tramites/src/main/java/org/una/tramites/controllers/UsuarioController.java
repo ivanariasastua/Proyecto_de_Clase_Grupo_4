@@ -10,9 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -142,12 +139,12 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/{value}")
+    @PostMapping("saveUser/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo usuario", response = UsuarioDTO.class, tags = "Usuarios")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuario) {
         try {
-            Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);
+            Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);;
             user.setPasswordEncriptado(value);
             user = usuarioService.create(user);
             UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user, UsuarioDTO.class);
@@ -157,16 +154,18 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}/{value}")
     @ResponseBody
     @ApiOperation(value = "Modifica un usuario existente", response = UsuarioDTO.class, tags = "Usuarios")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Usuario usuarioModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuarioModified) {
         try {
-            Optional<Usuario> usuarioUpdated = usuarioService.update(usuarioModified, id);
-            if (usuarioUpdated.isPresent()) {
-                UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuarioUpdated.get(), UsuarioDTO.class);
+            Usuario user = MapperUtils.EntityFromDto(usuarioModified, Usuario.class);
+            if(!value.equals("nada"))
+                user.setPasswordEncriptado(value);
+            Optional<Usuario> user2 = usuarioService.update(user, id);
+            if (user2.isPresent()) {
+                UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user2.get(), UsuarioDTO.class);
                 return new ResponseEntity<>(usuarioDto, HttpStatus.OK);
-
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 

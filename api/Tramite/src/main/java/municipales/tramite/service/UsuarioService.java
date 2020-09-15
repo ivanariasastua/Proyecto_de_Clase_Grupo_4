@@ -128,11 +128,11 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta guardarUsuario(UsuarioDTO usuario, String value){
+    public Respuesta guardarUsuario(UsuarioDTO usuario){
         try{
             Map<String, Object> parametros = new HashMap<>();
-            parametros.put("value", value);
-            Request request = new Request("usuarios", "/{value}", parametros);
+            parametros.put("value", "1234");
+            Request request = new Request("usuarios/saveUser", "/{value}", parametros);
             request.post(usuario);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo guardar el usuario");
@@ -144,11 +144,12 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta modificarUsuario(Long id, UsuarioDTO usuario){
+    public Respuesta modificarUsuario(Long id, String value, UsuarioDTO usuario){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("usuarios", "/{id}", parametros);
+            parametros.put("value", value);
+            Request request = new Request("usuarios/update", "/{id}/{value}", parametros);
             request.put(usuario);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo modificar el usuario");

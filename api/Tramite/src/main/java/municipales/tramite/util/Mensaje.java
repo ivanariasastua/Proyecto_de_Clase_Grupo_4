@@ -39,7 +39,6 @@ public class Mensaje {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
-        alert.initOwner(padre);
         alert.setContentText(mensaje);
         Optional<ButtonType> result = alert.showAndWait();
 
