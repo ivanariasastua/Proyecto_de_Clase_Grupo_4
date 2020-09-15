@@ -147,7 +147,7 @@ public class TramitesTiposController {
     
     @GetMapping("/descripcion/{descripcion}")
 
-    @GetMapping("/{descripcion}")
+   // @GetMapping("/{descripcion}")
     public ResponseEntity<?> findByDescripcion(@PathVariable(value = "descripcion") String descripcion) {
         try {
             Optional<List<TramitesTipos>> result = traService.findByDescripcion(descripcion);
