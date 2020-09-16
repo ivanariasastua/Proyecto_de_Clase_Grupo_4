@@ -144,8 +144,8 @@ public class TramitesController implements Initializable {
     }
     
     public void iniciarTablaTipoTramite(){
-        tcIdTramiteTipo.setCellFactory(new PropertyValueFactory("id"));
-        tcTramiteTipoDescripcion.setCellFactory(new PropertyValueFactory("descripcion"));
+        tcIdTramiteTipo.setCellValueFactory(new PropertyValueFactory("id"));
+        tcTramiteTipoDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         tcTramiteTipoFecha.setCellValueFactory(fecha -> {
             SimpleStringProperty property = new SimpleStringProperty();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -206,7 +206,7 @@ public class TramitesController implements Initializable {
             }
             if(respuesta.getEstado()){
                 tvTramiteTipo.getItems().clear();
-                tvTramiteTipo.getItems().addAll((List<TramitesTiposDTO>) respuesta.getResultado("TipoTramite_Descripcion"));
+                tvTramiteTipo.getItems().addAll((List<TramitesTiposDTO>) respuesta.getResultado("TipoTramites"));
             }else{
                 mensaje.show(Alert.AlertType.ERROR, "Busqueda de tipos de trámites", respuesta.getMensaje());
             }
