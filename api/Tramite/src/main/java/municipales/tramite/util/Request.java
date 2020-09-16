@@ -25,7 +25,7 @@ public class Request {
     private Invocation.Builder builder;
     private WebTarget webTarget;
     private Response response;
-    private final String apiUrl = "http://localhost:8989/";
+    private final String apiUrl = "http://192.168.8.102:8989/";
 
     public Request(String direccion) {
         this.client = ClientBuilder.newClient();

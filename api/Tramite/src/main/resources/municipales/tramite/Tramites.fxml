@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bpPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.TramitesController">
+<BorderPane fx:id="bpPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" stylesheets="@Secundarias.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.TramitesController">
    <top>
       <VBox prefHeight="142.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#actBuscar" prefHeight="37.0" prefWidth="98.0" text="Buscar">
+                  <Button mnemonicParsing="false" onAction="#actBuscar" prefHeight="37.0" prefWidth="151.0" styleClass="boton" text="Buscar">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
@@ -83,12 +83,12 @@
                      <top>
                         <HBox prefHeight="55.0" prefWidth="870.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#actAgregarVariacion" prefHeight="38.0" prefWidth="100.0" text="Agregar">
+                              <Button mnemonicParsing="false" onAction="#actAgregarVariacion" prefHeight="38.0" prefWidth="100.0" styleClass="boton" text="Agregar">
                                  <HBox.margin>
                                     <Insets left="650.0" top="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#actEditarVariacion" prefHeight="38.0" prefWidth="100.0" text="Editar">
+                              <Button mnemonicParsing="false" onAction="#actEditarVariacion" prefHeight="38.0" prefWidth="100.0" styleClass="boton" text="Editar">
                                  <HBox.margin>
                                     <Insets left="10.0" top="10.0" />
                                  </HBox.margin>
@@ -99,12 +99,12 @@
                      <bottom>
                         <HBox prefHeight="52.0" prefWidth="870.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#actVerVariacion" prefHeight="38.0" prefWidth="100.0" text="Ver">
+                              <Button mnemonicParsing="false" onAction="#actVerVariacion" prefHeight="38.0" prefWidth="100.0" styleClass="boton" text="Ver">
                                  <HBox.margin>
                                     <Insets left="15.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#actEliminarVariacion" prefHeight="36.0" prefWidth="100.0" text="Eliminar">
+                              <Button mnemonicParsing="false" onAction="#actEliminarVariacion" prefHeight="36.0" prefWidth="100.0" styleClass="boton" text="Eliminar">
                                  <HBox.margin>
                                     <Insets left="645.0" top="5.0" />
                                  </HBox.margin>
@@ -134,12 +134,12 @@
                      <top>
                         <HBox prefHeight="55.0" prefWidth="870.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#actAgregarRequisito" prefHeight="38.0" prefWidth="100.0" text="Agregar">
+                              <Button mnemonicParsing="false" onAction="#actAgregarRequisito" prefHeight="38.0" prefWidth="100.0" styleClass="boton" text="Agregar">
                                  <HBox.margin>
                                     <Insets left="650.0" top="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#actEditarRequisito" prefHeight="38.0" prefWidth="100.0" text="Editar">
+                              <Button mnemonicParsing="false" onAction="#actEditarRequisito" prefHeight="38.0" prefWidth="100.0" styleClass="boton" text="Editar">
                                  <HBox.margin>
                                     <Insets left="10.0" top="10.0" />
                                  </HBox.margin>

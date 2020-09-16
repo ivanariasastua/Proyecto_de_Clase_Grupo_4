@@ -164,3 +164,14 @@ and open the template in the editor.
     -fx-font: bold 16pt "Courier";
     -fx-text-fill: #1d1d1d;
 }
+
+.boton{
+    -fx-text-fill: white;
+    -fx-font: bold 14.8px "Courier";
+    -fx-background-color:#5dbf84;
+}
+
+.boton:hover{
+    -fx-scale-x: 1.03;
+    -fx-background-color:#84dda9;
+}

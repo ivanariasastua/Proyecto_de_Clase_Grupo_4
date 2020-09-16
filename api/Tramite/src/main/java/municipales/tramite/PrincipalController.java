@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.Principal;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,10 +38,15 @@ public class PrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AuthenticationResponse user = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
-        System.out.println(user.toString());
-    //    lblUser.setText(user.getUsuario().getNombreCompleto());
-        lblUser.requestFocus();
+        try {
+            AuthenticationResponse user = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
+            System.out.println(user.toString());
+            lblUser.setText(user.getUsuario().getNombreCompleto());
+            lblUser.requestFocus();
+            CargarVista("Departamentos");
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void CargarVista(String fxml) throws IOException {
@@ -56,7 +63,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void actCerrarSesion(ActionEvent event) throws IOException {
-        App.goView("LogIn",0,0,false,false);
+        App.goView("LogIn", 900, 600,false,false);
         App.CerrarVentana(event);
     }
 
@@ -85,13 +92,5 @@ public class PrincipalController implements Initializable {
         CargarVista("Usuarios");
     }
     
-    @FXML
-    private void actClientes(ActionEvent event) throws IOException {
-        CargarVista("Clientes");
 
-//    @FXML
-//    private void actClientes(ActionEvent event) {
-//
-//    }
-    }
 }

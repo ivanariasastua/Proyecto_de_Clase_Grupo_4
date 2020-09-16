@@ -34,6 +34,21 @@ public class UsuarioService {
         }
     }
     
+    public Respuesta validarPassword(String userName, String userPassword){
+        try{
+            AuthenticationRequest authetication = new AuthenticationRequest(userName, userPassword);
+            Request request = new Request("usuarios/login");
+            request.post(authetication);
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "Iniciar Sesion: "+request.getMensajeRespuesta());
+            }
+            AuthenticationResponse usuario = (AuthenticationResponse) request.readEntity(AuthenticationResponse.class);
+            return new Respuesta(true, "Usuario", usuario);
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "Iniciar Sesion: Error al comunicarse con el servidor");
+        }
+    }
+    
     public Respuesta getAll(){
         try{
             Request request = new Request("usuarios");

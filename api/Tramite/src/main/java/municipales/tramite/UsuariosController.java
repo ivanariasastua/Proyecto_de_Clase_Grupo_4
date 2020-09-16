@@ -35,6 +35,9 @@ import municipales.tramite.util.Respuesta;
 import municipales.tramite.util.Mensaje;
 import municipales.tramite.util.AppContext;
 import municipales.tramite.dto.PermisoDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
 
 /**
  * FXML Controller class
@@ -67,6 +70,18 @@ public class UsuariosController implements Initializable {
     private List<PermisoOtorgadoDTO> usuario = new ArrayList<>();
     private List<PermisoOtorgadoDTO> eliminados = new ArrayList<>();
     private List<PermisoOtorgadoDTO> agregados = new ArrayList<>();
+    @FXML
+    private TextField txtUser;
+    @FXML
+    private TextField txtCed;
+    @FXML
+    private TextField txtPassAct;
+    @FXML
+    private TextField txtPassCon;
+    @FXML
+    private TextField txtNueva;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     
     
     
@@ -320,6 +335,37 @@ public class UsuariosController implements Initializable {
                 }
                 tvPermisos.refresh();
             }
+        }
+    }
+
+    @FXML
+    private void accionChangePassword(ActionEvent event) {
+        if(select != null && validarPassword()){
+            if(txtPassAct.getText().equals(txtPassCon.getText())){
+                Respuesta res = service.validarPassword(select.getCedula(), txtPassAct.getText());
+                if(res.getEstado()){
+                    String password =  bCryptPasswordEncoder.encode(txtNueva.getText());
+                    System.out.println(password);
+                }else{
+                    mensaje.show(Alert.AlertType.WARNING, "Cambiar contraseña", res.getMensaje());
+                }
+            }
+        }
+    }
+    
+    public Boolean validarPassword(){
+        String error = "";
+        if(txtPassAct.getText() == null || txtPassAct.getText().isEmpty())
+            error = "No ingreso la contraseña actual\n";
+        if(txtPassCon.getText() == null || txtPassCon.getText().isEmpty())
+            error += "No confirmo la contraseña\n";
+        if(txtNueva.getText() == null || txtNueva.getText().isEmpty())
+            error += "No ingreso una nueva contraseña";
+        if(error.isEmpty()){
+            return true;
+        }else{
+            mensaje.show(Alert.AlertType.WARNING, "Cambiar contraseña", error);
+            return false;
         }
     }
     

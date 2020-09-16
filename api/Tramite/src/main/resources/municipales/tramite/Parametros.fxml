@@ -19,15 +19,15 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="746.0" layoutY="139.0" mnemonicParsing="false" onAction="#actBuscar" prefHeight="25.0" prefWidth="97.0" text="Buscar" />
-      <Label layoutX="315.0" layoutY="27.0" text="Información de Parámetros">
+      <Button layoutX="746.0" layoutY="139.0" mnemonicParsing="false" onAction="#actBuscar" prefHeight="31.0" prefWidth="116.0" styleClass="boton" text="Buscar" />
+      <Label layoutX="322.0" layoutY="27.0" text="Información de Parámetros">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <Button layoutX="781.0" layoutY="580.0" mnemonicParsing="false" onAction="#actAgregarParametros" prefHeight="25.0" prefWidth="83.0" text="Agregar" />
+      <Button layoutX="781.0" layoutY="580.0" mnemonicParsing="false" onAction="#actAgregarParametros" prefHeight="25.0" prefWidth="83.0" styleClass="boton" text="Agregar" />
       <TextField fx:id="txtBuscar" layoutX="42.0" layoutY="120.0" prefHeight="25.0" prefWidth="684.0" promptText="Buscar por nombre" />
-      <Button layoutX="692.0" layoutY="580.0" mnemonicParsing="false" onAction="#actModificar" prefHeight="25.0" prefWidth="83.0" text="Modificar" />
-      <Button layoutX="598.0" layoutY="580.0" mnemonicParsing="false" onAction="#actEliminar" prefHeight="25.0" prefWidth="83.0" text="Eliminar" />
+      <Button layoutX="684.0" layoutY="580.0" mnemonicParsing="false" onAction="#actModificar" prefHeight="31.0" prefWidth="90.0" styleClass="boton" text="Modificar" />
+      <Button layoutX="590.0" layoutY="580.0" mnemonicParsing="false" onAction="#actEliminar" prefHeight="25.0" prefWidth="83.0" styleClass="boton" text="Eliminar" />
    </children>
 </AnchorPane>
