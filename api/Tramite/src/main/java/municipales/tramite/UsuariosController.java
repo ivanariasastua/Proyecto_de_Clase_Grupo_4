@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -28,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import municipales.tramite.dto.UsuarioDTO;
 import municipales.tramite.dto.PermisoOtorgadoDTO;
+import municipales.tramite.dto.AuthenticationResponse;
 import municipales.tramite.service.UsuarioService;
 import municipales.tramite.service.PermisosService;
 import municipales.tramite.service.PermisosOtorgadosService;
@@ -35,10 +38,7 @@ import municipales.tramite.util.Respuesta;
 import municipales.tramite.util.Mensaje;
 import municipales.tramite.util.AppContext;
 import municipales.tramite.dto.PermisoDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.validation.BindingResult;
-
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 /**
  * FXML Controller class
  *
@@ -80,8 +80,8 @@ public class UsuariosController implements Initializable {
     private TextField txtPassCon;
     @FXML
     private TextField txtNueva;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final String pregunta = "Ingrese una cedula para buscar usuarios con una cedula similar o igual al ingresado\nDeje el campo de texto en blanco\npara mostrar todos los usuarios\nFinalmente solo pulse el boton 'Buscar'";
+
     
     
     
@@ -103,7 +103,7 @@ public class UsuariosController implements Initializable {
 
     @FXML
     private void actAgregarUsuarios(ActionEvent event) throws IOException {
-        App.goView("UsuariosInfo", 750, 561,true,false);
+        App.goView("UsuariosInfo", 758, 400 ,true,false);
     }
 
     @FXML
@@ -116,6 +116,8 @@ public class UsuariosController implements Initializable {
             select = tvUsuarios.getSelectionModel().getSelectedItem();
             tvPermisos.getItems().clear();
             usuario = select.getPermisos();
+            txtCed.setText(select.getCedula());
+            txtUser.setText(select.getNombreCompleto());
             tvPermisos.getItems().addAll(usuario);
             boolean add;
             for(PermisoDTO cbper : todos){
@@ -164,7 +166,7 @@ public class UsuariosController implements Initializable {
     private void accionModificar(ActionEvent event) throws IOException {
         if(select != null){
             AppContext.getInstance().set("usuSelect", select);
-            App.goView("UsuariosInfo", 750, 561,true,false);
+            App.goView("UsuariosInfo", 758, 400 ,true,false);
             AppContext.getInstance().set("usuSelect", null);
         }
     }
@@ -229,6 +231,7 @@ public class UsuariosController implements Initializable {
 
     @FXML
     private void accionPregunta(ActionEvent event) {
+        mensaje.show(Alert.AlertType.INFORMATION, "Busqueda", pregunta);
     }
 
     @FXML
@@ -344,8 +347,15 @@ public class UsuariosController implements Initializable {
             if(txtPassAct.getText().equals(txtPassCon.getText())){
                 Respuesta res = service.validarPassword(select.getCedula(), txtPassAct.getText());
                 if(res.getEstado()){
-                    String password =  bCryptPasswordEncoder.encode(txtNueva.getText());
-                    System.out.println(password);
+                    res = service.modificarUsuario(select.getId(), txtNueva.getText(), 1, select);
+                    if(res.getEstado()){
+                        mensaje.show(Alert.AlertType.INFORMATION, "Cambiar contraseña", "Cambiar contrasena: cambio exitoso");
+                        txtPassAct.clear();
+                        txtPassCon.clear();
+                        txtNueva.clear();
+                    }else{
+                        mensaje.show(Alert.AlertType.WARNING, "Cambiar contraseña", res.getMensaje());
+                    }
                 }else{
                     mensaje.show(Alert.AlertType.WARNING, "Cambiar contraseña", res.getMensaje());
                 }

@@ -109,7 +109,7 @@
                                           <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="txtUser" editable="false" prefHeight="40.0" prefWidth="192.0">
+                                    <TextField fx:id="txtUser" editable="false" prefHeight="46.0" prefWidth="355.0">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                                        </HBox.margin>
