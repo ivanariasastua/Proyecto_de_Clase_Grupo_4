@@ -188,22 +188,22 @@
                      <center>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField alignment="CENTER">
+                              <TextField fx:id="txtPassAct" alignment="CENTER" promptText="Contraseña actual">
                                  <VBox.margin>
                                     <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                              <TextField fx:id="txtPassCon" alignment="CENTER" layoutX="10.0" layoutY="10.0" promptText="Cofirmela">
                                  <VBox.margin>
                                     <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField alignment="CENTER" layoutX="10.0" layoutY="56.0">
+                              <TextField fx:id="txtNueva" alignment="CENTER" layoutX="10.0" layoutY="56.0" promptText="Nueva contraseña">
                                  <VBox.margin>
                                     <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
                                  </VBox.margin>
                               </TextField>
-                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="235.0" styleClass="btnAdd" text="Guardar">
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#accionChangePassword" prefHeight="50.0" prefWidth="235.0" styleClass="btnAdd" text="Guardar">
                                  <VBox.margin>
                                     <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
                                  </VBox.margin>
