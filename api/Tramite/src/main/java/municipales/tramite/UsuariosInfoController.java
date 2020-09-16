@@ -88,7 +88,7 @@ public class UsuariosInfoController implements Initializable {
             if(uso){
                 res = service.guardarUsuario(new UsuarioDTO(
                         Long.valueOf("0"), 
-                        txtNombre.getText(), 
+                        txtNombre.getText(),
                         txtCedula.getText(), 
                         true, 
                         new Date(), 
