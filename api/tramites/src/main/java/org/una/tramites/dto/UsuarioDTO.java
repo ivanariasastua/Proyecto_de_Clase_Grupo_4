@@ -16,6 +16,7 @@ public class UsuarioDTO {
     private Long id; 
     private String nombreCompleto; 
     private String cedula; 
+    private String passwordEncriptado;
     private boolean estado; 
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro; 

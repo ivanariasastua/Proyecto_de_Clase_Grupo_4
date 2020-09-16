@@ -256,7 +256,7 @@ public class TramitesController implements Initializable {
     void actAgregarVariacion(ActionEvent event) throws IOException {
         bpPrincipal.setMouseTransparent(true);
         AppContext.getInstance().set("Variacion", null);
-        App.goView("TramitesVariaciones", 750, 570, true, false);
+        App.goView("TramitesVariaciones", 750, 600, true, false);
         bpPrincipal.setMouseTransparent(false);
         if((Boolean)AppContext.getInstance().get("OperacionExitosa")){
             tvVariaciones.getItems().add((VariacionesDTO)AppContext.getInstance().get("Variacion"));

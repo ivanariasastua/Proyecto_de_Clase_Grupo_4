@@ -27,7 +27,7 @@ public class VariacionesDTO {
     
     
     private Long id;
-    private int grupo;
+    private Integer grupo;
     private String descripcion;
     private boolean estado;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")

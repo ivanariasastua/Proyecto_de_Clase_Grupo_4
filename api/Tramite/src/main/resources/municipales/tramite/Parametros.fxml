@@ -26,8 +26,8 @@
          </font>
       </Label>
       <Button layoutX="781.0" layoutY="580.0" mnemonicParsing="false" onAction="#actAgregarParametros" prefHeight="25.0" prefWidth="83.0" text="Agregar" />
-      <TextField fx:id="txtBuscar" layoutX="42.0" layoutY="120.0" prefHeight="25.0" prefWidth="684.0" promptText="Buscar" />
+      <TextField fx:id="txtBuscar" layoutX="42.0" layoutY="120.0" prefHeight="25.0" prefWidth="684.0" promptText="Buscar por nombre" />
       <Button layoutX="692.0" layoutY="580.0" mnemonicParsing="false" onAction="#actModificar" prefHeight="25.0" prefWidth="83.0" text="Modificar" />
-      <Button layoutX="598.0" layoutY="580.0" mnemonicParsing="false" onAction="#actEliminar" prefHeight="25.0" prefWidth="83.0" text="Modificar" />
+      <Button layoutX="598.0" layoutY="580.0" mnemonicParsing="false" onAction="#actEliminar" prefHeight="25.0" prefWidth="83.0" text="Eliminar" />
    </children>
 </AnchorPane>

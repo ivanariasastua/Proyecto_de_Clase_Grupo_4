@@ -75,7 +75,7 @@ public class VariacionesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/save")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Variaciones variacion) {
+    public ResponseEntity<?> create(@RequestBody VariacionesDTO variacion) {
         try {
             Variaciones varCreated = MapperUtils.EntityFromDto(variacion,Variaciones.class);
             varCreated= varService.create(varCreated);
