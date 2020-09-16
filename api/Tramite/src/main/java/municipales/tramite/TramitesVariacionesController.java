@@ -135,7 +135,7 @@ public class TramitesVariacionesController implements Initializable {
             variacion.setFechaRegistro(new Date());
             variacion.setEstado(cbEstado.getSelectionModel().getSelectedItem() == "Activo");
             variacion.setRequisitos(null);
-            variacion.setTramites(tramiteTipo);
+//            variacion.setTramites(tramiteTipo);
             respuesta = variacionService.modificarVariacion(variacion.getId(), variacion);
             if(respuesta.getEstado()){
                 mensaje.show(Alert.AlertType.INFORMATION, "Éxito", "La variación se editó con éxito.");
@@ -152,9 +152,8 @@ public class TramitesVariacionesController implements Initializable {
             variacion.setFechaRegistro(new Date());
             variacion.setEstado("Activo".equals(cbEstado.getSelectionModel().getSelectedItem()));
             variacion.setRequisitos(null);
-            variacion.setTramites(tramiteTipo);
             System.out.println(tramiteTipo.getId());
-            respuesta = variacionService.guardarVariacion(variacion);
+            respuesta = variacionService.guardarVariacion(variacion,tramiteTipo.getId());
             if(respuesta.getEstado()){
                 mensaje.show(Alert.AlertType.INFORMATION, "Éxito", "La variación se agregó con éxito.");
                 agregarRequisitos(respuesta);
@@ -169,11 +168,14 @@ public class TramitesVariacionesController implements Initializable {
     
     public void agregarRequisitos(Respuesta resultado){
         for(RequisitosDTO reqAgregar : lvRequisitos.getItems()){
-            if(reqAgregar.getId() > 0){
+            if(reqAgregar.getId() < 0){
                 reqAgregar.setEstado(true);
                 reqAgregar.setFechaRegistro(new Date());
-                reqAgregar.setVariaciones((VariacionesDTO) respuesta.getResultado("Variaciones"));
-                requisitoService.guardarRequisito(reqAgregar);
+//                reqAgregar.setVariaciones((VariacionesDTO) respuesta.getResultado("Variaciones"));
+                VariacionesDTO aux = (VariacionesDTO) respuesta.getResultado("Variaciones");
+                Respuesta res = requisitoService.guardarRequisito(reqAgregar,aux.getId());
+                if(!res.getEstado())
+                    System.out.println(res.getMensajeInterno());
             }
         }
     }
@@ -225,7 +227,7 @@ public class TramitesVariacionesController implements Initializable {
             requisito = new RequisitosDTO();
         if(txtDescripcionRequisito.getText() != null && !txtDescripcionRequisito.getText().isEmpty()){
             requisito.setDescripcion(txtDescripcionRequisito.getText());
-            requisito.setVariaciones(variacion);
+//            requisito.setVariaciones(variacion);
             requisito.setId(num);
             listaRequisitos.add(requisito);
             lvRequisitos.getItems().clear();

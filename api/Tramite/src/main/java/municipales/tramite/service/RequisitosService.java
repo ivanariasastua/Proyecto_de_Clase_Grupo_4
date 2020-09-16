@@ -53,9 +53,11 @@ public class RequisitosService {
         }
     }
 
-    public Respuesta guardarRequisito(RequisitosDTO requisito) {
+    public Respuesta guardarRequisito(RequisitosDTO requisito, Long id) {
         try {
-            Request request = new Request("requisitos/save");
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("id", id);
+            Request request = new Request("requisitos/save","/{id}",parametros);
             request.post(requisito);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo guardar el requisito");

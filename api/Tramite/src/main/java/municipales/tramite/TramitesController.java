@@ -163,9 +163,9 @@ public class TramitesController implements Initializable {
     }
     
     public void iniciarTablaVariaciones(){
-        tcIdVariaciones.setCellFactory(new PropertyValueFactory("id"));
-        tcDescripcion.setCellFactory(new PropertyValueFactory("descripcion"));
-        tcVariacionesGrupo.setCellFactory(new PropertyValueFactory("grupo"));
+        tcIdVariaciones.setCellValueFactory(new PropertyValueFactory("id"));
+        tcDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        tcVariacionesGrupo.setCellValueFactory(new PropertyValueFactory("grupo"));
         tcEstadoVariaciones.setCellValueFactory(per -> {
             String estadoString;
             if(per.getValue().isEstado())
@@ -177,8 +177,8 @@ public class TramitesController implements Initializable {
     }
     
     public void iniciarTablaRequisitos(){
-        tcIdRequisitos.setCellFactory(new PropertyValueFactory("id"));
-        tcRequisitosDescripcion.setCellFactory(new PropertyValueFactory("descripcion"));
+        tcIdRequisitos.setCellValueFactory(new PropertyValueFactory("id"));
+        tcRequisitosDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         tcRequisitosEstados.setCellValueFactory(per -> {
             String estadoString;
             if(per.getValue().isEstado())
@@ -264,7 +264,7 @@ public class TramitesController implements Initializable {
     void actEditarVariacion(ActionEvent event) throws IOException {
         bpPrincipal.setMouseTransparent(true);
         AppContext.getInstance().set("Variacion", variacionSeleccionado);
-        App.goView("TramitesVariaciones", 750, 570, true, false);
+        App.goView("TramitesVariaciones", 750, 600, true, false);
         bpPrincipal.setMouseTransparent(false);
     }
     

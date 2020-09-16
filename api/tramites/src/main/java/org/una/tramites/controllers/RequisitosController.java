@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.RequisitosDTO;
 import org.una.tramites.entities.Requisitos;
 import org.una.tramites.services.IRequisitosService;
+import org.una.tramites.services.IVariacionesService;
 import org.una.tramites.utils.MapperUtils;
 
 /**
@@ -38,6 +39,9 @@ public class RequisitosController {
 
     @Autowired
     private IRequisitosService reqService;
+    
+    @Autowired
+    private IVariacionesService varService;
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Requisitos", response = RequisitosDTO.class, responseContainer = "List", tags = "Requisitos")
@@ -73,11 +77,12 @@ public class RequisitosController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/save")
+    @PostMapping("/save/{id}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody RequisitosDTO requisito) {
+    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody RequisitosDTO requisito) {
         try {
             Requisitos varCreated = MapperUtils.EntityFromDto(requisito, Requisitos.class);
+            varCreated.setVariaciones(varService.findById(id).get());
             varCreated = reqService.create(varCreated);
             RequisitosDTO varDto = MapperUtils.DtoFromEntity(varCreated, RequisitosDTO.class);
             return new ResponseEntity<>(varDto, HttpStatus.CREATED);
