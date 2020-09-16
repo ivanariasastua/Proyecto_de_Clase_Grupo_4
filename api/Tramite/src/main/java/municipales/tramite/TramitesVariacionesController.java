@@ -153,6 +153,7 @@ public class TramitesVariacionesController implements Initializable {
             variacion.setEstado("Activo".equals(cbEstado.getSelectionModel().getSelectedItem()));
             variacion.setRequisitos(lvRequisitos.getItems());
             variacion.setTramites(tramiteTipo);
+            System.out.println(tramiteTipo.getId());
             respuesta = variacionService.guardarVariacion(variacion);
             if(respuesta.getEstado()){
                 mensaje.show(Alert.AlertType.INFORMATION, "Éxito", "La variación se agregó con éxito.");

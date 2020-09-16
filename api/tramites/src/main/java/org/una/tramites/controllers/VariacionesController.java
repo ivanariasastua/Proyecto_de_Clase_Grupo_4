@@ -76,14 +76,14 @@ public class VariacionesController {
     @PostMapping("/save")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody VariacionesDTO variacion) {
-        try {
+//        try {
             Variaciones varCreated = MapperUtils.EntityFromDto(variacion,Variaciones.class);
             varCreated= varService.create(varCreated);
             VariacionesDTO varDto = MapperUtils.DtoFromEntity(varCreated, VariacionesDTO.class);
             return new ResponseEntity<>(varDto, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
     }
 
     @PutMapping("/{id}")
