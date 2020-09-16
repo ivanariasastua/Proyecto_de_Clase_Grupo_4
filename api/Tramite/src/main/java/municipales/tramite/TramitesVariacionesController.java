@@ -129,13 +129,13 @@ public class TramitesVariacionesController implements Initializable {
     }
     
     public void asignarValores(){
-        variacion.setDescripcion(txtDescripcion.getText());
-        variacion.setGrupo(Integer.parseInt(txtGrupo.getText()));
-        variacion.setFechaRegistro(new Date());
-        variacion.setEstado(cbEstado.getSelectionModel().getSelectedItem() == "Activo");
-        variacion.setRequisitos(lvRequisitos.getItems());
-        variacion.setTramites(tramiteTipo);
         if(variacion != null){
+            variacion.setDescripcion(txtDescripcion.getText());
+            variacion.setGrupo(Integer.parseInt(txtGrupo.getText()));
+            variacion.setFechaRegistro(new Date());
+            variacion.setEstado(cbEstado.getSelectionModel().getSelectedItem() == "Activo");
+            variacion.setRequisitos(lvRequisitos.getItems());
+            variacion.setTramites(tramiteTipo);
             respuesta = variacionService.modificarVariacion(variacion.getId(), variacion);
             if(respuesta.getEstado()){
                 mensaje.show(Alert.AlertType.INFORMATION, "Éxito", "La variación se editó con éxito.");
@@ -146,6 +146,13 @@ public class TramitesVariacionesController implements Initializable {
                 mensaje.show(Alert.AlertType.ERROR, "Error", "La variación no se pudo editar.");
             }
         }else{
+            variacion = new VariacionesDTO();
+            variacion.setDescripcion(txtDescripcion.getText());
+            variacion.setGrupo(Integer.parseInt(txtGrupo.getText()));
+            variacion.setFechaRegistro(new Date());
+            variacion.setEstado("Activo".equals(cbEstado.getSelectionModel().getSelectedItem()));
+            variacion.setRequisitos(lvRequisitos.getItems());
+            variacion.setTramites(tramiteTipo);
             respuesta = variacionService.guardarVariacion(variacion);
             if(respuesta.getEstado()){
                 mensaje.show(Alert.AlertType.INFORMATION, "Éxito", "La variación se agregó con éxito.");
@@ -153,7 +160,8 @@ public class TramitesVariacionesController implements Initializable {
                 AppContext.getInstance().set("OperacionExitosa", true);
                 AppContext.getInstance().set("Variacion", variacion);
             }else{
-                mensaje.show(Alert.AlertType.ERROR, "Error", "La variación no se pudo agregar.");
+                System.out.println(respuesta.getMensajeInterno());
+                mensaje.show(Alert.AlertType.ERROR, "Error", respuesta.getMensaje());
             }
         }
     }
@@ -174,10 +182,10 @@ public class TramitesVariacionesController implements Initializable {
         mensaje = new Mensaje();
         boolean infoCompleta = true;
         String faltante = "Dato(s) faltante(s):\n";
-        if(txtGrupo.getText() != null && !txtDescripcion.getText().isEmpty()){
+        if(txtGrupo.getText() != null && !txtGrupo.getText().isEmpty()){
             if(txtDescripcion.getText() != null && !txtDescripcion.getText().isEmpty()){
                 if(cbEstado.getSelectionModel().getSelectedItem() != null || variacion == null){
-                    if(!lvRequisitos.getSelectionModel().getSelectedItems().isEmpty()){
+                    if(!lvRequisitos.getItems().isEmpty()){
                         if(infoCompleta){
                             asignarValores();
                         }else{
@@ -187,18 +195,26 @@ public class TramitesVariacionesController implements Initializable {
                     }else{
                         faltante += "Requisitos.\n";
                         infoCompleta = false;
+                        faltante += "Por favor, rellenar todos los campos necesarios.";
+                        mensaje.show(Alert.AlertType.ERROR,"Falta de información", faltante);
                     }
                 }else{
                     faltante += "Estado.\n";
                     infoCompleta = false;
+                    faltante += "Por favor, rellenar todos los campos necesarios.";
+                    mensaje.show(Alert.AlertType.ERROR,"Falta de información", faltante);
                 }
             }else{
                 faltante += "Descripción.\n";
                 infoCompleta = false;
+                faltante += "Por favor, rellenar todos los campos necesarios.";
+                mensaje.show(Alert.AlertType.ERROR,"Falta de información", faltante);
             }
         }else{
             faltante += "Grupo de exclusión.\n";
             infoCompleta = false;
+            faltante += "Por favor, rellenar todos los campos necesarios.";
+            mensaje.show(Alert.AlertType.ERROR,"Falta de información", faltante);
         }
     }
     
@@ -225,11 +241,11 @@ public class TramitesVariacionesController implements Initializable {
             for(RequisitosDTO reqBorrar : requisitosBorrar){
                 if(reqBorrar.getId() > 0){
                     requisitoService.deleteRequisito(reqBorrar.getId());
-                    lvRequisitos.getItems().remove(reqBorrar);
-                }else{
-                    lvRequisitos.getItems().remove(reqBorrar);
                 }
             }
+            listaRequisitos.removeAll(requisitosBorrar);
+            lvRequisitos.getItems().clear();
+            lvRequisitos.getItems().addAll(listaRequisitos);
         }
     }
     

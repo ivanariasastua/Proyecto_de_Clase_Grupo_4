@@ -5,6 +5,7 @@ municipales\tramite\service\RequisitosService$1.class
 municipales\tramite\DepartamentosController.class
 municipales\tramite\util\Request.class
 municipales\tramite\dto\TransaccionDTO.class
+municipales\tramite\service\ParametrodGeneralesService.class
 municipales\tramite\service\TramiteEstadoService.class
 municipales\tramite\dto\ArchivoRelacionadoDTO.class
 municipales\tramite\service\TramiteRegistradoService$2.class
@@ -57,6 +58,7 @@ municipales\tramite\service\TramiteEstadoService$1.class
 municipales\tramite\util\Formato.class
 municipales\tramite\Controller.class
 municipales\tramite\service\DepartamentoService$2.class
+municipales\tramite\service\ParametrodGeneralesService$1.class
 municipales\tramite\service\ClienteService.class
 municipales\tramite\ClientesController.class
 municipales\tramite\service\TramiteTipoService.class
@@ -69,6 +71,7 @@ municipales\tramite\dto\PermisoDTO.class
 municipales\tramite\service\TramiteRegistradoService.class
 municipales\tramite\PermisosInfoController.class
 municipales\tramite\VariacionesInfoController.class
+municipales\tramite\service\ParametrodGeneralesService$2.class
 municipales\tramite\service\UsuarioService$3.class
 municipales\tramite\util\FlowController.class
 municipales\tramite\dto\DepartamentoDTO.class

@@ -75,7 +75,7 @@ public class RequisitosController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/save")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Requisitos requisito) {
+    public ResponseEntity<?> create(@RequestBody RequisitosDTO requisito) {
         try {
             Requisitos varCreated = MapperUtils.EntityFromDto(requisito, Requisitos.class);
             varCreated = reqService.create(varCreated);
