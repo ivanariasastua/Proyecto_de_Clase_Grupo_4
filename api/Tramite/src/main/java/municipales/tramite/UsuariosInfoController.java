@@ -86,6 +86,7 @@ public class UsuariosInfoController implements Initializable {
         if(validarCampos()){
             Respuesta res; 
             if(uso){
+                String key = clave();
                 res = service.guardarUsuario(new UsuarioDTO(
                         Long.valueOf("0"), 
                         txtNombre.getText(),
@@ -95,9 +96,9 @@ public class UsuariosInfoController implements Initializable {
                         new Date(), 
                         cbDepartamento.getSelectionModel().getSelectedItem(), 
                         null, 
-                        cbEsJefe.getSelectionModel().getSelectedItem().equals("Sí")));
+                        cbEsJefe.getSelectionModel().getSelectedItem().equals("Sí")), key);
                 if(res.getEstado()){
-                    alert.show(Alert.AlertType.INFORMATION, "Guardar Usuario", "Guardar Usuario: usuario guardado");
+                    alert.show(Alert.AlertType.INFORMATION, "Guardar Usuario", "Guardar Usuario: usuario guardado\n"+key+": Su contraseña");
                 }else{
                     alert.show(Alert.AlertType.ERROR, "Guardar Usuario", res.getMensaje());
                 }
@@ -117,6 +118,7 @@ public class UsuariosInfoController implements Initializable {
             }
         }
     }
+    
 
     @FXML
     private void actCancelar(ActionEvent event) {
@@ -137,5 +139,15 @@ public class UsuariosInfoController implements Initializable {
             alert.show(Alert.AlertType.WARNING, "Guardar Usario", mensaje);
             return false;
         }
-    } 
+    }
+    
+    public String clave(){
+        String password = "";
+        int number = 0;
+        for(int i = 0; i < 6; i++){
+            number = (int)(Math.random()*10);
+            password += number;
+        }
+        return password;
+    }
 }
