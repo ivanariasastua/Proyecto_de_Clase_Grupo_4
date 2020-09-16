@@ -154,15 +154,15 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("update/{id}/{value}")
+    @PutMapping("update/{id}/{value}/{enc}")
     @ResponseBody
     @ApiOperation(value = "Modifica un usuario existente", response = UsuarioDTO.class, tags = "Usuarios")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuarioModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "value") String value, @PathVariable(value = "enc") Integer enc, @RequestBody UsuarioDTO usuarioModified) {
         try {
             Usuario user = MapperUtils.EntityFromDto(usuarioModified, Usuario.class);
             if(!value.equals("nada"))
                 user.setPasswordEncriptado(value);
-            Optional<Usuario> user2 = usuarioService.update(user, id);
+            Optional<Usuario> user2 = usuarioService.update(user, id, enc);
             if (user2.isPresent()) {
                 UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user2.get(), UsuarioDTO.class);
                 return new ResponseEntity<>(usuarioDto, HttpStatus.OK);

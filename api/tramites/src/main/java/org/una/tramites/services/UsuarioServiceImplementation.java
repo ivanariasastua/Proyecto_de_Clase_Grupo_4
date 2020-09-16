@@ -75,8 +75,10 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
 
     @Override
     @Transactional
-    public Optional<Usuario> update(Usuario usuario, Long id) {
+    public Optional<Usuario> update(Usuario usuario, Long id, Integer enc) {
         if (usuarioRepository.findById(id).isPresent()) {
+            if(enc == 1)
+                encriptarPassword(usuario);
             return Optional.ofNullable(usuarioRepository.save(usuario));
         } else {
             return null;

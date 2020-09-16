@@ -27,7 +27,7 @@ public interface IUsuarioService {
 
     public Usuario create(Usuario usuario);
 
-    public Optional<Usuario> update(Usuario usuario, Long id);
+    public Optional<Usuario> update(Usuario usuario, Long id, Integer enc);
 
     public void delete(Long id);
 
