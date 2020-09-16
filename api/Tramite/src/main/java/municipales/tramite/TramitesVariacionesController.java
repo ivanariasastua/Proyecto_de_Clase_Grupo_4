@@ -93,15 +93,17 @@ public class TramitesVariacionesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        mensaje = new Mensaje();
         listaRequisitos = new ArrayList();
         variacionService = new VariacionesService();
         requisitoService = new RequisitosService();
         variacion = (VariacionesDTO) AppContext.getInstance().get("Variacion");
         tramiteTipo = (TramitesTiposDTO) AppContext.getInstance().get("Tipo_Tramite");
+        requisito = new RequisitosDTO();
         List<String> estados = new ArrayList();
         estados.add("Activo");
         estados.add("Inactivo");
-        cbEstado.setItems((ObservableList<String>) estados);
+        cbEstado.getItems().addAll(estados);
         lvRequisitos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         AppContext.getInstance().set("OperacionExitosa", false);
         modalidad();
@@ -114,7 +116,7 @@ public class TramitesVariacionesController implements Initializable {
             lbfechaCreacion.setText(variacion.getFechaRegistro().toString());
             cbEstado.getSelectionModel().select(variacion.isEstado()?"Activo":"Inactivo");
             listaRequisitos = variacion.getRequisitos();
-            lvRequisitos.setItems((ObservableList<RequisitosDTO>) listaRequisitos);
+            lvRequisitos.getItems().addAll(listaRequisitos);
             lbTitulo.setText("Editar");
             btnAccion.setText("Editar");
         }else{
@@ -122,7 +124,7 @@ public class TramitesVariacionesController implements Initializable {
             lbfechaTitulo.setText(" ");
             lbTitulo.setText("Agregar");
             btnAccion.setText("Agregar");
-            lvRequisitos.setItems((ObservableList) listaRequisitos);
+            lvRequisitos.getItems().addAll(listaRequisitos);
         }
     }
     
@@ -203,13 +205,14 @@ public class TramitesVariacionesController implements Initializable {
     @FXML
     private void actAnadirRequisito(ActionEvent event){
         long num = -1;
+            requisito = new RequisitosDTO();
         if(txtDescripcionRequisito.getText() != null && !txtDescripcionRequisito.getText().isEmpty()){
             requisito.setDescripcion(txtDescripcionRequisito.getText());
             requisito.setVariaciones(variacion);
             requisito.setId(num);
             listaRequisitos.add(requisito);
             lvRequisitos.getItems().clear();
-            lvRequisitos.setItems((ObservableList<RequisitosDTO>) listaRequisitos);
+            lvRequisitos.getItems().addAll(listaRequisitos);
         }else{
             mensaje.show(Alert.AlertType.WARNING,"Dato Faltante","Por favor, dígitar una descripción para agregar el requerimiento.");
         }
