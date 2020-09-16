@@ -80,6 +80,9 @@ public class TramitesVariacionesController implements Initializable {
     private Label lbfechaTitulo;
     
     @FXML
+    private Label lbEstadoTitulo;
+    
+    @FXML
     private Button btnAccion;
     
     VariacionesDTO variacion;
@@ -122,6 +125,7 @@ public class TramitesVariacionesController implements Initializable {
         }else{
             cbEstado.setVisible(false);
             lbfechaTitulo.setText(" ");
+            lbEstadoTitulo.setText(" ");
             lbTitulo.setText("Agregar");
             btnAccion.setText("Agregar");
             lvRequisitos.getItems().addAll(listaRequisitos);

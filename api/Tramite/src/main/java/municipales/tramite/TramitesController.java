@@ -241,9 +241,6 @@ public class TramitesController implements Initializable {
         AppContext.getInstance().set("Variacion", null);
         App.goView("TramitesVariaciones", 750, 600, true, false);
         bpPrincipal.setMouseTransparent(false);
-        if((Boolean)AppContext.getInstance().get("OperacionExitosa")){
-            tvVariaciones.getItems().add((VariacionesDTO)AppContext.getInstance().get("Variacion"));
-        }
     }
     
     @FXML
@@ -252,9 +249,6 @@ public class TramitesController implements Initializable {
         AppContext.getInstance().set("Variacion", variacionSeleccionado);
         App.goView("TramitesVariaciones", 750, 600, true, false);
         bpPrincipal.setMouseTransparent(false);
-        tvRequisitos.getItems().clear();
-        tvRequisitos.setItems((ObservableList) variacionSeleccionado.getRequisitos());
-        variacionSeleccionado = (VariacionesDTO) AppContext.getInstance().get("Variacion");
     }
     
     @FXML
