@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -174,7 +173,45 @@
             </Tab>
             <Tab text="Contraseña">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <HBox prefHeight="68.0" prefWidth="905.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="54.0" prefWidth="920.0" text="Cambio de contraseña">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </top>
+                     <center>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField alignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField alignment="CENTER" layoutX="10.0" layoutY="56.0">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="235.0" styleClass="btnAdd" text="Guardar">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" left="60.0" right="60.0" top="15.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
               </content>
             </Tab>
          </tabs>

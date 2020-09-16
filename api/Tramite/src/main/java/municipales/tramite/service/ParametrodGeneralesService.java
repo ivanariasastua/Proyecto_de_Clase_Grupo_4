@@ -24,7 +24,7 @@ public class ParametrodGeneralesService {
     public Respuesta getAll() {
         try {
             AuthenticationResponse usuario = (AuthenticationResponse) AppContext.getInstance().get("UsuarioAutenticado");
-            Request request = new Request("parametros_generales/get");
+            Request request = new Request("parametros_generales/get",usuario);
             request.get();
             if (request.isError()) {
                 System.out.println("error");
