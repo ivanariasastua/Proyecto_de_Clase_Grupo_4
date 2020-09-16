@@ -10,33 +10,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="585.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.ParametrosInfoController">
+<AnchorPane id="AnchorPane" prefHeight="585.0" prefWidth="750.0" stylesheets="@Secundarias.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.ParametrosInfoController">
    <children>
       <ImageView fitHeight="585.0" fitWidth="757.0" layoutX="-7.0" opacity="0.46" pickOnBounds="true">
          <image>
             <Image url="@fondo.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="203.0" layoutY="23.0" prefHeight="39.0" prefWidth="385.0" text="Información de Parámetros" textFill="#175e39">
+      <Label layoutX="239.0" layoutY="23.0" prefHeight="39.0" prefWidth="385.0" text="Información de Parámetros" textFill="#175e39">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label layoutX="108.0" layoutY="151.0" text="Nombre" textFill="#175e39">
+      <Label layoutX="108.0" layoutY="148.0" text="Nombre" textFill="#175e39">
          <font>
             <Font size="14.0" />
          </font></Label>
       <TextField fx:id="txtNombre" layoutX="239.0" layoutY="132.0" prefHeight="25.0" prefWidth="346.0" styleClass="text-field" stylesheets="@Secundarias.css" />
-      <Button layoutX="617.0" layoutY="545.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="27.0" prefWidth="108.0" text="Guardar" />
+      <Button layoutX="617.0" layoutY="542.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="27.0" prefWidth="108.0" styleClass="boton" text="Guardar" />
       <TextField fx:id="txtValor" layoutX="239.0" layoutY="207.0" prefHeight="25.0" prefWidth="346.0" stylesheets="@Secundarias.css" />
       <ComboBox fx:id="cbxEstado" layoutX="239.0" layoutY="284.0" prefHeight="25.0" prefWidth="346.0" styleClass="text-field" stylesheets="@Secundarias.css" />
       <TextArea fx:id="txtDescripcion" layoutX="242.0" layoutY="390.0" prefHeight="88.0" prefWidth="346.0" styleClass="text-field" stylesheets="@Secundarias.css" />
-      <Button layoutX="20.0" layoutY="545.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="27.0" prefWidth="108.0" text="Cancelar" />
-      <Label layoutX="108.0" layoutY="230.0" text="Valor" textFill="#175e39">
+      <Button layoutX="20.0" layoutY="542.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="27.0" prefWidth="108.0" styleClass="boton" text="Cancelar" />
+      <Label layoutX="108.0" layoutY="220.0" text="Valor" textFill="#175e39">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="108.0" layoutY="308.0" text="Estado" textFill="#175e39">
+      <Label layoutX="108.0" layoutY="301.0" text="Estado" textFill="#175e39">
          <font>
             <Font size="14.0" />
          </font></Label>

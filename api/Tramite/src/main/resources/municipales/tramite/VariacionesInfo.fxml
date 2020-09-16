@@ -5,28 +5,34 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="519.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="municipales.tramite.VariacionesInfoController">
+<AnchorPane id="AnchorPane" prefHeight="519.0" prefWidth="750.0" stylesheets="@Secundarias.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="municipales.tramite.VariacionesInfoController">
    <children>
-      <ComboBox layoutX="289.0" layoutY="108.0" prefHeight="25.0" prefWidth="295.0" />
-      <Button layoutX="627.0" layoutY="479.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="25.0" prefWidth="102.0" text="Guardar" />
-      <Label layoutX="253.0" layoutY="24.0" text="Información de Variaciones">
+      <ImageView fitHeight="519.0" fitWidth="753.0" opacity="0.49" pickOnBounds="true">
+         <image>
+            <Image url="@fondo.jpg" />
+         </image>
+      </ImageView>
+      <ComboBox layoutX="312.0" layoutY="97.0" prefHeight="25.0" prefWidth="295.0" styleClass="text-field" />
+      <Button layoutX="627.0" layoutY="479.0" mnemonicParsing="false" onAction="#actGuardar" prefHeight="25.0" prefWidth="102.0" styleClass="boton" text="Guardar" />
+      <Label layoutX="253.0" layoutY="21.0" text="Información de Variaciones">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextArea layoutX="291.0" layoutY="372.0" prefHeight="77.0" prefWidth="295.0" />
-      <ComboBox layoutX="291.0" layoutY="170.0" prefHeight="25.0" prefWidth="295.0" />
-      <DatePicker layoutX="291.0" layoutY="236.0" prefHeight="25.0" prefWidth="295.0" />
-      <ComboBox layoutX="291.0" layoutY="305.0" prefHeight="25.0" prefWidth="295.0" />
-      <Label layoutX="143.0" layoutY="174.0" text="Estado" />
-      <Label layoutX="143.0" layoutY="112.0" text="Grupo de Exclusión" />
-      <Label layoutX="143.0" layoutY="240.0" text="Fecha de Registro" />
-      <Label layoutX="143.0" layoutY="309.0" text="Tipo de Trámite" />
-      <Label layoutX="143.0" layoutY="380.0" text="Descripción" />
-      <Button layoutX="17.0" layoutY="479.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="25.0" prefWidth="102.0" text="Cancelar" />
+      <TextArea layoutX="314.0" layoutY="385.0" prefHeight="77.0" prefWidth="295.0" styleClass="text-field" />
+      <ComboBox layoutX="314.0" layoutY="164.0" prefHeight="25.0" prefWidth="295.0" styleClass="text-field" />
+      <DatePicker layoutX="314.0" layoutY="228.0" prefHeight="25.0" prefWidth="295.0" styleClass="text-field" />
+      <ComboBox layoutX="314.0" layoutY="299.0" prefHeight="25.0" prefWidth="295.0" styleClass="text-field" />
+      <Label layoutX="102.0" layoutY="180.0" text="Estado" />
+      <Label layoutX="102.0" layoutY="114.0" text="Grupo de Exclusión" />
+      <Label layoutX="103.0" layoutY="245.0" text="Fecha de Registro" />
+      <Label layoutX="100.0" layoutY="315.0" text="Tipo de Trámite" />
+      <Label layoutX="102.0" layoutY="380.0" text="Descripción" />
+      <Button layoutX="17.0" layoutY="479.0" mnemonicParsing="false" onAction="#actCancelar" prefHeight="25.0" prefWidth="102.0" styleClass="boton" text="Cancelar" />
    </children>
 </AnchorPane>
