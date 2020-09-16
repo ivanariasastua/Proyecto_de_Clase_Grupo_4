@@ -61,7 +61,7 @@
             </HBox>
             <HBox prefHeight="54.0" prefWidth="750.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="65.0" text="Estado">
+                  <Label fx:id="lbEstadoTitulo" prefHeight="27.0" prefWidth="65.0" text="Estado">
                      <HBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
@@ -76,9 +76,18 @@
                   </ComboBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="750.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="219.0" text="Descripción del Requisito">
+                  <Label text="Añadir Requerimientos">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="750.0">
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="112.0" text="Requisito">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -86,7 +95,7 @@
                         <Insets bottom="5.0" left="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtDescripcionRequisito" prefHeight="31.0" prefWidth="508.0" />
+                  <TextField fx:id="txtDescripcionRequisito" prefHeight="31.0" prefWidth="616.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="750.0">
