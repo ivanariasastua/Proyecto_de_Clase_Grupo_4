@@ -44,10 +44,10 @@ public class ParametrosGenerales implements Serializable {
     @Column(name = "nombre", length = 50)
     private String nombre;
     
-    @Column(name = "valor")
+    @Column(name = "valor",length = 50)
     private String valor;
     
-    @Column(name = "descripcion")
+    @Column(name = "descripcion",length = 100)
     private String descripcion;
     
     @Column(name = "fecha_registro", updatable = false)
@@ -65,7 +65,7 @@ public class ParametrosGenerales implements Serializable {
     
     @PrePersist
     public void prePersist() {
-        estado=true;
+      //  estado=true;
         fechaRegistro = new Date();
         fechaModificacion = new Date();
     }
