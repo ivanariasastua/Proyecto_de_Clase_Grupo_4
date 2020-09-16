@@ -108,7 +108,7 @@ public class UsuariosInfoController implements Initializable {
                 usuSelect.setEsJefe(cbEsJefe.getSelectionModel().getSelectedItem().equals("Sí"));
                 usuSelect.setFechaModificacion(new Date());
                 usuSelect.setDepartamento(cbDepartamento.getSelectionModel().getSelectedItem());
-                res = service.modificarUsuario(usuSelect.getId(), "nada", usuSelect);
+                res = service.modificarUsuario(usuSelect.getId(), "nada", 0,    usuSelect);
                 if(res.getEstado()){
                     alert.show(Alert.AlertType.INFORMATION, "Guardar Usuario", "Guardar Usuario: usuario guardado");
                 }else{

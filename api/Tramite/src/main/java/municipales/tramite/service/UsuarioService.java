@@ -159,12 +159,13 @@ public class UsuarioService {
         }
     }
     
-    public Respuesta modificarUsuario(Long id, String value, UsuarioDTO usuario){
+    public Respuesta modificarUsuario(Long id, String value, Integer enc, UsuarioDTO usuario){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
             parametros.put("value", value);
-            Request request = new Request("usuarios/update", "/{id}/{value}", parametros);
+            parametros.put("enc", enc);
+            Request request = new Request("usuarios/update", "/{id}/{value}/{enc}", parametros);
             request.put(usuario);
             if(request.isError()){
                 return new Respuesta(false, request.getError(), "No se pudo modificar el usuario");
