@@ -254,26 +254,30 @@ public class UsuariosController implements Initializable {
     private void accionGuardarPermisos(ActionEvent event) {
         int errores = 0, correctos = 0;
         List<PermisoOtorgadoDTO> registrados = new ArrayList<>();
-        if(!agregados.isEmpty()){
-            Respuesta res;
-            for(PermisoOtorgadoDTO per : agregados){
-                res = perOtorService.guardarPermiso(per, select.getId());
-                if(!res.getEstado()){
-                    mensaje.show(Alert.AlertType.INFORMATION, "Guardar permisos", res.getMensaje());
-                    errores++;
-                }else{
-                    correctos++;
-                    registrados.add((PermisoOtorgadoDTO) res.getResultado("Permiso"));
+        if(select != null){
+            if(!agregados.isEmpty()){
+                Respuesta res;
+                for(PermisoOtorgadoDTO per : agregados){
+                    res = perOtorService.guardarPermiso(per, select.getId());
+                    if(!res.getEstado()){
+                        mensaje.show(Alert.AlertType.INFORMATION, "Guardar permisos", res.getMensaje());
+                        errores++;
+                    }else{
+                        correctos++;
+                        registrados.add((PermisoOtorgadoDTO) res.getResultado("Permiso"));
+                    }
                 }
+                mensaje.show(Alert.AlertType.INFORMATION, "Guardar permiso", "Se registro: "+correctos+": correctos y "+errores+": no se pudieron resgistrar");
+                agregados.clear();
+                select.getPermisos().addAll(registrados);
+                tvPermisos.getItems().clear();
+                tvPermisos.getItems().addAll(select.getPermisos());
+                tvUsuarios.refresh();
+            }else{
+                mensaje.show(Alert.AlertType.WARNING, "Guardar Permisos", "No hay permisos que agregar");
             }
-            mensaje.show(Alert.AlertType.INFORMATION, "Guardar permiso", "Se registro: "+correctos+": correctos y "+errores+": no se pudieron resgistrar");
-            agregados.clear();
-            select.getPermisos().addAll(registrados);
-            tvPermisos.getItems().clear();
-            tvPermisos.getItems().addAll(select.getPermisos());
-            tvUsuarios.refresh();
         }else{
-            mensaje.show(Alert.AlertType.WARNING, "Guardar Permisos", "No hay permisos que agregar");
+            mensaje.show(Alert.AlertType.WARNING, "Guardar Permisos", "No ha seleccionado un usuario");
         }
     }
 
