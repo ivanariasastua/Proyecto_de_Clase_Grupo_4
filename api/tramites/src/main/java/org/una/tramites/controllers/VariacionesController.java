@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.VariacionesDTO;
 import org.una.tramites.entities.Variaciones;
 import org.una.tramites.services.VariacionesServiceImplementation;
+import org.una.tramites.services.TramitesTiposServiceImplementation;
 import org.una.tramites.utils.MapperUtils;
 
 /**
@@ -39,6 +40,9 @@ public class VariacionesController {
 
     @Autowired
     private VariacionesServiceImplementation varService;
+    
+    @Autowired
+    private TramitesTiposServiceImplementation tipoTraService;
     
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos las Variaciones", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
@@ -73,17 +77,18 @@ public class VariacionesController {
     }
     
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/save")
+    @PostMapping("/save/{id}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody VariacionesDTO variacion) {
-//        try {
+    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody VariacionesDTO variacion) {
+        try {
             Variaciones varCreated = MapperUtils.EntityFromDto(variacion,Variaciones.class);
-            varCreated= varService.create(varCreated);
+            varCreated.setTramites(tipoTraService.findById(id).get());
+            varCreated = varService.create(varCreated);
             VariacionesDTO varDto = MapperUtils.DtoFromEntity(varCreated, VariacionesDTO.class);
             return new ResponseEntity<>(varDto, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
+        } catch (Exception e) {
+           return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")

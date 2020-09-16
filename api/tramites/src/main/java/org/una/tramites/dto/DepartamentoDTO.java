@@ -31,5 +31,5 @@ public class DepartamentoDTO {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaModificacion;
     //private List<UsuarioDTO> usuarios;
-    private List<TramitesTiposDTO> tramitesTipos;
+    //private List<TramitesTiposDTO> tramitesTipos;
 }
