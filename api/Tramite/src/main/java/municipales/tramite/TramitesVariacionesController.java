@@ -134,7 +134,7 @@ public class TramitesVariacionesController implements Initializable {
             variacion.setGrupo(Integer.parseInt(txtGrupo.getText()));
             variacion.setFechaRegistro(new Date());
             variacion.setEstado(cbEstado.getSelectionModel().getSelectedItem() == "Activo");
-            variacion.setRequisitos(lvRequisitos.getItems());
+            variacion.setRequisitos(null);
             variacion.setTramites(tramiteTipo);
             respuesta = variacionService.modificarVariacion(variacion.getId(), variacion);
             if(respuesta.getEstado()){
@@ -151,7 +151,7 @@ public class TramitesVariacionesController implements Initializable {
             variacion.setGrupo(Integer.parseInt(txtGrupo.getText()));
             variacion.setFechaRegistro(new Date());
             variacion.setEstado("Activo".equals(cbEstado.getSelectionModel().getSelectedItem()));
-            variacion.setRequisitos(lvRequisitos.getItems());
+            variacion.setRequisitos(null);
             variacion.setTramites(tramiteTipo);
             System.out.println(tramiteTipo.getId());
             respuesta = variacionService.guardarVariacion(variacion);
