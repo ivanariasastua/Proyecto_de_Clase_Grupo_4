@@ -33,7 +33,7 @@ public interface IUsuarioService {
 
     public void deleteAll();
 
-    public Optional<Usuario> login(Usuario usuario); 
+    //public Optional<Usuario> login(Usuario usuario); 
     
     public Optional<List<Usuario>> findUsersByDepartamentoId(Long id);
     
@@ -43,5 +43,5 @@ public interface IUsuarioService {
 
    // public String login(AuthenticationRequest authenticationRequest);
     
-    public AuthenticationResponse login(AuthenticationRequest authenticationRequest); 
+   // public AuthenticationResponse login(AuthenticationRequest authenticationRequest); 
 }

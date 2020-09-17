@@ -78,6 +78,7 @@ public class UsuarioController {
         }
     }
     
+    /*
     @PostMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
@@ -105,7 +106,7 @@ public class UsuarioController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+*/
     @GetMapping("/cedula/{term}")
     @ApiOperation(value = "Obtiene una lista de usuarios por medio de su cedula", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
