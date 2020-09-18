@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.una.tramites.dto.PermisoDTO;
 import org.una.tramites.dto.PermisoOtorgadoDTO;
-import org.una.tramites.entities.Permiso;
 import org.una.tramites.entities.PermisoOtorgado;
-import org.una.tramites.entities.Usuario;
 import org.una.tramites.services.IPermisoOtorgadoService;
-import org.una.tramites.services.IPermisoService;
 import org.una.tramites.services.IUsuarioService;
 import org.una.tramites.utils.MapperUtils;
 
@@ -46,72 +43,55 @@ public class PermisoOtorgadoController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los permisos otorgados", response = PermisoOtorgadoDTO.class, responseContainer = "List", tags = "Permisos_Otorgados")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
+    public ResponseEntity<?> findAll() {
         try {
-            Optional<List<PermisoOtorgado>> result = perOtorgadoService.findAll();
-            if (result.isPresent()) {
-                List<PermisoOtorgadoDTO> perOtorgadosDTO = MapperUtils.DtoListFromEntityList(result.get(), PermisoOtorgadoDTO.class);
-                return new ResponseEntity<>(perOtorgadosDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity<>(perOtorgadoService.findAll(), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-            Optional<PermisoOtorgado> perOtorgadoFound = perOtorgadoService.findById(id);
-            if (perOtorgadoFound.isPresent()) {
-                PermisoOtorgadoDTO perOtorDto = MapperUtils.DtoFromEntity(perOtorgadoFound.get(), PermisoOtorgadoDTO.class);
-                return new ResponseEntity<>(perOtorDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity<>(perOtorgadoService.findById(id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @PostMapping("/create/{id}")
-//    @ResponseBody
-//    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgadoDTO per) {
-//        try {
-//            Usuario user = usuService.findById(id);
-//            PermisoOtorgado entity = MapperUtils.EntityFromDto(per, PermisoOtorgado.class);
-//            entity.setUsuario(user);
-//            entity = perOtorgadoService.create(entity);
-//            PermisoOtorgadoDTO perOtorgadoDto = MapperUtils.DtoFromEntity(entity, PermisoOtorgadoDTO.class);
-//            return new ResponseEntity<>(perOtorgadoDto, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-//    @PutMapping("update/{id}/{ID}")
-//    @ResponseBody
-//    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "ID") Long ID, @RequestBody PermisoOtorgadoDTO perOtorgadoModified) {
-//        try {
-//            Usuario user = usuService.findById(ID).get();
-//            PermisoOtorgado entity = MapperUtils.EntityFromDto(perOtorgadoModified, PermisoOtorgado.class);
-//            entity.setUsuario(user);
-//            Optional<PermisoOtorgado> perOtorgadoUpdated = perOtorgadoService.update(entity, id);
-//            if (perOtorgadoUpdated.isPresent()) {
-//                PermisoOtorgadoDTO perOtoDto = MapperUtils.DtoFromEntity(perOtorgadoUpdated.get(), PermisoOtorgadoDTO.class);
-//                return new ResponseEntity<>(perOtoDto, HttpStatus.OK);
-//            } else {
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/create/{id}")
+    @ResponseBody
+    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
+    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgadoDTO per) {
+        try {
+            return new ResponseEntity<>(perOtorgadoService.create(per, id), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PutMapping("update/{id}/{ID}")
+    @ResponseBody
+    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "ID") Long ID, @RequestBody PermisoOtorgadoDTO perOtorgadoModified) {
+        try {
+            Optional<PermisoOtorgadoDTO> perOtorgadoUpdated = perOtorgadoService.update(perOtorgadoModified, id, ID);
+            if (perOtorgadoUpdated.isPresent()) {
+                return new ResponseEntity<>(perOtorgadoUpdated, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             perOtorgadoService.delete(id);
@@ -125,6 +105,7 @@ public class PermisoOtorgadoController {
     }
 
     @DeleteMapping("/")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             perOtorgadoService.deleteAll();
