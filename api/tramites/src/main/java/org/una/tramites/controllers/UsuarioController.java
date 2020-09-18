@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.UsuarioDTO;
-import org.una.tramites.dto.AuthenticationRequest;
-import org.una.tramites.dto.AuthenticationResponse;
 import org.una.tramites.entities.Usuario;
 import org.una.tramites.services.IUsuarioService;
 import org.una.tramites.utils.MapperUtils;
@@ -43,36 +41,26 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
+    
+    final String MENSAJE_VERIFICAR_INFORMACION = "Debe verifiar el formato y la información de su solicitud con el formato esperado";
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
+    public ResponseEntity<?> findAll() {
         try {
-            Optional<List<Usuario>> result = usuarioService.findAll();
-            if (result.isPresent()) {
-                List<UsuarioDTO> usuariosDTO = MapperUtils.DtoListFromEntityList(result.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuariosDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity(usuarioService.findAll(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un usuario a travez de su identificador unico", response = UsuarioDTO.class, tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-
-            Optional<Usuario> usuarioFound = usuarioService.findById(id);
-            if (usuarioFound.isPresent()) {
-                UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuarioFound.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuarioDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity<>(usuarioService.findById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -109,15 +97,10 @@ public class UsuarioController {
 */
     @GetMapping("/cedula/{term}")
     @ApiOperation(value = "Obtiene una lista de usuarios por medio de su cedula", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
-            Optional<List<Usuario>> result = usuarioService.findByCedulaAproximate(term);
-            if (result.isPresent()) {
-                List<UsuarioDTO> usuariosDTO = MapperUtils.DtoListFromEntityList(result.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuariosDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity<>(usuarioService.findByCedulaAproximate(term), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -125,15 +108,10 @@ public class UsuarioController {
 
     @GetMapping("/nombre/{term}")
     @ApiOperation(value = "Obtiene una lista de usuarios por medio de su nombre", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
-            Optional<List<Usuario>> result = usuarioService.findByNombreCompletoAproximateIgnoreCase(term);
-            if (result.isPresent()) {
-                List<UsuarioDTO> usuariosDTO = MapperUtils.DtoListFromEntityList(result.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuariosDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity(usuarioService.findByNombreCompletoAproximateIgnoreCase(term), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -143,48 +121,42 @@ public class UsuarioController {
     @PostMapping("saveUser/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo usuario", response = UsuarioDTO.class, tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuario) {
         try {
-            Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);;
-            user.setPasswordEncriptado(value);
-            user = usuarioService.create(user);
-            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user, UsuarioDTO.class);
-            return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
+            return new ResponseEntity(usuarioService.create(usuario), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("update/{id}/{value}/{enc}")
-    @ResponseBody
-    @ApiOperation(value = "Modifica un usuario existente", response = UsuarioDTO.class, tags = "Usuarios")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "value") String value, @PathVariable(value = "enc") Integer enc, @RequestBody UsuarioDTO usuarioModified) {
-        try {
-            Usuario user = MapperUtils.EntityFromDto(usuarioModified, Usuario.class);
-            if(!value.equals("nada"))
-                user.setPasswordEncriptado(value);
-            Optional<Usuario> user2 = usuarioService.update(user, id, enc);
-            if (user2.isPresent()) {
-                UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(user2.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuarioDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Permite modificar un Usuario a partir de su Id", response = UsuarioDTO.class, tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody UsuarioDTO usuarioDTO, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            try {
+                Optional<UsuarioDTO> usuarioUpdated = usuarioService.update(usuarioDTO, id);
+                if (usuarioUpdated.isPresent()) {
+                    return new ResponseEntity(usuarioUpdated, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity(HttpStatus.NOT_FOUND);
+                }
+            } catch (Exception e) {
+                return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(MENSAJE_VERIFICAR_INFORMACION, HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Borra un usario por su identificador unico", tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             usuarioService.delete(id);
-            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -192,13 +164,11 @@ public class UsuarioController {
 
     @DeleteMapping("/")
     @ApiOperation(value = "Borra todos los usuario", tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             usuarioService.deleteAll();
-            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -208,29 +178,24 @@ public class UsuarioController {
     @ApiOperation(value = "Obtiene una lista de usuarios segun el departamento donde se desempeña", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") Long id) {
         try {
-            Optional<List<Usuario>> result = usuarioService.findUsersByDepartamentoId(id);
-            if (result.isPresent()) {
-                List<UsuarioDTO> usuariosDTO = MapperUtils.DtoListFromEntityList(result.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(usuariosDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity(usuarioService.findUsersByDepartamentoId(id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/jefe/{id}")
-    @ApiOperation(value = "Obtiene una lista de los jefes de los departementos", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id") Long id) {
-        try {
-            Optional<Usuario> result = usuarioService.findJefesDepartemento(id);
-            if (result.isPresent()) {
-                UsuarioDTO userDto = MapperUtils.DtoFromEntity(result.get(), UsuarioDTO.class);
-                return new ResponseEntity<>(userDto, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/jefe/{id}")
+//    @ApiOperation(value = "Obtiene una lista de los jefes de los departementos", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
+//    public ResponseEntity<?> findJefeByDepartemento(@PathVariable(value = "id") Long id) {
+//        try {
+//            Optional<Usuario> result = usuarioService.findJefesDepartemento(id);
+//            if (result.isPresent()) {
+//                UsuarioDTO userDto = MapperUtils.DtoFromEntity(result.get(), UsuarioDTO.class);
+//                return new ResponseEntity<>(userDto, HttpStatus.OK);
+//            }
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } catch (Exception ex) {
+//            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }

@@ -76,40 +76,40 @@ public class PermisoOtorgadoController {
         }
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/create/{id}")
-    @ResponseBody
-    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgadoDTO per) {
-        try {
-            Usuario user = usuService.findById(id).get();
-            PermisoOtorgado entity = MapperUtils.EntityFromDto(per, PermisoOtorgado.class);
-            entity.setUsuario(user);
-            entity = perOtorgadoService.create(entity);
-            PermisoOtorgadoDTO perOtorgadoDto = MapperUtils.DtoFromEntity(entity, PermisoOtorgadoDTO.class);
-            return new ResponseEntity<>(perOtorgadoDto, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @PostMapping("/create/{id}")
+//    @ResponseBody
+//    public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgadoDTO per) {
+//        try {
+//            Usuario user = usuService.findById(id);
+//            PermisoOtorgado entity = MapperUtils.EntityFromDto(per, PermisoOtorgado.class);
+//            entity.setUsuario(user);
+//            entity = perOtorgadoService.create(entity);
+//            PermisoOtorgadoDTO perOtorgadoDto = MapperUtils.DtoFromEntity(entity, PermisoOtorgadoDTO.class);
+//            return new ResponseEntity<>(perOtorgadoDto, HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
-    @PutMapping("update/{id}/{ID}")
-    @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "ID") Long ID, @RequestBody PermisoOtorgadoDTO perOtorgadoModified) {
-        try {
-            Usuario user = usuService.findById(ID).get();
-            PermisoOtorgado entity = MapperUtils.EntityFromDto(perOtorgadoModified, PermisoOtorgado.class);
-            entity.setUsuario(user);
-            Optional<PermisoOtorgado> perOtorgadoUpdated = perOtorgadoService.update(entity, id);
-            if (perOtorgadoUpdated.isPresent()) {
-                PermisoOtorgadoDTO perOtoDto = MapperUtils.DtoFromEntity(perOtorgadoUpdated.get(), PermisoOtorgadoDTO.class);
-                return new ResponseEntity<>(perOtoDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PutMapping("update/{id}/{ID}")
+//    @ResponseBody
+//    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "ID") Long ID, @RequestBody PermisoOtorgadoDTO perOtorgadoModified) {
+//        try {
+//            Usuario user = usuService.findById(ID).get();
+//            PermisoOtorgado entity = MapperUtils.EntityFromDto(perOtorgadoModified, PermisoOtorgado.class);
+//            entity.setUsuario(user);
+//            Optional<PermisoOtorgado> perOtorgadoUpdated = perOtorgadoService.update(entity, id);
+//            if (perOtorgadoUpdated.isPresent()) {
+//                PermisoOtorgadoDTO perOtoDto = MapperUtils.DtoFromEntity(perOtorgadoUpdated.get(), PermisoOtorgadoDTO.class);
+//                return new ResponseEntity<>(perOtoDto, HttpStatus.OK);
+//            } else {
+//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {

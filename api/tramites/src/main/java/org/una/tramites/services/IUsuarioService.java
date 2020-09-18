@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import org.una.tramites.dto.AuthenticationRequest;
 import org.una.tramites.dto.AuthenticationResponse;
+import org.una.tramites.dto.UsuarioDTO;
 import org.una.tramites.entities.Usuario;
 
 /**
@@ -17,17 +18,17 @@ import org.una.tramites.entities.Usuario;
  */
 public interface IUsuarioService {
 
-    public Optional<List<Usuario>> findAll();
+    public Optional<List<UsuarioDTO>> findAll();
 
-    public Optional<Usuario> findById(Long id);
+    public Optional<UsuarioDTO> findById(Long id);
 
-    public Optional<List<Usuario>> findByCedulaAproximate(String cedula);
+    public Optional<List<UsuarioDTO>> findByCedulaAproximate(String cedula);
 
-    public Optional<List<Usuario>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
+    public Optional<List<UsuarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
 
-    public Usuario create(Usuario usuario);
+    public UsuarioDTO create(UsuarioDTO usuario);
 
-    public Optional<Usuario> update(Usuario usuario, Long id, Integer enc);
+    public Optional<UsuarioDTO> update(UsuarioDTO usuario, Long id);
 
     public void delete(Long id);
 
@@ -35,11 +36,11 @@ public interface IUsuarioService {
 
     //public Optional<Usuario> login(Usuario usuario); 
     
-    public Optional<List<Usuario>> findUsersByDepartamentoId(Long id);
+    public Optional<List<UsuarioDTO>> findUsersByDepartamentoId(Long id);
     
-    public Optional<Usuario> findJefesDepartemento(Long id);
+    public Optional<UsuarioDTO> findJefesDepartemento(Long id);
     
-    public Optional<Usuario> findByCedula(String cedula);
+    public Optional<UsuarioDTO> findByCedula(String cedula);
 
    // public String login(AuthenticationRequest authenticationRequest);
     

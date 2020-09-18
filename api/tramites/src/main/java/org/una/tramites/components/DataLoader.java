@@ -53,12 +53,12 @@ public class DataLoader implements ApplicationRunner {
 //                permiso = permisoBuscado.get();
 //            }
 //            
-            createPermisos();
-            Usuario usuario = new Usuario();
-            usuario.setNombreCompleto("Usuario Admin");
-            usuario.setCedula(cedula);
-            usuario.setPasswordEncriptado(password);
-            usuario = usuarioService.create(usuario);
+//            createPermisos();
+//            Usuario usuario = new Usuario();
+//            usuario.setNombreCompleto("Usuario Admin");
+//            usuario.setCedula(cedula);
+//            usuario.setPasswordEncriptado(password);
+//            usuario = usuarioService.create(usuario);
 //
 //            PermisoOtorgado permisoOtorgado = new PermisoOtorgado();
 //            permisoOtorgado.setPermiso(permiso);

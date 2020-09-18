@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,14 +15,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.una.tramites.dto.AuthenticationRequest;
-import org.una.tramites.dto.AuthenticationResponse;
-import org.una.tramites.dto.PermisoOtorgadoDTO;
 import org.una.tramites.dto.UsuarioDTO;
 import org.una.tramites.entities.Usuario;
 import org.una.tramites.jwt.JwtProvider;
 import org.una.tramites.repositories.IUsuarioRepository;
 import org.una.tramites.utils.MapperUtils;
+import org.una.tramites.utils.ServiceConvertionHelper;
 
 @Service
 public class UsuarioServiceImplementation implements IUsuarioService, UserDetailsService {
@@ -42,50 +37,103 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    private UsuarioDTO encriptarPassword(UsuarioDTO usuario) {
+        String password = usuario.getPasswordEncriptado();
+        if (!password.isBlank()) {
+            usuario.setPasswordEncriptado(bCryptPasswordEncoder.encode(password));
+        }
+        return usuario;
+    }
+    
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<List<Usuario>> findAll() {
+//        return Optional.ofNullable(usuarioRepository.findAll());
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<Usuario>> findAll() {
-        return Optional.ofNullable(usuarioRepository.findAll());
+    public Optional<List<UsuarioDTO>> findAll() {
+        return ServiceConvertionHelper.findList(usuarioRepository.findAll(), UsuarioDTO.class);
     }
-
+    
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<Usuario> findById(Long id) {
+//        return usuarioRepository.findById(id);
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<Usuario> findById(Long id) {
-        return usuarioRepository.findById(id);
+    public Optional<UsuarioDTO> findById(Long id) {
+        return ServiceConvertionHelper.oneToOptionalDto(usuarioRepository.findById(id), UsuarioDTO.class);
     }
-
+    
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<List<Usuario>> findByCedulaAproximate(String cedula) {
+//        return Optional.ofNullable(usuarioRepository.findByCedulaContaining(cedula));
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<Usuario>> findByCedulaAproximate(String cedula) {
-        return Optional.ofNullable(usuarioRepository.findByCedulaContaining(cedula));
+    public Optional<List<UsuarioDTO>> findByCedulaAproximate(String cedula) {
+        return ServiceConvertionHelper.findList(usuarioRepository.findByCedulaContaining(cedula), UsuarioDTO.class);
     }
-
+    
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<List<Usuario>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
+//        return Optional.ofNullable(usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto));
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<Usuario>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
-        return Optional.ofNullable(usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto));
+    public Optional<List<UsuarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
+        return ServiceConvertionHelper.findList(usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto), UsuarioDTO.class);
     }
 
+//    @Override
+//    @Transactional
+//    public Usuario create(Usuario usuario) {
+//        encriptarPassword(usuario);
+//        return usuarioRepository.save(usuario);
+//    }
+    
     @Override
     @Transactional
-    public Usuario create(Usuario usuario) {
-        encriptarPassword(usuario);
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO create(UsuarioDTO usuario) {
+        usuario = encriptarPassword(usuario);
+        Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);
+        user = usuarioRepository.save(user);
+        return MapperUtils.DtoFromEntity(user, UsuarioDTO.class);
     }
 
+//    @Override
+//    @Transactional
+//    public Optional<Usuario> update(Usuario usuario, Long id, Integer enc) {
+//        if (usuarioRepository.findById(id).isPresent()) {
+//            if(enc == 1)
+//                encriptarPassword(usuario);
+//            return Optional.ofNullable(usuarioRepository.save(usuario));
+//        } else {
+//            return null;
+//        }
+//    }
+    
     @Override
     @Transactional
-    public Optional<Usuario> update(Usuario usuario, Long id, Integer enc) {
+    public Optional<UsuarioDTO> update(UsuarioDTO usuario, Long id) {
         if (usuarioRepository.findById(id).isPresent()) {
-            if(enc == 1)
-                encriptarPassword(usuario);
-            return Optional.ofNullable(usuarioRepository.save(usuario));
+            usuario = encriptarPassword(usuario);
+            Usuario user = MapperUtils.EntityFromDto(usuario, Usuario.class);
+            user = usuarioRepository.save(user);
+            return Optional.ofNullable(MapperUtils.DtoFromEntity(user, UsuarioDTO.class));
         } else {
             return null;
-        }
-
+        } 
     }
-
+    
     @Override
     @Transactional
     public void delete(Long id) {
@@ -104,46 +152,67 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
 //        return Optional.ofNullable(usuarioRepository.findByCedulaAndPasswordEncriptado(usuario.getCedula(), usuario.getPasswordEncriptado()));
 //    }
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<List<Usuario>> findUsersByDepartamentoId(Long id) {
+//        return Optional.ofNullable(usuarioRepository.findByDepartamentoId(id));
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<Usuario>> findUsersByDepartamentoId(Long id) {
-        return Optional.ofNullable(usuarioRepository.findByDepartamentoId(id));
+    public Optional<List<UsuarioDTO>> findUsersByDepartamentoId(Long id) {
+        return ServiceConvertionHelper.findList(usuarioRepository.findByDepartamentoId(id), UsuarioDTO.class);
     }
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<Usuario> findJefesDepartemento(Long id) {
+//        return Optional.ofNullable(usuarioRepository.findJefeByDepartamento(id));
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<Usuario> findJefesDepartemento(Long id) {
-        return Optional.ofNullable(usuarioRepository.findJefeByDepartamento(id));
+    public Optional<UsuarioDTO> findJefesDepartemento(Long id) {
+        return ServiceConvertionHelper.oneToOptionalDto(Optional.ofNullable(usuarioRepository.findJefeByDepartamento(id)), UsuarioDTO.class);
     }
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<Usuario> findByCedula(String cedula) {
+//        return Optional.ofNullable(usuarioRepository.findByCedula(cedula));
+//    }
+    
     @Override
     @Transactional(readOnly = true)
-    public Optional<Usuario> findByCedula(String cedula) {
-        return Optional.ofNullable(usuarioRepository.findByCedula(cedula));
+    public Optional<UsuarioDTO> findByCedula(String cedula) {
+        return ServiceConvertionHelper.oneToOptionalDto(Optional.ofNullable(usuarioRepository.findByCedula(cedula)), UsuarioDTO.class);
     }
     
-    private void encriptarPassword(Usuario usuario) {
-        String password = usuario.getPasswordEncriptado();
-        if (!password.isBlank()) {
-            usuario.setPasswordEncriptado(bCryptPasswordEncoder.encode(password));
-        }
-    }
+//    private void encriptarPassword(Usuario usuario) {
+//        String password = usuario.getPasswordEncriptado();
+//        if (!password.isBlank()) {
+//            usuario.setPasswordEncriptado(bCryptPasswordEncoder.encode(password));
+//        }
+//    }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Usuario> usuarioBuscado = findByCedula(username);
+        Optional<Usuario> usuarioBuscado = Optional.ofNullable(usuarioRepository.findByCedula(username));
         if (usuarioBuscado.isPresent()) {
             Usuario usuario = usuarioBuscado.get();
             List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("ADMIN"));
+
+            usuario.getPermisos().forEach(permisoOtorgado -> {
+                roles.add(new SimpleGrantedAuthority(permisoOtorgado.getPermiso().getCodigo()));
+            });
             UserDetails userDetails = new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
             return userDetails;
         } else {
-            System.out.println("loadUserByUserName: fail");
             return null;
         }
-
     }
+}
 
 //    @Override
 //    public String login(AuthenticationRequest authenticationRequest) {
@@ -176,5 +245,5 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
 //    }
 
 
-}
+
 

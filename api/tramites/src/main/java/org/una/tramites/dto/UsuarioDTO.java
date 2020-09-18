@@ -15,6 +15,7 @@ import lombok.ToString;
 public class UsuarioDTO {
     private Long id; 
     private String nombreCompleto; 
+    private String passwordEncriptado;
     private String cedula; 
     private boolean estado; 
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
