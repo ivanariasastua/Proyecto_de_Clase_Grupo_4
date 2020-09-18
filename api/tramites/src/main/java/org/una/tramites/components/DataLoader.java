@@ -72,14 +72,14 @@ public class DataLoader implements ApplicationRunner {
         
     }
     
-    private void createPermisos() {
-        for (Permisos permiso : Permisos.values()) {
-            Permiso nuevoPermiso = new Permiso();
-            nuevoPermiso.setCodigo(permiso.getCodigo());
-            nuevoPermiso.setDescripcion(permiso.name());
-            permisoService.create(nuevoPermiso);
-        } 
-    }
+//    private void createPermisos() {
+//        for (Permisos permiso : Permisos.values()) {
+//            Permiso nuevoPermiso = new Permiso();
+//            nuevoPermiso.setCodigo(permiso.getCodigo());
+//            nuevoPermiso.setDescripcion(permiso.name());
+//            permisoService.create(nuevoPermiso);
+//        } 
+//    }
 
 }
 
