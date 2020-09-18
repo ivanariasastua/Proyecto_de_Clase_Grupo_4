@@ -10,8 +10,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.tramites.dto.TramitesEstadosDTO;
 import org.una.tramites.entities.TramitesEstados;
 import org.una.tramites.repositories.ITramitesEstadosRepository;
+import org.una.tramites.utils.MapperUtils;
+import org.una.tramites.utils.ServiceConvertionHelper;
 
 /**
  *
@@ -25,38 +28,46 @@ public class TramitesEstadosServiceImplementation implements ITramitesEstadosSer
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<TramitesEstados> findById(Long id) {
-        return tramRepository.findById(id);
+    public Optional<List<TramitesEstadosDTO>> findAll() {
+        return ServiceConvertionHelper.findList(tramRepository.findAll(), TramitesEstadosDTO.class);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<TramitesEstados>> findAll() {
-        return Optional.ofNullable(tramRepository.findAll());
+    public Optional<TramitesEstadosDTO> findById(Long id) {
+        return ServiceConvertionHelper.oneToOptionalDto(tramRepository.findById(id), TramitesEstadosDTO.class);
     }
 
     @Override
     @Transactional
-    public TramitesEstados create(TramitesEstados tramites) {
-        return tramRepository.save(tramites);
+    public TramitesEstadosDTO create(TramitesEstadosDTO tramites) {
+        TramitesEstados entidad = MapperUtils.EntityFromDto(tramites, TramitesEstados.class);
+        entidad = tramRepository.save(entidad);
+        return MapperUtils.DtoFromEntity(entidad, TramitesEstadosDTO.class);
     }
 
     @Override
-    public Optional<TramitesEstados> update(TramitesEstados tramites, Long id) {
-        if (tramRepository.findById(id).isPresent()) {
-            return Optional.ofNullable(tramRepository.save(tramites));
-        } else {
+    @Transactional
+    public Optional<TramitesEstadosDTO> update(TramitesEstadosDTO tramites, Long id) {
+        if(tramRepository.findById(id).isPresent()){
+            TramitesEstados entidad = MapperUtils.EntityFromDto(tramites, TramitesEstados.class);
+            entidad = tramRepository.save(entidad);
+            return Optional.ofNullable(MapperUtils.DtoFromEntity(entidad, TramitesEstadosDTO.class));
+        }else{
             return null;
         }
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         tramRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
         tramRepository.deleteAll();
     }
+    
 }
