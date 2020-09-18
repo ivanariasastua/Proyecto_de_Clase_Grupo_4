@@ -11,8 +11,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.tramites.dto.TramitesTiposDTO;
+import org.una.tramites.entities.TramitesEstados;
 import org.una.tramites.entities.TramitesTipos;
 import org.una.tramites.repositories.ITramitesTiposRepository;
+import org.una.tramites.utils.MapperUtils;
+import org.una.tramites.utils.ServiceConvertionHelper;
 
 /**
  * 
@@ -23,31 +27,38 @@ public class TramitesTiposServiceImplementation implements ITramitesTiposService
 
     @Autowired
     private ITramitesTiposRepository traRepository;
-    
+
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<TramitesTipos>> findAll() {
-        return Optional.ofNullable(traRepository.findAll());
+    public Optional<List<TramitesTiposDTO>> findAll() {
+        return ServiceConvertionHelper.findList(traRepository.findAll(),TramitesTiposDTO.class);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<TramitesTipos> findById(Long id) {
-        return traRepository.findById(id);
+    public Optional<TramitesTiposDTO> findById(Long id) {
+        return ServiceConvertionHelper.oneToOptionalDto(traRepository.findById(id), TramitesTiposDTO.class);
     }
 
     @Override
     @Transactional
-    public TramitesTipos create(TramitesTipos tramite) {
-        return traRepository.save(tramite);
+    public TramitesTiposDTO create(TramitesTiposDTO tramiteTipoDTO) {
+        TramitesTipos entidad = MapperUtils.EntityFromDto(tramiteTipoDTO, TramitesTipos.class);
+        entidad = traRepository.save(entidad);
+        return MapperUtils.DtoFromEntity(entidad, TramitesTiposDTO.class);
+
     }
 
     @Override
     @Transactional
-    public Optional<TramitesTipos> update(TramitesTipos tramite, Long id) {
-        if(traRepository.findById(id).isPresent())
-            return Optional.ofNullable(traRepository.save(tramite));
-        return null;
+    public Optional<TramitesTiposDTO> update(TramitesTiposDTO tramiteTipoDTO, Long id) {
+        if(traRepository.findById(id).isPresent()){
+            TramitesTipos entidad = MapperUtils.EntityFromDto(tramiteTipoDTO, TramitesTipos.class);
+            entidad = traRepository.save(entidad);
+            return Optional.ofNullable(MapperUtils.DtoFromEntity(entidad, TramitesTiposDTO.class));
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -64,14 +75,15 @@ public class TramitesTiposServiceImplementation implements ITramitesTiposService
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<TramitesTipos>> findByDepartamentoId(Long id) {
-        return Optional.ofNullable(traRepository.findByDepartamentoId(id));
+    public Optional<List<TramitesTiposDTO>> findByDepartamentoId(Long id) {
+        return ServiceConvertionHelper.findList(traRepository.findByDepartamentoId(id), TramitesTiposDTO.class);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<TramitesTipos>> findByDescripcion(String descripcion) {
-        return Optional.ofNullable(traRepository.findByDescripcion(descripcion));
+    public Optional<List<TramitesTiposDTO>> findByDescripcion(String descripcion) {
+        return ServiceConvertionHelper.findList(traRepository.findByDescripcion(descripcion), TramitesTiposDTO.class);
+
     }
 
 }

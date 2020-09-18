@@ -10,8 +10,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.tramites.dto.TramitesRegistradosDTO;
 import org.una.tramites.entities.TramitesRegistrados;
 import org.una.tramites.repositories.ITramitesRegistradosRepository;
+import org.una.tramites.utils.MapperUtils;
+import org.una.tramites.utils.ServiceConvertionHelper;
 
 /**
  *
@@ -22,47 +25,61 @@ public class TramitesRegistradosServiceImplementation implements ITramitesRegist
     
     @Autowired
     private ITramitesRegistradosRepository tramitesRegistradosRepository;
-    
+
     @Override
-    public Optional<List<TramitesRegistrados>> findAll() {
-         return Optional.ofNullable(tramitesRegistradosRepository.findAll());
+    @Transactional(readOnly = true)
+    public Optional<List<TramitesRegistradosDTO>> findAll() {
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.findAll(), TramitesRegistradosDTO.class);
     }
 
     @Override
-    public TramitesRegistrados create(TramitesRegistrados tramitesRegistrados) {
-        return tramitesRegistradosRepository.save(tramitesRegistrados);
+    @Transactional(readOnly = true)
+    public Optional<TramitesRegistradosDTO> findById(Long id) {
+        return ServiceConvertionHelper.oneToOptionalDto(tramitesRegistradosRepository.findById(id), TramitesRegistradosDTO.class);
     }
 
     @Override
-    public Optional<TramitesRegistrados> update(TramitesRegistrados tramitesRegistrados, Long id) {
-        if(tramitesRegistradosRepository.findById(id).isPresent())
-            return Optional.ofNullable(tramitesRegistradosRepository.save(tramitesRegistrados));
-        else
+    @Transactional
+    public TramitesRegistradosDTO create(TramitesRegistradosDTO tramitesRegistrados) {
+        TramitesRegistrados entidad = MapperUtils.EntityFromDto(tramitesRegistrados, TramitesRegistrados.class);
+        entidad = tramitesRegistradosRepository.save(entidad);
+        return MapperUtils.DtoFromEntity(entidad, TramitesRegistradosDTO.class);
+    }
+
+    @Override
+    @Transactional
+    public Optional<TramitesRegistradosDTO> update(TramitesRegistradosDTO tramitesRegistrados, Long id) {
+        if(tramitesRegistradosRepository.findById(id).isPresent()){
+            TramitesRegistrados entidad = MapperUtils.EntityFromDto(tramitesRegistrados, TramitesRegistrados.class);
+            entidad = tramitesRegistradosRepository.save(entidad);
+            return Optional.ofNullable(MapperUtils.DtoFromEntity(entidad, TramitesRegistradosDTO.class));
+        }else{
             return null;
+        }
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         tramitesRegistradosRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
         tramitesRegistradosRepository.deleteAll();
     }
 
     @Override
-    public Optional<TramitesRegistrados> findById(Long id) {
-        return tramitesRegistradosRepository.findById(id);
+    @Transactional(readOnly = true)
+    public Optional<List<TramitesRegistradosDTO>> findByClienteId(Long id) {
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.findByClientesIdContaining(id), TramitesRegistradosDTO.class);
     }
 
     @Override
-    public Optional<List<TramitesRegistrados>> findByClienteId(Long id) {
-        return Optional.ofNullable(tramitesRegistradosRepository.findByClientesId(id));
+    public Optional<List<TramitesRegistradosDTO>> findByTramiteTipoId(Long id) {
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.findByTramitesTiposIdContaining(id), TramitesRegistradosDTO.class);
     }
-
-    @Override
-    public Optional<List<TramitesRegistrados>> findByTramiteTipoId(Long id) {
-        return Optional.ofNullable(tramitesRegistradosRepository.findByTramitesTiposId(id));
-    }
+    
+    
 }

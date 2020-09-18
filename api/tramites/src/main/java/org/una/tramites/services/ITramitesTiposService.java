@@ -7,6 +7,7 @@ package org.una.tramites.services;
 
 import java.util.List;
 import java.util.Optional;
+import org.una.tramites.dto.TramitesTiposDTO;
 import org.una.tramites.entities.TramitesTipos;
 
 /**
@@ -15,19 +16,19 @@ import org.una.tramites.entities.TramitesTipos;
  */
 public interface ITramitesTiposService {
     
-    public Optional<List<TramitesTipos>> findAll();
+    public Optional<List<TramitesTiposDTO>> findAll();
 
-    public Optional<TramitesTipos> findById(Long id);
+    public Optional<TramitesTiposDTO> findById(Long id);
     
-    public TramitesTipos create(TramitesTipos tramite);
+    public TramitesTiposDTO create(TramitesTiposDTO tramite);
 
-    public Optional<TramitesTipos> update(TramitesTipos tramite, Long id);
+    public Optional<TramitesTiposDTO> update(TramitesTiposDTO tramite, Long id);
 
     public void delete(Long id);
 
     public void deleteAll();
     
-    public Optional<List<TramitesTipos>> findByDepartamentoId(Long id);
+    public Optional<List<TramitesTiposDTO>> findByDepartamentoId(Long id);
     
-    public Optional<List<TramitesTipos>> findByDescripcion(String descripcion);
+    public Optional<List<TramitesTiposDTO>> findByDescripcion(String descripcion);
 }

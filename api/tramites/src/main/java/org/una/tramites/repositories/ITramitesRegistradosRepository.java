@@ -18,6 +18,6 @@ import org.una.tramites.entities.Usuario;
 public interface ITramitesRegistradosRepository extends JpaRepository<TramitesRegistrados, Long>{
     
     @Query("SELECT t FROM TramitesRegistrados t LEFT JOIN t.cliente d WHERE t.cliente.id =:id")
-    public List<TramitesRegistrados> findByClientesId(Long id);
-    public List<TramitesRegistrados> findByTramitesTiposId(Long id);
+    public List<TramitesRegistrados> findByClientesIdContaining(Long id);
+    public List<TramitesRegistrados> findByTramitesTiposIdContaining(Long id);
 }

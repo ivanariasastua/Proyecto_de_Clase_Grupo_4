@@ -9,9 +9,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,81 +40,68 @@ public class TramitesRegistradosController {
 
     @Autowired
     private ITramitesRegistradosService tramitesRegistradosService;
+    
+    final String MENSAJE_VERIFICAR_INFORMACION = "Debe verificar el formato y la información de su solicitud con el formato esperado";
+
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites registrados", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        try {
-            Optional<List<TramitesRegistrados>> result = tramitesRegistradosService.findAll();
-            if (result.isPresent()) {
-                List<TramitesRegistradosDTO> tramitesDTO = MapperUtils.DtoListFromEntityList(result.get(), TramitesRegistradosDTO.class);
-                return new ResponseEntity<>(tramitesDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        try{
+            return new ResponseEntity(tramitesRegistradosService.findAll(), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tramite registrado a travez de su identificador unico", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        try {
-
-            Optional<TramitesRegistrados> tramitesFound = tramitesRegistradosService.findById(id);
-            if (tramitesFound.isPresent()) {
-                TramitesRegistradosDTO tramitesDTO = MapperUtils.DtoFromEntity(tramitesFound.get(), TramitesRegistradosDTO.class);
-                return new ResponseEntity<>(tramitesDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        try{
+            return new ResponseEntity<>(tramitesRegistradosService.findById(id), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("save/")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody TramitesRegistrados tramites) {
-        try {
-            TramitesRegistrados tramitesCreated = tramitesRegistradosService.create(tramites);
-            TramitesRegistradosDTO tramitesDto = MapperUtils.DtoFromEntity(tramitesCreated, TramitesRegistradosDTO.class);
-            return new ResponseEntity<>(tramitesDto, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    @ApiOperation(value = "Crea un nuevo tramite", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
+    public ResponseEntity<?> create(@RequestBody TramitesRegistradosDTO tramiteRegistrado) {
+        try{
+            return new ResponseEntity<>(tramitesRegistradosService.create(tramiteRegistrado), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody TramitesRegistrados tramitesModified) {
-        try {
-            Optional<TramitesRegistrados> tramitesUpdated = tramitesRegistradosService.update(tramitesModified, id);
-            if (tramitesUpdated.isPresent()) {
-                TramitesRegistradosDTO tramitesDto = MapperUtils.DtoFromEntity(tramitesUpdated.get(), TramitesRegistradosDTO.class);
-                return new ResponseEntity<>(tramitesDto, HttpStatus.OK);
-
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody TramitesRegistradosDTO tramiteRegistradoDTO, BindingResult bindingResult) {
+        if(!bindingResult.hasErrors()){
+            try{
+                Optional<TramitesRegistradosDTO> updated = tramitesRegistradosService.update(tramiteRegistradoDTO, id);
+                if(updated.isPresent()){
+                    return new ResponseEntity(updated, HttpStatus.OK);
+                }else{
+                    return new ResponseEntity(HttpStatus.NOT_FOUND);
+                }
+            }catch(Exception ex){
+                return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            }else{
+                return new ResponseEntity<>(MENSAJE_VERIFICAR_INFORMACION, HttpStatus.BAD_REQUEST);
+            }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             tramitesRegistradosService.delete(id);
-            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        } catch (Exception ex) {
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception ex){
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -121,42 +110,29 @@ public class TramitesRegistradosController {
     public ResponseEntity<?> deleteAll() {
         try {
             tramitesRegistradosService.deleteAll();
-            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        } catch (Exception ex) {
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception ex){
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
     @GetMapping("/cliente/{id}")
     @ApiOperation(value = "Obtiene una lista de tramites registrados por el cliente", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
-    public ResponseEntity<?> findByClienteId(@PathVariable(value = "id") Long id) {
+    public @ResponseBody ResponseEntity<?> findByClienteId(@PathVariable(value = "id") Long id) {
         try {
-            Optional<List<TramitesRegistrados>> result = tramitesRegistradosService.findByClienteId(id);
-            if (result.isPresent()) {
-                List<TramitesRegistradosDTO> tramitesRegistradosDTO = MapperUtils.DtoListFromEntityList(result.get(), TramitesRegistradosDTO.class);
-                return new ResponseEntity<>(tramitesRegistradosDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(tramitesRegistradosService.findByClienteId(id),HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
     @GetMapping("/tipo_tramite/{id}")
     @ApiOperation(value = "Obtiene una lista de tramites según el tipo", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
-    public ResponseEntity<?> findByTipoTramiteId(@PathVariable(value = "id") Long id) {
+    public @ResponseBody ResponseEntity<?> findByTipoTramiteId(@PathVariable(value = "id") Long id) {
         try {
-            Optional<List<TramitesRegistrados>> result = tramitesRegistradosService.findByTramiteTipoId(id);
-            if (result.isPresent()) {
-                List<TramitesRegistradosDTO> tramitesRegistradosDTO = MapperUtils.DtoListFromEntityList(result.get(), TramitesRegistradosDTO.class);
-                return new ResponseEntity<>(tramitesRegistradosDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(tramitesRegistradosService.findByTramiteTipoId(id),HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
