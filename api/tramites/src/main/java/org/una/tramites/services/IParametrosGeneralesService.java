@@ -7,6 +7,7 @@ package org.una.tramites.services;
 
 import java.util.List;
 import java.util.Optional;
+import org.una.tramites.dto.ParametrosGeneralesDTO;
 import org.una.tramites.entities.ParametrosGenerales;
 
 /**
@@ -14,19 +15,14 @@ import org.una.tramites.entities.ParametrosGenerales;
  * @author Ivan Josué Arias Astúa
  */
 public interface IParametrosGeneralesService {
-    public Optional<List<ParametrosGenerales>> findByNombreAproximate(String nombre);
+
+    public Optional<ParametrosGeneralesDTO> update(ParametrosGeneralesDTO pg, Long id);
     
-//    public Optional<List<ParametrosGenerales>> findByValor(String valor);
-//    
-//    public Optional<List<ParametrosGenerales>> findByDescripcion(String descripcion);
+    public Optional<List<ParametrosGeneralesDTO>> findAll();
     
-    public Optional<ParametrosGenerales> update(ParametrosGenerales pg, Long id);
-    
-    public Optional<List<ParametrosGenerales>> findAll();
-    
-    public ParametrosGenerales create(ParametrosGenerales parametros);
+    public ParametrosGeneralesDTO create(ParametrosGeneralesDTO parametros);
     
     public void delete(Long id);
     
-    public Optional<ParametrosGenerales> findById(Long id);
+    public Optional<ParametrosGeneralesDTO> findById(Long id);
 }

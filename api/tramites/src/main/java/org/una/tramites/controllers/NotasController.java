@@ -9,9 +9,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.NotasDTO;
-import org.una.tramites.dto.TramitesTiposDTO;
-import org.una.tramites.entities.Notas;
-import org.una.tramites.entities.TramitesTipos;
 import org.una.tramites.services.NotasServiceImplementation;
 import org.una.tramites.utils.MapperUtils;
 
@@ -40,20 +39,17 @@ public class NotasController {
 
     @Autowired
     private NotasServiceImplementation notasService;
+    
+    final String MENSAJE_VERIFICAR_INFORMACION = "Debe verifiar el formato y la información de su solicitud con el formato esperado";
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos las notas", response = NotasDTO.class, responseContainer = "List", tags = "Notas")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
-            Optional<List<Notas>> result = notasService.findAll();
-            if (result.isPresent()) {
-                List<NotasDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), NotasDTO.class);
-                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(notasService.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -61,27 +57,19 @@ public class NotasController {
     @ApiOperation(value = "Obtiene una notas a travez de su identificador unico", response = NotasDTO.class, tags = "Notas")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-
-            Optional<Notas> notasFound = notasService.findById(id);
-            if (notasFound.isPresent()) {
-                NotasDTO notasDto = MapperUtils.DtoFromEntity(notasFound.get(), NotasDTO.class);
-                return new ResponseEntity<>(notasDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(notasService.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("save/{value}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody Notas notas) {
+    @ApiOperation(value = "Crea un nuevo archivo relacionado", response = NotasDTO.class, tags = "Notas")
+    public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody NotasDTO notas) {
         try {
-            Notas notasCreated = notasService.create(notas);
-            NotasDTO notasDto = MapperUtils.DtoFromEntity(notasCreated, NotasDTO.class);
-            return new ResponseEntity<>(notasDto, HttpStatus.CREATED);
+            return new ResponseEntity(notasService.create(notas), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -89,16 +77,20 @@ public class NotasController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Notas notasModified) {
-        try {
-            Optional<Notas> notasUpdated = notasService.update(notasModified, id);
-            if (notasUpdated.isPresent()) {
-                NotasDTO notasDto = MapperUtils.DtoFromEntity(notasUpdated.get(), NotasDTO.class);
-                return new ResponseEntity<>(notasDto, HttpStatus.OK);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody NotasDTO notasDTO, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            try {
+                Optional<NotasDTO> Updated = notasService.update(notasDTO, id);
+                if (Updated.isPresent()) {
+                    return new ResponseEntity(Updated, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity(HttpStatus.NOT_FOUND);
+                }
+            } catch (Exception e) {
+                return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(MENSAJE_VERIFICAR_INFORMACION, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -106,10 +98,7 @@ public class NotasController {
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             notasService.delete(id);
-            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -119,27 +108,19 @@ public class NotasController {
     public ResponseEntity<?> deleteAll() {
         try {
             notasService.deleteAll();
-            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+//
 //    @GetMapping("/titulo")
-//    public ResponseEntity<?> findByTitulo(@PathVariable(value = "titulo") String titulo) {
+//    public ResponseEntity<?> findByTitulo(@PathVariable(value = "term") String term) {
 //        try {
-//            Optional<List<Notas>> result = notasService.findByTitulo(titulo);
-//            if (result.isPresent()) {
-//                List<NotasDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), NotasDTO.class);
-//                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
-//            }
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception ex) {
-//            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+//            return new ResponseEntity<>(notasService.findByTitulo(term), HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
 //    }
-    
+//    
 }

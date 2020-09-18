@@ -13,7 +13,7 @@ import org.una.tramites.entities.Transaccion;
  */
 public interface IArchivoRelacionadoRepository extends JpaRepository<ArchivoRelacionado, Long>{
     
-    @Query("SELECT a FROM ArchivoRelacionado a LEFT JOIN a.tramiteRegistrado t WHERE a.tramiteRegistrado.id =:id")
+  //  @Query("SELECT a FROM ArchivoRelacionado a LEFT JOIN a.tramiteRegistrado t WHERE a.tramiteRegistrado.id =:id")
     public List<ArchivoRelacionado> findByTramiteRegistrado(Long id);
     
     public List<ArchivoRelacionado> findByFechaRegistro(Date fechaRegistro);

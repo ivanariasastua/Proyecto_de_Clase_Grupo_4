@@ -7,6 +7,7 @@ package org.una.tramites.services;
 
 import java.util.List;
 import java.util.Optional;
+import org.una.tramites.dto.ClienteDTO;
 import org.una.tramites.entities.Cliente;
 
 /**
@@ -15,21 +16,21 @@ import org.una.tramites.entities.Cliente;
  */
 
 public interface IClienteService {
-    public Optional<List<Cliente>> findAll();
+    public Optional<List<ClienteDTO>> findAll();
 
-    public Optional<Cliente> findById(Long id);
+    public Optional<ClienteDTO> findById(Long id);
 
-    public Optional<List<Cliente>> findByCedulaAproximate(String cedula);
+    public Optional<List<ClienteDTO>> findByCedulaAproximate(String cedula);
 
-    public Optional<List<Cliente>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
+    public Optional<List<ClienteDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
 
-    public Cliente create(Cliente cliente);
+    public ClienteDTO create(ClienteDTO cliente);
 
-    public Optional<Cliente> update(Cliente cliente, Long id);
+    public Optional<ClienteDTO> update(ClienteDTO cliente, Long id);
 
     public void delete(Long id);
 
     public void deleteAll();
     
-    public Optional<Cliente> findByCedula(String cedula);
+   // public Optional<ClienteDTO> findByCedula(String cedula);
 }

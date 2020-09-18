@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,36 +42,27 @@ public class DepartamentoController {
 
     @Autowired
     private IDepartamentoService departamentoService;
+    
+    final String MENSAJE_VERIFICAR_INFORMACION = "Debe verifiar el formato y la información de su solicitud con el formato esperado";
   
     @GetMapping("/dep")
     @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
-            Optional<List<Departamento>> result = departamentoService.findAll();
-            if (result.isPresent()) {
-                List<DepartamentoDTO> departamentosDTO = MapperUtils.DtoListFromEntityList(result.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(departamentosDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(departamentoService.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('DEPARTAMENTO_CONSULTAR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-            Optional<Departamento> departamentoFound = departamentoService.findById(id);
-            if (departamentoFound.isPresent()) {
-                DepartamentoDTO depDto = MapperUtils.DtoFromEntity(departamentoFound.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(depDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(departamentoService.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -78,12 +70,10 @@ public class DepartamentoController {
     @PostMapping("/save")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo departamento", response = DepartamentoDTO.class, tags = "Departamentos")
+    @PreAuthorize("hasAuthority('DEPARTAMENTO_CREAR')")
     public ResponseEntity<?> create(@RequestBody DepartamentoDTO departamento) {
         try {
-            Departamento depart = MapperUtils.EntityFromDto(departamento, Departamento.class);
-            depart = departamentoService.create(depart);
-            DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depart, DepartamentoDTO.class);
-            return new ResponseEntity<>(depDto, HttpStatus.CREATED);
+            return new ResponseEntity(departamentoService.create(departamento), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -92,17 +82,21 @@ public class DepartamentoController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/editar/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Departamento depModified) {
-        try {
-            Optional<Departamento> depUpdated = departamentoService.update(depModified, id);
-            if (depUpdated.isPresent()) {
-                DepartamentoDTO depDto = MapperUtils.DtoFromEntity(depUpdated.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(depDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PreAuthorize("hasAuthority('DEPARTAMENTO_MODIFICAR')")
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody DepartamentoDTO depDTO, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            try {
+                Optional<DepartamentoDTO> Updated = departamentoService.update(depDTO, id);
+                if (Updated.isPresent()) {
+                    return new ResponseEntity(Updated, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity(HttpStatus.NOT_FOUND);
+                }
+            } catch (Exception e) {
+                return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(MENSAJE_VERIFICAR_INFORMACION, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -110,10 +104,7 @@ public class DepartamentoController {
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             departamentoService.delete(id);
-            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -123,10 +114,7 @@ public class DepartamentoController {
     public ResponseEntity<?> deleteAll() {
         try {
             departamentoService.deleteAll();
-            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -136,15 +124,9 @@ public class DepartamentoController {
     @ApiOperation(value = "Obtiene una lista de departamentos por medio de su nombre", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
-            Optional<List<Departamento>> result = departamentoService.findByNombreAproximate(term);
-            if (result.isPresent()) {
-                List<DepartamentoDTO> depDTO = MapperUtils.DtoListFromEntityList(result.get(), DepartamentoDTO.class);
-                return new ResponseEntity<>(depDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(departamentoService.findByNombreAproximate(term), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

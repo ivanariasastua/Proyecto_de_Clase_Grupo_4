@@ -7,6 +7,7 @@ package org.una.tramites.services;
 
 import java.util.List;
 import java.util.Optional;
+import org.una.tramites.dto.NotasDTO;
 import org.una.tramites.entities.Notas;
 
 /**
@@ -14,17 +15,17 @@ import org.una.tramites.entities.Notas;
  * @author cordo
  */
 public interface INotasService {
-    public Optional<List<Notas>> findAll();
+    public Optional<List<NotasDTO>> findAll();
 
-    public Optional<Notas> findById(Long id);
+    public Optional<NotasDTO> findById(Long id);
 
-    public Notas create(Notas variacion);
+    public NotasDTO create(NotasDTO notas);
 
-    public Optional<Notas> update(Notas notas, Long id);
+    public Optional<NotasDTO> update(NotasDTO notas, Long id);
 
     public void delete(Long id);
 
     public void deleteAll();
     
-    public Optional<Notas> findByTitulo(String grupo);
+   // public Optional<List<NotasDTO>> findByTitulo(String titulo);
 }
