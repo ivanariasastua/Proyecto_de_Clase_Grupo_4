@@ -40,7 +40,7 @@ public class NotasController {
     @Autowired
     private NotasServiceImplementation notasService;
     
-    final String MENSAJE_VERIFICAR_INFORMACION = "Debe verifiar el formato y la información de su solicitud con el formato esperado";
+    final String MENSAJE_VERIFICAR_INFORMACION = "Debe verificar el formato y la información de su solicitud con el formato esperado";
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos las notas", response = NotasDTO.class, responseContainer = "List", tags = "Notas")
