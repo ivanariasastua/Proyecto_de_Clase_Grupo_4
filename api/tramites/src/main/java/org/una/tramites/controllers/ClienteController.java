@@ -7,12 +7,12 @@ package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.ClienteDTO;
-import org.una.tramites.entities.Cliente;
 import org.una.tramites.services.IClienteService;
-import org.una.tramites.utils.MapperUtils;
 
 /**
  *
@@ -45,6 +43,7 @@ public class ClienteController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Clientes", response = ClienteDTO.class, responseContainer = "List", tags = "Clientes")
+    @PreAuthorize("hasAuthority('USU05')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -56,6 +55,7 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un cliente a travez de su identificador unico", response = ClienteDTO.class, tags = "Clientes")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(clienteService.findById(id), HttpStatus.OK);
@@ -65,6 +65,7 @@ public class ClienteController {
     }
 
     @GetMapping("/cedula/{term}")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
             return new ResponseEntity(clienteService.findByCedulaAproximate(term), HttpStatus.OK);
@@ -74,6 +75,7 @@ public class ClienteController {
     }
 
     @GetMapping("/nombre/{term}")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
             return new ResponseEntity(clienteService.findByNombreCompletoAproximateIgnoreCase(term), HttpStatus.OK);
@@ -85,7 +87,7 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    // @PreAuthorize("hasAuthority('USUARIO_CREAR')")
+    @PreAuthorize("hasAuthority('USU01')")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody ClienteDTO cliente) {
         try {
             return new ResponseEntity(clienteService.create(cliente), HttpStatus.CREATED);
@@ -96,7 +98,7 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    // @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    @PreAuthorize("hasAuthority('USU02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody ClienteDTO clienteDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             try {
@@ -116,7 +118,7 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Borra un cliente por su identificador unico", tags = "Clientes")
-    //  @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             clienteService.delete(id);
@@ -128,7 +130,7 @@ public class ClienteController {
 
     @DeleteMapping("/")
     @ApiOperation(value = "Borra todos los clientes", tags = "Clientes")
-    //  @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             clienteService.deleteAll();

@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class NotasController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos las notas", response = NotasDTO.class, responseContainer = "List", tags = "Notas")
+    @PreAuthorize("hasAuthority('TRA06')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -55,6 +57,7 @@ public class NotasController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una notas a travez de su identificador unico", response = NotasDTO.class, tags = "Notas")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(notasService.findById(id), HttpStatus.OK);
@@ -67,6 +70,7 @@ public class NotasController {
     @PostMapping("save/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo archivo relacionado", response = NotasDTO.class, tags = "Notas")
+    @PreAuthorize("hasAuthority('TRA01')")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody NotasDTO notas) {
         try {
             return new ResponseEntity(notasService.create(notas), HttpStatus.CREATED);
@@ -77,6 +81,7 @@ public class NotasController {
 
     @PutMapping("/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('TRA02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody NotasDTO notasDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             try {

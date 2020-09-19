@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.una.tramites.entities.Requisitos;
-import org.una.tramites.entities.TramitesRegistrados;
 
 /**
  *

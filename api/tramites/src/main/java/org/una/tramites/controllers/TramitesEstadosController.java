@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,7 @@ public class TramitesEstadosController {
     
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites estados", response = TramitesEstadosDTO.class, responseContainer = "List", tags = "Tramites_Estados")
+    @PreAuthorize("hasAuthority('TAR06')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -56,6 +58,7 @@ public class TramitesEstadosController {
     
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tipo de tramite a travez de su identificador unico", response = TramitesEstadosDTO.class, tags = "Tramites_Estados")
+    @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(traService.findById(id), HttpStatus.OK);
@@ -68,6 +71,7 @@ public class TramitesEstadosController {
     @PostMapping("save/")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo estado", response = TramitesEstadosDTO.class, tags = "Notas")
+    @PreAuthorize("hasAuthority('TRD01')")
     public ResponseEntity<?> create(@RequestBody TramitesEstadosDTO tramiteEstado) {
         try {
             return new ResponseEntity<>(traService.create(tramiteEstado), HttpStatus.CREATED);
@@ -78,6 +82,7 @@ public class TramitesEstadosController {
 
     @PutMapping("/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('TAR02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @ Valid @RequestBody TramitesEstadosDTO tramiteEstado, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
             try{

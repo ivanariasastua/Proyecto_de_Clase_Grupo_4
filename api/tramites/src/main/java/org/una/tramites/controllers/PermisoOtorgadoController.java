@@ -43,7 +43,7 @@ public class PermisoOtorgadoController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los permisos otorgados", response = PermisoOtorgadoDTO.class, responseContainer = "List", tags = "Permisos_Otorgados")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
+    @PreAuthorize("hasAuthority('USU05')")
     public ResponseEntity<?> findAll() {
         try {
             return new ResponseEntity<>(perOtorgadoService.findAll(), HttpStatus.OK);
@@ -53,7 +53,7 @@ public class PermisoOtorgadoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(perOtorgadoService.findById(id), HttpStatus.OK);
@@ -65,7 +65,7 @@ public class PermisoOtorgadoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/create/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
+    @PreAuthorize("hasAuthority('USU01')")
     public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody PermisoOtorgadoDTO per) {
         try {
             return new ResponseEntity<>(perOtorgadoService.create(per, id), HttpStatus.CREATED);
@@ -76,7 +76,7 @@ public class PermisoOtorgadoController {
     
     @PutMapping("update/{id}/{ID}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    @PreAuthorize("hasAuthority('USU02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @PathVariable(value = "ID") Long ID, @RequestBody PermisoOtorgadoDTO perOtorgadoModified) {
         try {
             Optional<PermisoOtorgadoDTO> perOtorgadoUpdated = perOtorgadoService.update(perOtorgadoModified, id, ID);
@@ -91,7 +91,6 @@ public class PermisoOtorgadoController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             perOtorgadoService.delete(id);
@@ -105,7 +104,6 @@ public class PermisoOtorgadoController {
     }
 
     @DeleteMapping("/")
-    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             perOtorgadoService.deleteAll();
