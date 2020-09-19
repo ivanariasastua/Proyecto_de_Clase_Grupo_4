@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,7 @@ public class TramitesEstadosController {
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites estados", response = TramitesEstadosDTO.class, responseContainer = "List", tags = "Tramites_Estados")
     public @ResponseBody
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
     ResponseEntity<?> findAll() {
         try {
             return new ResponseEntity<>(traService.findAll(), HttpStatus.OK);
@@ -55,6 +57,7 @@ public class TramitesEstadosController {
     }
     
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @ApiOperation(value = "Obtiene un tipo de tramite a travez de su identificador unico", response = TramitesEstadosDTO.class, tags = "Tramites_Estados")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
@@ -68,6 +71,7 @@ public class TramitesEstadosController {
     @PostMapping("save/")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo estado", response = TramitesEstadosDTO.class, tags = "Notas")
+    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
     public ResponseEntity<?> create(@RequestBody TramitesEstadosDTO tramiteEstado) {
         try {
             return new ResponseEntity<>(traService.create(tramiteEstado), HttpStatus.CREATED);
@@ -78,6 +82,7 @@ public class TramitesEstadosController {
 
     @PutMapping("/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @ Valid @RequestBody TramitesEstadosDTO tramiteEstado, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
             try{
@@ -96,6 +101,7 @@ public class TramitesEstadosController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             traService.delete(id);
@@ -106,6 +112,7 @@ public class TramitesEstadosController {
     }
 
     @DeleteMapping("/")
+    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             traService.deleteAll();
