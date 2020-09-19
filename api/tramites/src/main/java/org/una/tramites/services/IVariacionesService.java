@@ -7,26 +7,27 @@ package org.una.tramites.services;
 
 import java.util.List;
 import java.util.Optional;
-import org.una.tramites.entities.Variaciones;
+import org.una.tramites.dto.VariacionesDTO;
 
 /**
  *
  * @author Ivan Josué Arias Astúa
  */
 public interface IVariacionesService {
-    public Optional<List<Variaciones>> findAll();
+    
+    public Optional<List<VariacionesDTO>> findAll();
 
-    public Optional<Variaciones> findById(Long id);
+    public Optional<VariacionesDTO> findById(Long id);
 
-    public Variaciones create(Variaciones variacion);
+    public VariacionesDTO create(VariacionesDTO variacion, Long id);
 
-    public Optional<Variaciones> update(Variaciones variacion, Long id);
+    public Optional<VariacionesDTO> update(VariacionesDTO variacion, Long id);
 
     public void delete(Long id);
 
     public void deleteAll();
     
-    public Optional<List<Variaciones>> findByGrupoContaining(int grupo);
+    public Optional<List<VariacionesDTO>> findByGrupoContaining(int grupo);
     
-    public Optional<List<Variaciones>> findByDescripcion(String descripcion);
+    public Optional<List<VariacionesDTO>> findByDescripcion(String descripcion);
 }

@@ -7,13 +7,12 @@ package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.ParametrosGeneralesDTO;
-import org.una.tramites.entities.ParametrosGenerales;
 import org.una.tramites.services.IParametrosGeneralesService;
-import org.una.tramites.utils.MapperUtils;
 
 /**
  *
@@ -45,6 +42,7 @@ public class ParametrosGeneralesController {
     final String MENSAJE_VERIFICAR_INFORMACION = "Debe verifiar el formato y la información de su solicitud con el formato esperado";
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(paramGenService.findById(id), HttpStatus.OK);
@@ -55,6 +53,7 @@ public class ParametrosGeneralesController {
 
     @PutMapping("/editar/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('USU02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody ParametrosGeneralesDTO usuarioDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             try {
@@ -74,6 +73,7 @@ public class ParametrosGeneralesController {
 
     @GetMapping("/get")
     @ApiOperation(value = "Obtiene una lista de todos los Parametros Generales", response = ParametrosGeneralesDTO.class, responseContainer = "List", tags = "Parametros_Generales")
+    @PreAuthorize("hasAuthority('USU05')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -96,6 +96,7 @@ public class ParametrosGeneralesController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USU01')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             paramGenService.delete(id);

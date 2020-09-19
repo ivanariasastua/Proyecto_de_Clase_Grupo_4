@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,14 +47,10 @@ public class VariacionesController {
     
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos las Variaciones", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
+    @PreAuthorize("hasAuthority('TRA06')")
     public @ResponseBody ResponseEntity<?> findAll(){
         try{
-            Optional<List<Variaciones>> result = varService.findAll();
-            if(result.isPresent()){
-                List<VariacionesDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), VariacionesDTO.class);
-                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(varService.findAll(), HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -61,16 +58,10 @@ public class VariacionesController {
     
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una variacion a travez de su identificador unico", response = VariacionesDTO.class, tags = "Variaciones")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
-
-            Optional<Variaciones> variacionFound = varService.findById(id);
-            if (variacionFound.isPresent()) {
-                VariacionesDTO variacionDto = MapperUtils.DtoFromEntity(variacionFound.get(), VariacionesDTO.class);
-                return new ResponseEntity<>(variacionDto, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            return new ResponseEntity<>(varService.findById(id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -79,13 +70,10 @@ public class VariacionesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/save/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('TRD01')")
     public ResponseEntity<?> create(@PathVariable(value = "id") Long id, @RequestBody VariacionesDTO variacion) {
         try {
-            Variaciones varCreated = MapperUtils.EntityFromDto(variacion,Variaciones.class);
-            varCreated.setTramites(tipoTraService.findById(id).get());
-            varCreated = varService.create(varCreated);
-            VariacionesDTO varDto = MapperUtils.DtoFromEntity(varCreated, VariacionesDTO.class);
-            return new ResponseEntity<>(varDto, HttpStatus.CREATED);
+            return new ResponseEntity<>(varService.create(variacion, id), HttpStatus.CREATED);
         } catch (Exception e) {
            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -93,12 +81,12 @@ public class VariacionesController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Variaciones varModified) {
+    @PreAuthorize("hasAuthority('TRD01')")
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody VariacionesDTO varModified) {
         try {
-            Optional<Variaciones> varUpdated = varService.update(varModified, id);
+            Optional<VariacionesDTO> varUpdated = varService.update(varModified, id);
             if (varUpdated.isPresent()) {
-                VariacionesDTO usuarioDto = MapperUtils.DtoFromEntity(varUpdated.get(), VariacionesDTO.class);
-                return new ResponseEntity<>(usuarioDto, HttpStatus.OK);
+                return new ResponseEntity<>(varUpdated, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
@@ -107,26 +95,22 @@ public class VariacionesController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('TRA03')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             varService.delete(id);
-            if (findById(id).getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/")
+    @PreAuthorize("hasAuthority('TRA03')")
     public ResponseEntity<?> deleteAll() {
         try {
             varService.deleteAll();
-            if (findAll().getStatusCode() == HttpStatus.NO_CONTENT) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -134,28 +118,20 @@ public class VariacionesController {
     
     @GetMapping("/grupo/{grupo}")
     @ApiOperation(value = "Obtiene una lista de las variaciones por medio de su grupo", response = VariacionesDTO.class, responseContainer = "List", tags = "Variaciones")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findByGrupo(@PathVariable(value = "grupo") int grupo){
         try{
-            Optional<List<Variaciones>> result = varService.findByGrupoContaining(grupo);
-            if(result.isPresent()){
-                List<VariacionesDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), VariacionesDTO.class);
-                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(varService.findByGrupoContaining(grupo), HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
     @GetMapping("descripcion/{descripcion}")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findByDescripcion(@PathVariable(value = "descripcion")String descripcion){
         try{
-            Optional<List<Variaciones>> result = varService.findByDescripcion(descripcion);
-            if(result.isPresent()){
-                List<VariacionesDTO> resultDTO = MapperUtils.DtoListFromEntityList(result.get(), VariacionesDTO.class);
-                return new ResponseEntity<>(resultDTO, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(varService.findByDescripcion(descripcion), HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }

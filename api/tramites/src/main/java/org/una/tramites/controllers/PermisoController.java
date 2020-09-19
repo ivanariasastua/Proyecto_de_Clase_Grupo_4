@@ -35,7 +35,7 @@ public class PermisoController {
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los permisos", response = PermisoDTO.class, responseContainer = "List", tags = "Permisos")
     public @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
+    @PreAuthorize("hasAuthority('USU05')")
     ResponseEntity<?> findAll() {
         try {
             return new ResponseEntity<>(permisoService.findAll(), HttpStatus.OK);
@@ -45,7 +45,7 @@ public class PermisoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(permisoService.findById(id), HttpStatus.OK);
@@ -56,7 +56,7 @@ public class PermisoController {
 
     @GetMapping("/Codigo/{codigo}")
     @ApiOperation(value = "Obtiene una lista de los permisos segun el codigo", response = PermisoDTO.class, responseContainer = "List", tags = "Permisos")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByCodigo(@PathVariable(value = "codigo") String codigo) {
         try {
             return new ResponseEntity<>(permisoService.findByCodigoAproximate(codigo), HttpStatus.OK);
@@ -68,7 +68,7 @@ public class PermisoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/save")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
+    @PreAuthorize("hasAuthority('USU01')")
     public ResponseEntity<?> create(@RequestBody PermisoDTO per) {
         if(permisoService.findByCodigo(per.getCodigo()).isPresent()){
             return new ResponseEntity<>("Ya existe ese permiso", HttpStatus.CONFLICT);
@@ -82,7 +82,7 @@ public class PermisoController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    @PreAuthorize("hasAuthority('USU02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PermisoDTO perModified) {
         try {
             Optional<PermisoDTO> perUpdated = permisoService.update(perModified, id);
@@ -97,7 +97,6 @@ public class PermisoController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             permisoService.delete(id);
@@ -111,7 +110,6 @@ public class PermisoController {
     }
 
     @DeleteMapping("/")
-    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             permisoService.deleteAll();

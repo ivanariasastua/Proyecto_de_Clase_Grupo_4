@@ -47,6 +47,7 @@ public class DepartamentoController {
   
     @GetMapping("/dep")
     @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
+    @PreAuthorize("hasAuthority('DEP04')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -57,7 +58,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('DEPARTAMENTO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('DEP04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(departamentoService.findById(id), HttpStatus.OK);
@@ -70,7 +71,7 @@ public class DepartamentoController {
     @PostMapping("/save")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo departamento", response = DepartamentoDTO.class, tags = "Departamentos")
-    @PreAuthorize("hasAuthority('DEPARTAMENTO_CREAR')")
+    @PreAuthorize("hasAuthority('DEP01')")
     public ResponseEntity<?> create(@RequestBody DepartamentoDTO departamento) {
         try {
             return new ResponseEntity(departamentoService.create(departamento), HttpStatus.CREATED);
@@ -82,7 +83,7 @@ public class DepartamentoController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/editar/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('DEPARTAMENTO_MODIFICAR')")
+    @PreAuthorize("hasAuthority('DEP02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody DepartamentoDTO depDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             try {
@@ -101,6 +102,7 @@ public class DepartamentoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('DEP03')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             departamentoService.delete(id);
@@ -111,6 +113,7 @@ public class DepartamentoController {
     }
 
     @DeleteMapping("/")
+    @PreAuthorize("hasAuthority('DEP03')")
     public ResponseEntity<?> deleteAll() {
         try {
             departamentoService.deleteAll();

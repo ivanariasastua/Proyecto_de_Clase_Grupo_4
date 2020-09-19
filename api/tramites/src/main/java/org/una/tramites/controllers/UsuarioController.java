@@ -7,7 +7,6 @@ package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.UsuarioDTO;
-import org.una.tramites.entities.Usuario;
 import org.una.tramites.services.IUsuarioService;
-import org.una.tramites.utils.MapperUtils;
 
 /**
  *
@@ -46,7 +43,7 @@ public class UsuarioController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
+    @PreAuthorize("hasAuthority('USU05')")
     public ResponseEntity<?> findAll() {
         try {
             return new ResponseEntity(usuarioService.findAll(), HttpStatus.OK);
@@ -57,7 +54,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un usuario a travez de su identificador unico", response = UsuarioDTO.class, tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(usuarioService.findById(id), HttpStatus.OK);
@@ -97,7 +94,7 @@ public class UsuarioController {
 */
     @GetMapping("/cedula/{term}")
     @ApiOperation(value = "Obtiene una lista de usuarios por medio de su cedula", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
             return new ResponseEntity<>(usuarioService.findByCedulaAproximate(term), HttpStatus.OK);
@@ -108,7 +105,7 @@ public class UsuarioController {
 
     @GetMapping("/nombre/{term}")
     @ApiOperation(value = "Obtiene una lista de usuarios por medio de su nombre", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
             return new ResponseEntity(usuarioService.findByNombreCompletoAproximateIgnoreCase(term), HttpStatus.OK);
@@ -121,7 +118,7 @@ public class UsuarioController {
     @PostMapping("saveUser/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo usuario", response = UsuarioDTO.class, tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
+    @PreAuthorize("hasAuthority('USU01')")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody UsuarioDTO usuario) {
         try {
             return new ResponseEntity(usuarioService.create(usuario), HttpStatus.CREATED);
@@ -132,7 +129,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Permite modificar un Usuario a partir de su Id", response = UsuarioDTO.class, tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    @PreAuthorize("hasAuthority('USU02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody UsuarioDTO usuarioDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             try {
@@ -152,7 +149,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Borra un usario por su identificador unico", tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
+    @PreAuthorize("hasAuthority('USU006')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             usuarioService.delete(id);
@@ -164,7 +161,7 @@ public class UsuarioController {
 
     @DeleteMapping("/")
     @ApiOperation(value = "Borra todos los usuario", tags = "Usuarios")
-    @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
+    @PreAuthorize("hasAuthority('USU07')")
     public ResponseEntity<?> deleteAll() {
         try {
             usuarioService.deleteAll();
@@ -176,6 +173,7 @@ public class UsuarioController {
 
     @GetMapping("/usuarios_en_departamento/{id}")
     @ApiOperation(value = "Obtiene una lista de usuarios segun el departamento donde se desempeña", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
+    @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByDepartamentoId(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity(usuarioService.findUsersByDepartamentoId(id), HttpStatus.OK);

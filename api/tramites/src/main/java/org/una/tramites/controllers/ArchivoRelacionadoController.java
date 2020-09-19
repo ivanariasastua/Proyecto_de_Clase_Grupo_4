@@ -3,7 +3,6 @@ package org.una.tramites.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.ArchivoRelacionadoDTO;
-import org.una.tramites.entities.ArchivoRelacionado;
 import org.una.tramites.services.IArchivoRelacionadoService;
-import org.una.tramites.utils.MapperUtils;
 
 /**
  *
@@ -43,7 +40,7 @@ public class ArchivoRelacionadoController {
     
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un archivo relacionado a travez de su identificador unico", response = ArchivoRelacionadoDTO.class, tags = "Archivos_Relacionados")
-   // @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(archivoRelacionadoService.findById(id), HttpStatus.OK);
@@ -65,6 +62,7 @@ public class ArchivoRelacionadoController {
     
     @GetMapping("tramite_registrado/{id}")
     @ApiOperation(value = "Obtiene los archivos relacionados al tramite registrado", response = ArchivoRelacionadoDTO.class, responseContainer = "List", tags = "Archivos_Relacionados")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findByTramiteRegistrado(@PathVariable(value = "id")Long  id) {
         try {
             return new ResponseEntity(archivoRelacionadoService.findByTramiteRegistrado(id), HttpStatus.OK);
@@ -75,6 +73,7 @@ public class ArchivoRelacionadoController {
     
     @GetMapping("/{fechaRegistro}")
     @ApiOperation(value = "Obtiene los archivos relacionados al tramite registrado", response = ArchivoRelacionadoDTO.class, responseContainer = "List", tags = "Archivos_Relacionados")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findByFechaRegistro(@PathVariable(value = "fechaRegistro")Date  fechaRegistro) {
         try {
             return new ResponseEntity(archivoRelacionadoService.findByFechaRegistro(fechaRegistro), HttpStatus.OK);
@@ -87,7 +86,7 @@ public class ArchivoRelacionadoController {
     @PostMapping("save/{value}")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo archivo relacionado", response = ArchivoRelacionadoDTO.class, tags = "Archivos_Relacionados")
-   // @PreAuthorize("hasAuthority('USUARIO_CREAR')")
+    @PreAuthorize("hasAuthority('TRA01')")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody ArchivoRelacionadoDTO archivo) {
         try {
             return new ResponseEntity(archivoRelacionadoService.create(archivo), HttpStatus.CREATED);
@@ -98,7 +97,7 @@ public class ArchivoRelacionadoController {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Permite modificar un archivo relacionado a partir de su Id", response = ArchivoRelacionadoDTO.class, tags = "Archivos_Relacionados")
-   // @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
+    @PreAuthorize("hasAuthority('TRA02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody ArchivoRelacionadoDTO archivoDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             try {
@@ -118,7 +117,6 @@ public class ArchivoRelacionadoController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Borra un archivo relacionado por su identificador unico", tags = "Archivos_Relacionados")
-  //  @PreAuthorize("hasAuthority('USUARIO_ELIMINAR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         try {
             archivoRelacionadoService.delete(id);
@@ -130,7 +128,6 @@ public class ArchivoRelacionadoController {
 
     @DeleteMapping("/")
     @ApiOperation(value = "Borra todos los archivos relacionados", tags = "Archivos_Relacionados")
-  //  @PreAuthorize("hasAuthority('USUARIO_ELIMINAR_TODO')")
     public ResponseEntity<?> deleteAll() {
         try {
             archivoRelacionadoService.deleteAll();
