@@ -45,7 +45,6 @@ public class ClienteController {
     @ApiOperation(value = "Obtiene una lista de todos los Clientes", response = ClienteDTO.class, responseContainer = "List", tags = "Clientes")
     @PreAuthorize("hasAuthority('USU05')")
     public @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
     ResponseEntity<?> findAll() {
         try {
             return new ResponseEntity(clienteService.findAll(), HttpStatus.OK);
@@ -56,7 +55,6 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un cliente a travez de su identificador unico", response = ClienteDTO.class, tags = "Clientes")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
@@ -67,7 +65,6 @@ public class ClienteController {
     }
 
     @GetMapping("/cedula/{term}")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         try {
@@ -78,7 +75,6 @@ public class ClienteController {
     }
 
     @GetMapping("/nombre/{term}")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @PreAuthorize("hasAuthority('USU04')")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
@@ -91,7 +87,6 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
     @PreAuthorize("hasAuthority('USU01')")
     public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody ClienteDTO cliente) {
         try {
@@ -103,7 +98,6 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
     @PreAuthorize("hasAuthority('USU02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody ClienteDTO clienteDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {

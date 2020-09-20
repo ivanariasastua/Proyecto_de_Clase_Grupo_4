@@ -48,7 +48,6 @@ public class TramitesRegistradosController {
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites registrados", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
     public @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
     @PreAuthorize("hasAuthority('TAR06')")
     ResponseEntity<?> findAll() {
         try{
@@ -59,7 +58,6 @@ public class TramitesRegistradosController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @ApiOperation(value = "Obtiene un tramite registrado a travez de su identificador unico", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
     @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -74,7 +72,6 @@ public class TramitesRegistradosController {
     @PostMapping("save/")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo tramite", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
     @PreAuthorize("hasAuthority('TAR01')")
     public ResponseEntity<?> create(@RequestBody TramitesRegistradosDTO tramiteRegistrado) {
         try{
@@ -86,7 +83,6 @@ public class TramitesRegistradosController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
     @PreAuthorize("hasAuthority('TAR02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody TramitesRegistradosDTO tramiteRegistradoDTO, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
@@ -129,7 +125,6 @@ public class TramitesRegistradosController {
     
     @GetMapping("/cliente/{id}")
     @ApiOperation(value = "Obtiene una lista de tramites registrados por el cliente", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @PreAuthorize("hasAuthority('TAR05')")
     public @ResponseBody ResponseEntity<?> findByClienteId(@PathVariable(value = "id") Long id) {
         try {
@@ -142,7 +137,6 @@ public class TramitesRegistradosController {
     @GetMapping("/tipo_tramite/{id}")
     @ApiOperation(value = "Obtiene una lista de tramites según el tipo", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
     @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
-    @PreAuthorize("hasAuthority('TAR05')")
     public @ResponseBody ResponseEntity<?> findByTipoTramiteId(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(tramitesRegistradosService.findByTramiteTipoId(id),HttpStatus.OK);

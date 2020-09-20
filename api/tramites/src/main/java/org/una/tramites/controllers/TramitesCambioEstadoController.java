@@ -46,7 +46,6 @@ public class TramitesCambioEstadoController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites cambio Estado", response = TramitesCambioEstadoDTO.class, responseContainer = "List", tags = "Tramites_Cambio_Estado")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
     @PreAuthorize("hasAuthority('TAR06')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
@@ -59,7 +58,6 @@ public class TramitesCambioEstadoController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tramite cambio estado a travez de su identificador unico", response = TramitesCambioEstadoDTO.class, tags = "Tramites_Cambio_Estado")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
@@ -72,7 +70,6 @@ public class TramitesCambioEstadoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("save/")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
     @PreAuthorize("hasAuthority('TRD01')")
     public ResponseEntity<?> create(@RequestBody TramitesCambioEstadoDTO tramites) {
         try {
@@ -84,7 +81,6 @@ public class TramitesCambioEstadoController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
     @PreAuthorize("hasAuthority('TAR02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody TramitesCambioEstadoDTO tramiteCambioDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {

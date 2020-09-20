@@ -48,7 +48,6 @@ public class TramitesEstadosController {
     @ApiOperation(value = "Obtiene una lista de todos los tramites estados", response = TramitesEstadosDTO.class, responseContainer = "List", tags = "Tramites_Estados")
     @PreAuthorize("hasAuthority('TAR06')")
     public @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR_TODO')")
     ResponseEntity<?> findAll() {
         try {
             return new ResponseEntity<>(traService.findAll(), HttpStatus.OK);
@@ -58,7 +57,6 @@ public class TramitesEstadosController {
     }
     
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USUARIO_CONSULTAR')")
     @ApiOperation(value = "Obtiene un tipo de tramite a travez de su identificador unico", response = TramitesEstadosDTO.class, tags = "Tramites_Estados")
     @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -73,7 +71,6 @@ public class TramitesEstadosController {
     @PostMapping("save/")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo estado", response = TramitesEstadosDTO.class, tags = "Notas")
-    @PreAuthorize("hasAuthority('USUARIO_CREAR')")
     @PreAuthorize("hasAuthority('TRD01')")
     public ResponseEntity<?> create(@RequestBody TramitesEstadosDTO tramiteEstado) {
         try {
@@ -85,7 +82,6 @@ public class TramitesEstadosController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('USUARIO_MODIFICAR')")
     @PreAuthorize("hasAuthority('TAR02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @ Valid @RequestBody TramitesEstadosDTO tramiteEstado, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
