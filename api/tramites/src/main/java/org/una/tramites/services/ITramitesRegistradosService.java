@@ -5,6 +5,7 @@
  */
 package org.una.tramites.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.una.tramites.dto.TramitesRegistradosDTO;
@@ -31,4 +32,6 @@ public interface ITramitesRegistradosService {
     public Optional<List<TramitesRegistradosDTO>> findByClienteId(Long id);
     
     public Optional<List<TramitesRegistradosDTO>> findByTramiteTipoId(Long id);
+
+    public Optional<List<TramitesRegistradosDTO>> getByFilter(String cedula, String estado, Date inicio, Date fin);
 }

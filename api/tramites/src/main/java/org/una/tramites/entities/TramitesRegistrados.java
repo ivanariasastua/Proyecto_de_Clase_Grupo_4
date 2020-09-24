@@ -48,6 +48,8 @@ public class TramitesRegistrados implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tramiteRegistrado") 
     private List<ArchivoRelacionado> archivosRelacionados = new ArrayList<>();
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tramitesRegistrados")
+    private List<TramitesCambioEstado> estados;
     
     private static final long serialVersionUID = 1L;
     

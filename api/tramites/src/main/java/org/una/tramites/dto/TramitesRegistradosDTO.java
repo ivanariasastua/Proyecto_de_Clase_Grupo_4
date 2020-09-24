@@ -5,14 +5,11 @@
  */
 package org.una.tramites.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.una.tramites.entities.Cliente;
-import org.una.tramites.entities.TramitesTipos;
 
 /**
  *
@@ -27,4 +24,5 @@ public class TramitesRegistradosDTO {
     private TramitesTiposDTO tramitesTiposId;
     private ClienteDTO clienteId;
     private List<ArchivoRelacionadoDTO> archivosRelacionados;
+    private List<TramitesCambioEstadoDTO> estados;
 }

@@ -5,6 +5,7 @@
  */
 package org.una.tramites.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,11 @@ public class TramitesRegistradosServiceImplementation implements ITramitesRegist
     @Override
     public Optional<List<TramitesRegistradosDTO>> findByTramiteTipoId(Long id) {
         return ServiceConvertionHelper.findList(tramitesRegistradosRepository.findByTramitesTiposIdContaining(id), TramitesRegistradosDTO.class);
+    }
+
+    @Override
+    public Optional<List<TramitesRegistradosDTO>> getByFilter(String cedula, String estado, Date inicio, Date fin) {
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByFilter(cedula, estado, inicio, fin), TramitesRegistradosDTO.class);
     }
     
     

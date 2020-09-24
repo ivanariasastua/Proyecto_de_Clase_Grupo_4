@@ -7,7 +7,7 @@ package org.una.tramites.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.una.tramites.dto.TramitesRegistradosDTO;
-import org.una.tramites.entities.TramitesRegistrados;
 import org.una.tramites.services.ITramitesRegistradosService;
-import org.una.tramites.utils.MapperUtils;
 
 /**
  *
@@ -145,4 +143,14 @@ public class TramitesRegistradosController {
         }
     }
 
+    @GetMapping("filtro/{cedula}/{estado}/{inicio}/{fin}")
+    @ApiOperation(value = "Obtiene un tramite registrado a de distintos parametros", response = TramitesRegistradosDTO.class,  responseContainer = "List", tags = "Tramites_Registrados")
+    @PreAuthorize("hasAuthority('TAR05')")
+    public ResponseEntity<?> getByFilter(@PathVariable(value = "cedula")String cedula, @PathVariable(value = "estado")String estado, @PathVariable(value = "inicio")Date inicio, @PathVariable(value = "fin")Date fin){
+        try{
+            return new ResponseEntity<>(tramitesRegistradosService.getByFilter(cedula, estado, inicio, fin), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
