@@ -16,6 +16,7 @@ import org.una.tramites.services.IPermisoService;
 import org.una.tramites.services.IPermisoOtorgadoService;
 
 
+
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -37,6 +38,7 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
 
+        /*
         if (usuarioService.findByCedula(cedula).isEmpty()) {
 
 //            Permiso permiso;
@@ -69,6 +71,7 @@ public class DataLoader implements ApplicationRunner {
         } else {
             System.out.println("Se encontro el admin");
         }
+*/
         
     }
     
