@@ -88,7 +88,7 @@ public class ClienteController {
     @PostMapping("/")
     @ResponseBody
     @PreAuthorize("hasAuthority('USU01')")
-    public ResponseEntity<?> create(@PathVariable(value = "value") String value, @RequestBody ClienteDTO cliente) {
+    public ResponseEntity<?> create(@RequestBody ClienteDTO cliente) {
         try {
             return new ResponseEntity(clienteService.create(cliente), HttpStatus.CREATED);
         } catch (Exception e) {
