@@ -44,62 +44,31 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         }
         return usuario;
     }
-    
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<List<Usuario>> findAll() {
-//        return Optional.ofNullable(usuarioRepository.findAll());
-//    }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<UsuarioDTO>> findAll() {
         return ServiceConvertionHelper.findList(usuarioRepository.findAll(), UsuarioDTO.class);
     }
-    
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<Usuario> findById(Long id) {
-//        return usuarioRepository.findById(id);
-//    }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findById(Long id) {
         return ServiceConvertionHelper.oneToOptionalDto(usuarioRepository.findById(id), UsuarioDTO.class);
     }
-    
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<List<Usuario>> findByCedulaAproximate(String cedula) {
-//        return Optional.ofNullable(usuarioRepository.findByCedulaContaining(cedula));
-//    }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<UsuarioDTO>> findByCedulaAproximate(String cedula) {
         return ServiceConvertionHelper.findList(usuarioRepository.findByCedulaContaining(cedula), UsuarioDTO.class);
     }
-    
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<List<Usuario>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
-//        return Optional.ofNullable(usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto));
-//    }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<UsuarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
         return ServiceConvertionHelper.findList(usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombreCompleto), UsuarioDTO.class);
     }
 
-//    @Override
-//    @Transactional
-//    public Usuario create(Usuario usuario) {
-//        encriptarPassword(usuario);
-//        return usuarioRepository.save(usuario);
-//    }
-    
     @Override
     @Transactional
     public UsuarioDTO create(UsuarioDTO usuario) {
@@ -108,18 +77,6 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         user = usuarioRepository.save(user);
         return MapperUtils.DtoFromEntity(user, UsuarioDTO.class);
     }
-
-//    @Override
-//    @Transactional
-//    public Optional<Usuario> update(Usuario usuario, Long id, Integer enc) {
-//        if (usuarioRepository.findById(id).isPresent()) {
-//            if(enc == 1)
-//                encriptarPassword(usuario);
-//            return Optional.ofNullable(usuarioRepository.save(usuario));
-//        } else {
-//            return null;
-//        }
-//    }
     
     @Override
     @Transactional
@@ -145,55 +102,24 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
     public void deleteAll() {
         usuarioRepository.deleteAll();
     }
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<Usuario> login(Usuario usuario) {
-//        return Optional.ofNullable(usuarioRepository.findByCedulaAndPasswordEncriptado(usuario.getCedula(), usuario.getPasswordEncriptado()));
-//    }
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<List<Usuario>> findUsersByDepartamentoId(Long id) {
-//        return Optional.ofNullable(usuarioRepository.findByDepartamentoId(id));
-//    }
     
     @Override
     @Transactional(readOnly = true)
     public Optional<List<UsuarioDTO>> findUsersByDepartamentoId(Long id) {
         return ServiceConvertionHelper.findList(usuarioRepository.findByDepartamentoId(id), UsuarioDTO.class);
     }
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<Usuario> findJefesDepartemento(Long id) {
-//        return Optional.ofNullable(usuarioRepository.findJefeByDepartamento(id));
-//    }
     
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findJefesDepartemento(Long id) {
         return ServiceConvertionHelper.oneToOptionalDto(Optional.ofNullable(usuarioRepository.findJefeByDepartamento(id)), UsuarioDTO.class);
     }
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<Usuario> findByCedula(String cedula) {
-//        return Optional.ofNullable(usuarioRepository.findByCedula(cedula));
-//    }
     
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findByCedula(String cedula) {
         return ServiceConvertionHelper.oneToOptionalDto(Optional.ofNullable(usuarioRepository.findByCedula(cedula)), UsuarioDTO.class);
     }
-    
-//    private void encriptarPassword(Usuario usuario) {
-//        String password = usuario.getPasswordEncriptado();
-//        if (!password.isBlank()) {
-//            usuario.setPasswordEncriptado(bCryptPasswordEncoder.encode(password));
-//        }
-//    }
 
     @Override
     @Transactional(readOnly = true)
@@ -213,36 +139,6 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         }
     }
 }
-
-//    @Override
-//    public String login(AuthenticationRequest authenticationRequest) {
-//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        return jwtProvider.generateToken(authenticationRequest);
-//    }
-//   
-//    @Override
-//    @Transactional(readOnly = true)
-//    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-//
-//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-//
-//        Optional<Usuario> usuario = findByCedula(authenticationRequest.getCedula());
-//
-//        if (usuario.isPresent()) {
-//            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
-//            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuario.get(), UsuarioDTO.class);
-//            authenticationResponse.setUsuario(usuarioDto);
-//            List<PermisoOtorgadoDTO> permisosOtorgadosDto = MapperUtils.DtoListFromEntityList(usuario.get().getPermisos(), PermisoOtorgadoDTO.class);
-//            authenticationResponse.setPermisos(permisosOtorgadosDto);
-//
-//            return authenticationResponse;
-//        } else {
-//            return null;
-//        }
-//    }
 
 
 
