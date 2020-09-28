@@ -46,7 +46,7 @@ public class TramitesRegistradosController {
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites registrados", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
     public @ResponseBody
-    @PreAuthorize("hasAuthority('TAR06')")
+    //@PreAuthorize("hasAuthority('TAR06')")
     ResponseEntity<?> findAll() {
         try{
             return new ResponseEntity(tramitesRegistradosService.findAll(), HttpStatus.OK);

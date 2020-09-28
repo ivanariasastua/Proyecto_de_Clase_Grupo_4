@@ -43,7 +43,7 @@ public class TramitesRegistrados implements Serializable {
     
     @ManyToOne 
     @JoinColumn(name="tramites_tipos_id")
-    private TramitesTipos tramitesTipos;
+    private TramitesTipos tramitesTiposId;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tramiteRegistrado") 
     private List<ArchivoRelacionado> archivosRelacionados = new ArrayList<>();

@@ -22,7 +22,7 @@ import lombok.ToString;
 public class TramitesRegistradosDTO {
     private Long id;
     private TramitesTiposDTO tramitesTiposId;
-    private ClienteDTO clienteId;
+    private ClienteDTO cliente;
     private List<ArchivoRelacionadoDTO> archivosRelacionados;
     private List<TramitesCambioEstadoDTO> estados;
 }
