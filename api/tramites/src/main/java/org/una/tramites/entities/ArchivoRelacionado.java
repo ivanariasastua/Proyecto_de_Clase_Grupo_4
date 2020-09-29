@@ -37,7 +37,7 @@ public class ArchivoRelacionado implements Serializable{
     
     @ManyToOne 
     @JoinColumn(name="tramites_registrados_id")
-    private TramitesRegistrados tramiteRegistrado;
+    private TramitesRegistrados tramiteRegistradoId;
     
     
     @Column(name = "nombre", length = 100)

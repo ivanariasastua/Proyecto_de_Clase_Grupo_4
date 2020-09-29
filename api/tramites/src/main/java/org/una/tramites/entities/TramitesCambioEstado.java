@@ -40,15 +40,15 @@ public class TramitesCambioEstado {
     
     @ManyToOne 
     @JoinColumn(name="tramites_registrados_id")
-    private TramitesRegistrados tramitesRegistrados;
+    private TramitesRegistrados tramitesRegistradosId;
     
     @ManyToOne 
     @JoinColumn(name="tramites_estados_id")
-    private TramitesEstados tramitesEstados;
+    private TramitesEstados tramitesEstadoId;
     
     @ManyToOne 
     @JoinColumn(name="usuario_id")
-    private Usuario usuario;
+    private Usuario usuarioId;
     
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

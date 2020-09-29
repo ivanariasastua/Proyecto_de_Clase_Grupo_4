@@ -25,4 +25,5 @@ public class TramitesRegistradosDTO {
     private ClienteDTO cliente;
     private List<ArchivoRelacionadoDTO> archivosRelacionados;
     private List<TramitesCambioEstadoDTO> estados;
+    private List<RequisitoPresentadoDTO> requisitosPresentados;
 }

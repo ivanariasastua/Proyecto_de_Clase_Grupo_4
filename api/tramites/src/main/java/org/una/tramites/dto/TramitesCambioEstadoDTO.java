@@ -26,8 +26,8 @@ import org.una.tramites.entities.Usuario;
 public class TramitesCambioEstadoDTO {
     private Long id;
     private UsuarioDTO usuarioId;
-    private TramitesRegistradosDTO tramitesRegistradosId;
-    private TramitesCambioEstadoDTO tramitesEstadoId;
+    //private TramitesRegistradosDTO tramitesRegistradosId;
+    private TramitesEstadosDTO tramitesEstadoId;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro; 
     

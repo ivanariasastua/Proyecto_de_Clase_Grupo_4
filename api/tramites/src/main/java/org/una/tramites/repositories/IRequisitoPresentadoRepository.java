@@ -12,8 +12,8 @@ import org.una.tramites.entities.RequisitoPresentado;
  */
 public interface IRequisitoPresentadoRepository extends JpaRepository<RequisitoPresentado, Long>{
     
-    public List<RequisitoPresentado>findByRequisito(Long id);
+    public List<RequisitoPresentado>findByRequisitoId(Long id);
     
-    public List<RequisitoPresentado>findByTramiteRegistrado(Long id);
+    public List<RequisitoPresentado>findByTramiteRegistradoId(Long id);
     
 }

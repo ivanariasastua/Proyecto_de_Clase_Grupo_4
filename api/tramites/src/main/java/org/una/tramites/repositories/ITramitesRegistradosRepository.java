@@ -20,8 +20,8 @@ public interface ITramitesRegistradosRepository extends JpaRepository<TramitesRe
     @Query("SELECT t FROM TramitesRegistrados t LEFT JOIN t.cliente d WHERE t.cliente.id =:id")
     public List<TramitesRegistrados> findByClientesIdContaining(Long id);
     public List<TramitesRegistrados> findByTramitesTiposIdContaining(Long id);
-    @Query("SELECT t FROM TramitesRegistrados t JOIN t.estados est on t.id = est.tramitesRegistrados.id "+
+    @Query("SELECT t FROM TramitesRegistrados t JOIN t.estados est on t.id = est.tramitesRegistradosId.id "+
             "WHERE UPPER(t.cliente.cedula) like CONCAT('%', UPPER(:cedula), '%') "+
-            "and UPPER(est.tramitesEstados.nombre) Like CONCAT('%', UPPER(:estado), '%') and est.fechaRegistro BETWEEN :inicio and :fin")
+            "and UPPER(est.tramitesEstadoId.nombre) Like CONCAT('%', UPPER(:estado), '%') and est.fechaRegistro BETWEEN :inicio and :fin")
     public List<TramitesRegistrados> getByFilter(String cedula, String estado, Date inicio, Date fin);
 }

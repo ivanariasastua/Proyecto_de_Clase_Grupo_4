@@ -38,7 +38,7 @@ public class ArchivoRelacionadoServiceImplementation implements IArchivoRelacion
     @Override
     @Transactional(readOnly = true)
     public Optional<List<ArchivoRelacionadoDTO>> findByTramiteRegistrado(Long id) {
-        return ServiceConvertionHelper.findList(archivoRelacionadoRepository.findByTramiteRegistrado(id),ArchivoRelacionadoDTO.class);
+        return ServiceConvertionHelper.findList(archivoRelacionadoRepository.findByTramiteRegistradoId(id),ArchivoRelacionadoDTO.class);
     }
 
     @Override

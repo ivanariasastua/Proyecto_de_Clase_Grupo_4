@@ -51,7 +51,7 @@ public class RequisitoPresentadoServiceImplementation implements IRequisitoPrese
     @Override
     @Transactional(readOnly = true)
     public Optional<List<RequisitoPresentadoDTO>> findByTramiteRegistrado(Long id) {
-        return ServiceConvertionHelper.findList(requisitoPresentadoRepository.findByTramiteRegistrado(id), RequisitoPresentadoDTO.class);
+        return ServiceConvertionHelper.findList(requisitoPresentadoRepository.findByTramiteRegistradoId(id), RequisitoPresentadoDTO.class);
     }
 
 //    @Override

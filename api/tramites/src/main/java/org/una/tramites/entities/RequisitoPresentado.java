@@ -19,11 +19,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author Dios
- */
-
 @Entity
 @Table(name = "Requisitos_Presentados")
 @Data
@@ -45,9 +40,9 @@ public class RequisitoPresentado implements Serializable{
     
     @ManyToOne 
     @JoinColumn(name="tramites_registrados_id")
-    private TramitesRegistrados tramiteRegistrado;
+    private TramitesRegistrados tramiteRegistradoId;
     
     @ManyToOne 
     @JoinColumn(name="requisitos_id")
-    private Requisitos requisito;
+    private Requisitos requisitoId;
 }
