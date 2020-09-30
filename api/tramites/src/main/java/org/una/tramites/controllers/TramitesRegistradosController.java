@@ -57,7 +57,7 @@ public class TramitesRegistradosController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tramite registrado a travez de su identificador unico", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
-    @PreAuthorize("hasAuthority('TAR05')")
+    //@PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try{
             return new ResponseEntity<>(tramitesRegistradosService.findById(id), HttpStatus.OK);
