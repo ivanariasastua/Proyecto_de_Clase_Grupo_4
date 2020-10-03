@@ -46,7 +46,7 @@ public class TramitesTiposController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Tipos de tramites", response = TramitesTiposDTO.class, responseContainer = "List", tags = "Tramites")
-    @PreAuthorize("hasAuthority('TAR06')")
+ //   @PreAuthorize("hasAuthority('TAR06')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -58,7 +58,7 @@ public class TramitesTiposController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tipo de tramite a travez de su identificador unico", response = TramitesTiposDTO.class, tags = "Tramites")
-    @PreAuthorize("hasAuthority('TAR05')")
+ //   @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(traService.findById(id), HttpStatus.OK);
@@ -71,7 +71,7 @@ public class TramitesTiposController {
     @PostMapping("/save")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo tipo de tramite", response = TramitesTiposDTO.class, tags = "Tramites_Tipos")
-    @PreAuthorize("hasAuthority('TRD01')")
+ ///   @PreAuthorize("hasAuthority('TRD01')")
     public ResponseEntity<?> create(@RequestBody TramitesTiposDTO tramites) {
         try {
             return new ResponseEntity<>(traService.create(tramites), HttpStatus.CREATED);
@@ -82,7 +82,7 @@ public class TramitesTiposController {
 
     @PutMapping("/editar/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('TAR02')")
+  //  @PreAuthorize("hasAuthority('TAR02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody TramitesTiposDTO tramiteTipoDTO, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
             try{

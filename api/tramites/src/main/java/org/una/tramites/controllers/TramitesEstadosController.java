@@ -46,7 +46,7 @@ public class TramitesEstadosController {
     
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites estados", response = TramitesEstadosDTO.class, responseContainer = "List", tags = "Tramites_Estados")
-    @PreAuthorize("hasAuthority('TAR06')")
+   // @PreAuthorize("hasAuthority('TAR06')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         try {
@@ -58,7 +58,7 @@ public class TramitesEstadosController {
     
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tipo de tramite a travez de su identificador unico", response = TramitesEstadosDTO.class, tags = "Tramites_Estados")
-    @PreAuthorize("hasAuthority('TAR05')")
+  //  @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(traService.findById(id), HttpStatus.OK);

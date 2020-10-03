@@ -74,7 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/authentication/**", "/v2/api-docs",
                         "/swagger-resources/**",
                         "/swagger-ui.html**",
-                        "/webjars/**","/tramites_registrados/**").permitAll()
+                        "/webjars/**","/tramites_registrados/**","/tramites_estados/**","/tramites_cambio_estado/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint).and()
