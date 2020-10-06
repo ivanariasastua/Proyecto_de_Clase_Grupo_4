@@ -58,7 +58,7 @@ public class TramitesCambioEstadoController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tramite cambio estado a travez de su identificador unico", response = TramitesCambioEstadoDTO.class, tags = "Tramites_Cambio_Estado")
-  //  @PreAuthorize("hasAuthority('TAR05')")
+    @PreAuthorize("hasAuthority('TAR05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try {
             return new ResponseEntity<>(tramiteService.findById(id), HttpStatus.OK);
@@ -70,10 +70,10 @@ public class TramitesCambioEstadoController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("save/")
     @ResponseBody
-  //  @PreAuthorize("hasAuthority('TRD01')")
+    @PreAuthorize("hasAuthority('TRD01')")
     public ResponseEntity<?> create(@RequestBody TramitesCambioEstadoDTO tramites) {
         try {
-            return new ResponseEntity<>(tramiteService.create(tramites),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(tramiteService.create(tramites),HttpStatus.CREATED);
         }catch(Exception ex){
             return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

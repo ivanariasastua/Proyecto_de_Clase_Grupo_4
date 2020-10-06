@@ -46,7 +46,7 @@ public class TramitesRegistradosController {
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los tramites registrados", response = TramitesRegistradosDTO.class, responseContainer = "List", tags = "Tramites_Registrados")
     public @ResponseBody
-    @PreAuthorize("hasAuthority('TAR06')")
+    @PreAuthorize("hasAuthority('TRA06')")
     ResponseEntity<?> findAll() {
         try{
             return new ResponseEntity(tramitesRegistradosService.findAll(), HttpStatus.OK);
@@ -57,7 +57,7 @@ public class TramitesRegistradosController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tramite registrado a travez de su identificador unico", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
-    //@PreAuthorize("hasAuthority('TAR05')")
+    @PreAuthorize("hasAuthority('TRA05')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         try{
             return new ResponseEntity<>(tramitesRegistradosService.findById(id), HttpStatus.OK);

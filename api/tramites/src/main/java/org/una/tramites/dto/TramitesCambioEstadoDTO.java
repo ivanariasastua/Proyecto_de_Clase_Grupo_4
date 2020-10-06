@@ -11,9 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.una.tramites.entities.TramitesCambioEstado;
-import org.una.tramites.entities.TramitesRegistrados;
-import org.una.tramites.entities.Usuario;
 
 /**
  *
@@ -26,7 +23,7 @@ import org.una.tramites.entities.Usuario;
 public class TramitesCambioEstadoDTO {
     private Long id;
     private UsuarioDTO usuarioId;
-    //private TramitesRegistradosDTO tramitesRegistradosId;
+    private TramitesRegistradosDTO tramitesRegistradosId;
     private TramitesEstadosDTO tramitesEstadoId;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaRegistro; 
