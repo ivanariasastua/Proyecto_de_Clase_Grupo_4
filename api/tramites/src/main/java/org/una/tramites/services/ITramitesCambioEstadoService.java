@@ -26,4 +26,6 @@ public interface ITramitesCambioEstadoService {
     public void delete(Long id);
     
     public void deleteAll();
+    
+    public Optional<List<TramitesCambioEstadoDTO>> findEstadoActualTramite(Long idTramite);
 }

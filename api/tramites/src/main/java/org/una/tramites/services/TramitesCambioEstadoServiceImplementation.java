@@ -31,6 +31,12 @@ public class TramitesCambioEstadoServiceImplementation implements ITramitesCambi
     public Optional<List<TramitesCambioEstadoDTO>> findAll() {
         return ServiceConvertionHelper.findList(tramitesCambioRepository.findAll(), TramitesCambioEstadoDTO.class);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<TramitesCambioEstadoDTO>> findEstadoActualTramite(Long idTramite) {
+        return ServiceConvertionHelper.findList(tramitesCambioRepository.findEstadoActualTramite(idTramite), TramitesCambioEstadoDTO.class);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -69,7 +75,5 @@ public class TramitesCambioEstadoServiceImplementation implements ITramitesCambi
     public void deleteAll() {
         tramitesCambioRepository.deleteAll();
     }
-    
-    
 
 }

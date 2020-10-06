@@ -70,7 +70,7 @@ public class TramitesRegistradosController {
     @PostMapping("save/")
     @ResponseBody
     @ApiOperation(value = "Crea un nuevo tramite", response = TramitesRegistradosDTO.class, tags = "Tramites_Registrados")
-  //  @PreAuthorize("hasAuthority('TAR01')")
+    @PreAuthorize("hasAuthority('TAR01')")
     public ResponseEntity<?> create(@RequestBody TramitesRegistradosDTO tramiteRegistrado) {
         try{
             return new ResponseEntity<>(tramitesRegistradosService.create(tramiteRegistrado), HttpStatus.OK);
@@ -81,7 +81,7 @@ public class TramitesRegistradosController {
 
     @PutMapping("/{id}")
     @ResponseBody
-  //  @PreAuthorize("hasAuthority('TAR02')")
+    @PreAuthorize("hasAuthority('TAR02')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @Valid @RequestBody TramitesRegistradosDTO tramiteRegistradoDTO, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
             try{

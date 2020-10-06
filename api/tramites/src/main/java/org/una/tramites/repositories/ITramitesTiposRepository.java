@@ -20,4 +20,5 @@ public interface ITramitesTiposRepository extends JpaRepository<TramitesTipos, L
     public List<TramitesTipos> findByDepartamentoId(Long id);
     
     public List<TramitesTipos> findByDescripcion(@Param("descripcion")String descripcion);
+    
 }
