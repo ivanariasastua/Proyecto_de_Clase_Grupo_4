@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.una.tramites.entities.TramitesRegistrados;
 
 /**
@@ -24,4 +25,16 @@ public interface ITramitesRegistradosRepository extends JpaRepository<TramitesRe
             "WHERE UPPER(t.cliente.cedula) like CONCAT('%', UPPER(:cedula), '%') "+
             "and UPPER(est.tramitesEstadoId.nombre) Like CONCAT('%', UPPER(:estado), '%') and est.fechaRegistro BETWEEN :inicio and :fin")
     public List<TramitesRegistrados> getByFilter(String cedula, String estado, Date inicio, Date fin);
+    
+    /*Filtros de la tarea*/
+    
+    @Query("SELECT t FROM TramitesRegistrados t WHERE t.cliente.cedula = :cedula")
+    public List<TramitesRegistrados> getByCedulaCliente(@Param("cedula")String cedula);
+    
+    @Query("SELECT distinct t FROM TramitesRegistrados t JOIN t.estados est ON t.id = est.tramitesRegistradosId.id "+
+           "WHERE UPPER(est.tramitesEstadoId.nombre) = UPPER(:estado)")
+    public List<TramitesRegistrados> getByEstado(@Param("estado")String estado);
+    
+    @Query("SELECT t FROM TramitesRegistrados t WHERE t.fechaRegistro BETWEEN :fInicial and :fFinal")
+    public List<TramitesRegistrados> getByFechas(@Param("fInicial")Date fInicial, @Param("fFinal") Date fFinal);
 }

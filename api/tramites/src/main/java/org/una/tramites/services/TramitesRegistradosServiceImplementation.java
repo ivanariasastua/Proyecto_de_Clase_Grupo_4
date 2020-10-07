@@ -5,6 +5,9 @@
  */
 package org.una.tramites.services;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -86,6 +89,26 @@ public class TramitesRegistradosServiceImplementation implements ITramitesRegist
     public Optional<List<TramitesRegistradosDTO>> getByFilter(String cedula, String estado, Date inicio, Date fin) {
         return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByFilter(cedula, estado, inicio, fin), TramitesRegistradosDTO.class);
     }
+
+    @Override
+    public Optional<List<TramitesRegistradosDTO>> getByCedulaCliente(String cedula) {
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByCedulaCliente(cedula), TramitesRegistradosDTO.class);
+    }
+
+    @Override
+    public Optional<List<TramitesRegistradosDTO>> getByEstado(String estado) {
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByEstado(estado), TramitesRegistradosDTO.class);
+    }
+
+    @Override
+    public Optional<List<TramitesRegistradosDTO>> getByFechas(int yfi, int mfi, int dfi, int yff, int mff, int dff) {
+        Date fInicial = createDate(yfi, mfi, dfi), fFinal = createDate(yff, mff, dff);
+        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByFechas(fInicial, fFinal), TramitesRegistradosDTO.class);
+    }
     
+    private Date createDate(int year, int mes, int day){
+        LocalDateTime ldt = LocalDateTime.of(year, mes, day, 0, 0, 0);
+        return Date.from(ldt.atZone(ZoneId.of("UTC")).toInstant());  
+    }
     
 }

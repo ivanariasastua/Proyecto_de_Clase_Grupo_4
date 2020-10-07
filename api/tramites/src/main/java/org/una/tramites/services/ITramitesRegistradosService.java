@@ -34,4 +34,12 @@ public interface ITramitesRegistradosService {
     public Optional<List<TramitesRegistradosDTO>> findByTramiteTipoId(Long id);
 
     public Optional<List<TramitesRegistradosDTO>> getByFilter(String cedula, String estado, Date inicio, Date fin);
+
+    /*Filtros tarea*/
+    
+    public Optional<List<TramitesRegistradosDTO>> getByCedulaCliente(String cedula);
+    
+    public Optional<List<TramitesRegistradosDTO>> getByEstado(String estado);
+    
+    public Optional<List<TramitesRegistradosDTO>> getByFechas(int yfi, int mfi, int dfi, int yff, int mff, int dff);
 }

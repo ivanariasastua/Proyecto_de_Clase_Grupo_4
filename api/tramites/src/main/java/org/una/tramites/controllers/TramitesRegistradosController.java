@@ -153,4 +153,45 @@ public class TramitesRegistradosController {
             return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    /*Filtros de la tarea*/
+    @GetMapping("findByCedulaCliente/{cedula}")
+    @ApiOperation(value = "Obtiene un tramite registrado a traves de la cedula del cliente", response = TramitesRegistradosDTO.class,  responseContainer = "List", tags = "Tramites_Registrados")
+    @PreAuthorize("hasAuthority('TRA05')")
+    public ResponseEntity<?> findByCedulaCliete(@PathVariable("cedula")String cedula){
+        try{
+            return new ResponseEntity<>(tramitesRegistradosService.getByCedulaCliente(cedula), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("findByEstado/{estado}")
+    @ApiOperation(value = "Obtiene un tramite registrado a traves del sus estados", response = TramitesRegistradosDTO.class,  responseContainer = "List", tags = "Tramites_Registrados")
+    @PreAuthorize("hasAuthority('TRA05')")
+    public ResponseEntity<?> findByEstado(@PathVariable("estado")String estado){
+        try{
+            return new ResponseEntity<>(tramitesRegistradosService.getByEstado(estado), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("findByFechas/{yfi}/{mfi}/{dfi}/{yff}/{mff}/{dff}")
+    @ApiOperation(value = "Obtiene un tramite registrado a traves de su fecha de registro", response = TramitesRegistradosDTO.class,  responseContainer = "List", tags = "Tramites_Registrados")
+    @PreAuthorize("hasAuthority('TRA05')")
+    public ResponseEntity<?> findByFechas(
+            @PathVariable("yfi")int yfi,
+            @PathVariable("mfi")int mfi,
+            @PathVariable("dfi")int dfi,
+            @PathVariable("yff")int yff,
+            @PathVariable("mff")int mff,
+            @PathVariable("dff")int dff
+    ){
+        try{
+            return new ResponseEntity<>(tramitesRegistradosService.getByFechas(yfi, mfi, dfi, yff, mff, dff), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
