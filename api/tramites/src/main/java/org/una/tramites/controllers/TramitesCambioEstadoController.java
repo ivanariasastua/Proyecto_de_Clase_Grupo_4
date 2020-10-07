@@ -62,7 +62,7 @@ public class TramitesCambioEstadoController {
     public @ResponseBody
     ResponseEntity<?> findEstadoActualTramite(@PathVariable(value = "idTramite") Long idTramite) {
         try {
-            return new ResponseEntity<>(tramiteService.findEstadoActualTramite(Long.MIN_VALUE), HttpStatus.OK);
+            return new ResponseEntity<>(tramiteService.findEstadoActualTramite(idTramite), HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<>(ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
