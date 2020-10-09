@@ -5,7 +5,6 @@
  */
 package org.una.tramites.services;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.tramites.dto.TramitesRegistradosDTO;
+import org.una.tramites.entities.TramitesCambioEstado;
 import org.una.tramites.entities.TramitesRegistrados;
 import org.una.tramites.repositories.ITramitesRegistradosRepository;
 import org.una.tramites.utils.MapperUtils;
@@ -39,7 +39,9 @@ public class TramitesRegistradosServiceImplementation implements ITramitesRegist
     @Override
     @Transactional(readOnly = true)
     public Optional<TramitesRegistradosDTO> findById(Long id) {
-        return ServiceConvertionHelper.oneToOptionalDto(tramitesRegistradosRepository.findById(id), TramitesRegistradosDTO.class);
+        Optional<TramitesRegistrados> tramite = tramitesRegistradosRepository.findById(id);
+        tramite.get().getEstados().sort((TramitesCambioEstado obj1, TramitesCambioEstado obj2) -> obj1.getId().compareTo(obj2.getId()));
+        return ServiceConvertionHelper.oneToOptionalDto(tramite, TramitesRegistradosDTO.class);
     }
 
     @Override
@@ -92,18 +94,30 @@ public class TramitesRegistradosServiceImplementation implements ITramitesRegist
 
     @Override
     public Optional<List<TramitesRegistradosDTO>> getByCedulaCliente(String cedula) {
-        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByCedulaCliente(cedula), TramitesRegistradosDTO.class);
+        List<TramitesRegistrados> tramites = tramitesRegistradosRepository.getByCedulaCliente(cedula);
+        tramites.forEach( t -> {
+            t.getEstados().sort((TramitesCambioEstado obj1, TramitesCambioEstado obj2) -> obj1.getId().compareTo(obj2.getId()));
+        });
+        return ServiceConvertionHelper.findList(tramites, TramitesRegistradosDTO.class);
     }
 
     @Override
     public Optional<List<TramitesRegistradosDTO>> getByEstado(String estado) {
-        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByEstado(estado), TramitesRegistradosDTO.class);
+        List<TramitesRegistrados> tramites = tramitesRegistradosRepository.getByEstado(estado);
+        tramites.forEach( t -> {
+            t.getEstados().sort((TramitesCambioEstado obj1, TramitesCambioEstado obj2) -> obj1.getId().compareTo(obj2.getId()));
+        });
+        return ServiceConvertionHelper.findList(tramites, TramitesRegistradosDTO.class);
     }
 
     @Override
     public Optional<List<TramitesRegistradosDTO>> getByFechas(int yfi, int mfi, int dfi, int yff, int mff, int dff) {
         Date fInicial = createDate(yfi, mfi, dfi), fFinal = createDate(yff, mff, dff);
-        return ServiceConvertionHelper.findList(tramitesRegistradosRepository.getByFechas(fInicial, fFinal), TramitesRegistradosDTO.class);
+        List<TramitesRegistrados> tramites = tramitesRegistradosRepository.getByFechas(fInicial, fFinal);
+        tramites.forEach( t -> {
+            t.getEstados().sort((TramitesCambioEstado obj1, TramitesCambioEstado obj2) -> obj1.getId().compareTo(obj2.getId()));
+        });
+        return ServiceConvertionHelper.findList(tramites, TramitesRegistradosDTO.class);
     }
     
     private Date createDate(int year, int mes, int day){
