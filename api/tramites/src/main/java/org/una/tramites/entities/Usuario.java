@@ -1,5 +1,4 @@
 package org.una.tramites.entities;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +22,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.una.tramites.dto.UsuarioDTO;
 
 @Entity
 @Table(name = "Usuarios")
